@@ -11,13 +11,11 @@ app.use(express.static(__dirname + '/public'));
 // ################ ROUTERS ################# //
 
 let campaigns = require('./routers/campaigns');
-let cloudinary = require('./routers/cloudinary');
 let ads = require('./routers/ads');
 
 // ################## API ################### //
 
 app.use('/campaigns', campaigns);
-app.use('/cloudinary', cloudinary);
 app.use('/ads', ads);
 
 app.get('/', (req, res) => {
