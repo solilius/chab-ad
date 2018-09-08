@@ -29,6 +29,8 @@ router.get('/:name', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    
+    req.body.transaction_details.expiration_date = new Date(req.body.transaction_details.expiration_date);
     DAL.Insert(CAMPAIGN_COL, req.body, (data) => {
         res.send(data);
     });
