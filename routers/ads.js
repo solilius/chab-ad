@@ -1,24 +1,35 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const DAL = require('../DAL');
+const BL = require('../campaignManager');
 const router = express.Router();
-router.use(bodyParser.json());
 const CAMPAIGN_COL = 'campaigns';
 const ADS_COL = 'ads';
 
+router.use(bodyParser.json());
+BL.ActiveCampaignSqudualer();
+
+DAL.Update(CAMPAIGN_COL, { 
+    "transaction_details.expiration_date": {$lte: new Date()} },
+     {$set: {isActive: false}
+    } ,(data) => {
+    console.log(data);
+});
 
 // ################### API ################### //
 
 router.get('/', (req, res) => {
-    // return ads array
+
+    let queryByActive = {isActive: true};
+    let adsRequested = req.query.ads.split(',');
+    DAL.Get(CAMPAIGN_COL, queryByActive, adsRequested.length, (data) => {
+        console.log('writeStatistics', data)
+    });
     res.send('ok');
 });
 
 router.post('/click', (req, res) => {
-    let queryByName = {name: req.body.name};
-
-    decrenetClicks(queryByName);
-    validateIsActive(queryByName);
+    BL.AdClicked({name: req.body.name});
     writeStatistics(req.body);
 
     res.send("Clicked on '" +  req.body.name + "' got registered");
@@ -27,31 +38,6 @@ router.post('/click', (req, res) => {
 module.exports = [router];
 
 // ################### Private Methods ################### //
-
-function decrenetClicks(queryByName) {
-    DAL.Update(CAMPAIGN_COL, queryByName, {
-        $inc: {
-            clicks_left: -1
-        }
-    }, (data) => {
-        console.log('decrenetClicks:', data);
-        // notify someone that the campaign was ended
-    });
-}
-
-function validateIsActive(queryByName) {
-    DAL.Get(CAMPAIGN_COL, queryByName, (data) => {
-        if ((data !== null) && (data.clicks_left <= 0)) {
-            DAL.Update(CAMPAIGN_COL, queryByName, {
-                $set: {
-                    isActive: false
-                }
-            }, (data) => {
-                console.log('validateIsActive:', data);
-            });
-        }
-    });
-}
 
 function writeStatistics(object) {
     DAL.Insert(ADS_COL, object, (data) => {
