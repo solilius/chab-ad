@@ -6,7 +6,7 @@ module.exports = {
 
     // ################### CRUD ################### //
 
-    GetAll: (collection, callback) => {
+    Get: (collection, query, limit, callback) => {
         try {
             mongo.connect(CONNECTION_URL, {
                 useNewUrlParser: true
@@ -14,24 +14,7 @@ module.exports = {
                 if (err) {
                     logErrors(err);
                 } else {
-                    db.db(DB_NAME).collection(collection).find({}).toArray((err, result) => {
-                        handleDbResult(err, result, callback);
-                    });
-                }
-            });
-        } catch (error) {
-            logErrors(error);
-        }
-    },
-    Get: (collection, query, callback) => {
-        try {
-            mongo.connect(CONNECTION_URL, {
-                useNewUrlParser: true
-            }, (err, db) => {
-                if (err) {
-                    logErrors(err);
-                } else {
-                    db.db(DB_NAME).collection(collection).findOne(query, (err, result) => {
+                    db.db(DB_NAME).collection(collection).find(query).limit(limit).toArray((err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }
@@ -65,7 +48,7 @@ module.exports = {
                 if (err) {
                     logErrors(err);
                 } else {
-                    db.db(DB_NAME).collection(collection).updateOne(query, updateObject, (err, result) => {
+                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, (err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }
