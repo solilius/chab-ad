@@ -1,2 +1,0 @@
-# chab-ad
-ad manager
