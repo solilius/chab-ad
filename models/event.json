@@ -1,0 +1,9 @@
+{
+    "campain_name": "my_campaign",
+    "action": "clicked",
+    "message": "ad from <campain_name> on position <ad_position> was <action>",
+    "site": "http://chabad.info",
+    "ad_position": "chabad.info-m-2",
+    "ip": "0.0.0.0",
+    "date": "10/10/2010 12:12:12"
+}

@@ -13,7 +13,14 @@ module.exports = {
     });
   },
   GetAds: (adsReqArr, callback) => {
-
+    let ads = [];
+    for (let i = 0; i < adsReqArr.length; i++) {
+      DAL.Get(ADS_COL, {locations: adsReqArr[i]}, (data) =>{
+        const adPosition = Math.floor(Math.random() * (data.length+1));
+        ads[i] = data[adPosition];
+      });
+    }
+    callback(ads);
   },
 
   AdClicked: (queryByName, callback) => {
@@ -52,7 +59,7 @@ function deactivateCampaign(query, callback){
 
 function validateResources(){
   DAL.Get(CAMPAIGN_COL, {isActive: false}, 0, (data) => {
-    data.array.forEach(campaign => {
+    data.forEach(campaign => {
       deactivateResources(campaign.name);
     });
   });

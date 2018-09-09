@@ -11,7 +11,7 @@ router.use('*', auth);
 // ################### API ################### //
 
 router.get('/checkname/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {name: req.params.name}, 0, (data) => {
+    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, 0, (data) => {
         res.send(data.length === 0);
     });
 });
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {name: req.params.name}, 1, (data) => {
+    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, 1, (data) => {
         res.send(data);
     });
 });
@@ -38,13 +38,13 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:name', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, {name: req.params.name}, {$set: req.body}, (data) => {
+    DAL.Update(CAMPAIGN_COL, {campaign_name: req.params.name}, {$set: req.body}, (data) => {
         res.send(data);
    });
 });
 
 router.delete('/:name', (req, res) => {
-    DAL.Delete(CAMPAIGN_COL, {name: req.params.name}, (data) => {
+    DAL.Delete(CAMPAIGN_COL, {campaign_name: req.params.name}, (data) => {
         res.send(data);
     });
 });
