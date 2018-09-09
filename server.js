@@ -11,11 +11,13 @@ app.use(express.static(__dirname + '/public'));
 // ################ ROUTERS ################# //
 
 let campaigns = require('./routers/campaigns');
+let resources = require('./routers/resources');
 let ads = require('./routers/ads');
 
 // ################## API ################### //
 
 app.use('/campaigns', campaigns);
+app.use('/resources', resources);
 app.use('/ads', ads);
 
 app.get('/', (req, res) => {

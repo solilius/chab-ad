@@ -1,0 +1,12 @@
+{
+    "campaingn_name": "my_campaign",
+    "isActive": true,
+    "positions": [
+        "chabad.info-1",
+        "chabad.info-m-2",
+        "nashim-3"
+    ],
+    "type": "image",
+    "url": "http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png",
+    "onclick": "eevee.com/awesome"
+}

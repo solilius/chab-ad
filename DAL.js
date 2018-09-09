@@ -65,7 +65,7 @@ module.exports = {
                 if (err) {
                     logErrors(err);
                 } else {
-                    db.db(DB_NAME).collection(collection).deleteOne(query, (err, result) => {
+                    db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }
