@@ -1,30 +1,42 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const DAL = require('../DAL');
-const BL = require('../BL');
+const auth = require('../middlewares/authenticator');
 const router = express.Router();
+const ADS_COL = 'ads';
 
 router.use(bodyParser.json());
-BL.ActiveCampaignSqudualer();
+router.use('*', auth);
 
 // ################### API ################### //
 
 router.get('/', (req, res) => {
-    BL.GetAds(req.query.ads.split(','), (data) => {
+    DAL.Get(ADS_COL, {}, 0, (data) => {
         res.send(data);
     });
 });
 
-router.post('/click', (req, res) => {
-    BL.AdClicked({name: req.body.name}, () => {
-        res.send("Clicked on '" +  req.body.name + "' got registered");
+router.get('/:name', (req, res) => {
+    DAL.Get(ADS_COL, {campaingn_name: req.params.name}, 0, (data) => {
+        res.send(data);
     });
-
 });
 
-router.post('/view', (req, res) => {
-    BL.AdViewed({name: req.body.name}, () => {
-        res.send("View on '" +  req.body.name + "' got registered");
+router.post('/', (req, res) => {
+        DAL.Insert(ADS_COL, req.body, (data) => {
+        res.send(data);
+    });
+});
+
+router.put('/:name', (req, res) => {
+    DAL.Update(ADS_COL, {campaingn_name: req.params.name}, {$set: req.body}, (data) => {
+        res.send(data);
+   });
+});
+
+router.delete('/:name', (req, res) => {
+    DAL.Delete(ADS_COL, {campaingn_name: req.params.name}, (data) => {
+        res.send(data);
     });
 });
 
