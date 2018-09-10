@@ -1,5 +1,5 @@
 {
-    "campaingn_name": "my_campaign",
+    "campaign_name": "my_campaign",
     "isActive": true,
     "positions": [
         "chabad.info-1",

@@ -6,21 +6,21 @@ module.exports = {
 
     // ################### CRUD ################### //
 
-    Get: (collection, query, limit, callback) => {
+    Get: (collection, query, callback) => {
         try {
             mongo.connect(CONNECTION_URL, {
                 useNewUrlParser: true
             }, (err, db) => {
                 if (err) {
-                    logErrors(err);
+                    handleErros(err, callback);
                 } else {
-                    db.db(DB_NAME).collection(collection).find(query).limit(limit).toArray((err, result) => {
+                    db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }
             });
         } catch (error) {
-            logErrors(error);
+            handleErros(error);
         }
     },
     Insert: (collection, object, callback) => {
@@ -29,7 +29,7 @@ module.exports = {
                 useNewUrlParser: true
             }, (err, db) => {
                 if (err) {
-                    logErrors(err);
+                    handleErros(err, callback);
                 } else {
                     db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
                         handleDbResult(err, result, callback);
@@ -37,7 +37,7 @@ module.exports = {
                 }
             });
         } catch (error) {
-            logErrors(error);
+            handleErros(error);
         }
     },
     Update: (collection, query, updateObject, callback) => {
@@ -46,7 +46,7 @@ module.exports = {
                 useNewUrlParser: true
             }, (err, db) => {
                 if (err) {
-                    logErrors(err);
+                    handleErros(err, callback);
                 } else {
                     db.db(DB_NAME).collection(collection).updateMany(query, updateObject, (err, result) => {
                         handleDbResult(err, result, callback);
@@ -54,7 +54,7 @@ module.exports = {
                 }
             });
         } catch (error) {
-            logErrors(error);
+            handleErros(error);
         }
     },
     Delete: (collection, query, callback) => {
@@ -63,7 +63,7 @@ module.exports = {
                 useNewUrlParser: true
             }, (err, db) => {
                 if (err) {
-                    logErrors(err);
+                    handleErros(err, callback);
                 } else {
                     db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
                         handleDbResult(err, result, callback);
@@ -71,7 +71,7 @@ module.exports = {
                 }
             });
         } catch (error) {
-            logErrors(error);
+            handleErros(error);
         }
     }
 }
@@ -80,13 +80,14 @@ module.exports = {
 
 function handleDbResult(err, result, callback) {
     if (err) {
-        logErrors(err);
+        handleErros(err, callback);
     } else {
         callback(result);
     }
 }
 
-function logErrors(err) {
+function handleErros(err, callback) {
     // log somewhere else
     console.log(err);
+    callback(err.name);
 }

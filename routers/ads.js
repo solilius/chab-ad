@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:name', (req, res) => {
-    DAL.Get(ADS_COL, {campaingn_name: req.params.name}, (data) => {
+    DAL.Get(ADS_COL, {campaign_name: req.params.name}, (data) => {
         res.send(data);
     });
 });
@@ -29,13 +29,13 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:name', (req, res) => {
-    DAL.Update(ADS_COL, {campaingn_name: req.params.name}, {$set: req.body}, (data) => {
+    DAL.Update(ADS_COL, {campaign_name: req.params.name}, {$set: req.body}, (data) => {
         res.send(data);
    });
 });
 
 router.delete('/:name', (req, res) => {
-    DAL.Delete(ADS_COL, {campaingn_name: req.params.name}, (data) => {
+    DAL.Delete(ADS_COL, {campaign_name: req.params.name}, (data) => {
         res.send(data);
     });
 });
