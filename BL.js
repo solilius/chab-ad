@@ -6,44 +6,78 @@ const ADS_COL = 'ads';
 
 module.exports = {
   ActiveCampaignSqudualer: () => {
-    schedule.scheduleJob('0 0 * * *', function () {
-      deactivateCampaign({ "transaction_details.expiration_date": {$lte: new Date()}}, () => {
-        validateResources();
-      });
-    });
+    try {
+      schedule.scheduleJob('0 0 * * *', function () {
+        deactivateCampaign({ "transaction_details.expiration_date": {$lte: new Date()}}, () => {
+          validateResources();
+        });
+      });  
+    } catch (err) {
+      handleErros(err, callback);
+    }
+    
   },
     GetAds: (adsReqArr, callback) => {
-    let ads = [];
+      let ads = [];
 
-    for (let i = 0; i < adsReqArr.length; i++) {
-      ads.push(getAd(adsReqArr[i]));
-    }
-
-    Promise.all(ads).then((data) => {
-      callback(data);
-      decrementViews(data);
-    });
+      try {
+    
+        for (let i = 0; i < adsReqArr.length; i++) {
+          ads.push(getAd(adsReqArr[i]));
+        }
+    
+        Promise.all(ads).then((data) => {
+          callback(data);
+          decrementViews(data);
+        });
+      
+      } catch (err) {
+        handleErros(err, callback);
+      }
   },
 
   AdClicked: (eventObject, callback) => {
     let queryByName = {campaign_name: eventObject.campaign_name};
-    
-    decremetValue(queryByName, 'clicks_left', () => {
-      logEvent(eventObject);
-      callback();
-    });
+
+    try {
+      
+      decremetValue(queryByName, 'clicks_left', () => {
+        logEvent(eventObject);
+        callback();
+      });
+      
+    } catch (err) {
+      handleErros(err, callback);
+    }
   },
 
   AdViewed: (eventObject, callback) => {
     let queryByName = {campaign_name: eventObject.campaign_name};
-    decremetValue(queryByName, 'views_left', () => {
-    logEvent(eventObject);
-    callback();
-    });
+
+    try {
+      decremetValue(queryByName, 'views_left', () => {
+      logEvent(eventObject);
+      callback();
+      });
+      
+    } catch (err) {
+      handleErros(err, callback);
+    }
   }
 }
 
 // ################### Private Methods ################### //
+
+function getAd(pos){
+  return new Promise((res, rej) =>{
+  DAL.Get(ADS_COL, {isActive: true, positions: pos}, (data) =>{
+    if(data.length === 0){
+      res({campaign_name: 'no_reslut'});
+    }
+      res(data[Math.floor(Math.random() * (data.length))])
+        });
+    });
+}
 
 function validateCampaign (queryByName) {
   DAL.Get(CAMPAIGN_COL, queryByName, (data) => {
@@ -76,6 +110,14 @@ function deactivateResources(name){
   });
 }
 
+function decrementViews(ads){
+  for (let i = 0; i < ads.length; i++) {
+    let queryByName = {campaign_name: ads[i].campaign_name};
+      decremetValue(queryByName, 'views_left', () =>{
+    });
+  }
+}
+
 function decremetValue(queryByName, key, callback) {
   let updateQuery = {$inc: { clicks_left: -1} };
   if (key === "views_left")
@@ -94,21 +136,8 @@ function logEvent(object) {
   });
 }
 
-function getAd(pos){
-  return new Promise((res, rej) =>{
-  DAL.Get(ADS_COL, {isActive: true, positions: pos}, (data) =>{
-    if(data.length === 0){
-      res({campaign_name: 'no_reslut'});
-    }
-      res(data[Math.floor(Math.random() * (data.length))])
-        });
-    });
-}
-
-function decrementViews(ads){
-  for (let i = 0; i < ads.length; i++) {
-    let queryByName = {campaign_name: ads[i].campaign_name};
-      decremetValue(queryByName, 'views_left', () =>{
-    });
-  }
+function handleErros(err, callback) {
+  // log somewhere else
+  console.log(err);
+  callback(err.name);
 }
