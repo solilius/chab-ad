@@ -1,8 +1,8 @@
 const DAL = require('./DAL');
 const schedule = require('node-schedule');
+const logger = require('./Logger');
 const CAMPAIGN_COL = 'campaigns';
 const LOGS_COL = 'logs';
-const ADS_COL = 'ads';
 
 module.exports = {
   ActiveCampaignSqudualer: () => {
@@ -13,7 +13,9 @@ module.exports = {
         });
       });  
     } catch (err) {
-      handleErros(err, callback);
+      handleErros('CampaignSqudualer', err, () =>{
+        console.log("CampaignSqudualer falied");
+      });
     }
     
   },
@@ -32,7 +34,7 @@ module.exports = {
         });
       
       } catch (err) {
-        handleErros(err, callback);
+        handleErros('GetAds', err, callback);
       }
   },
 
@@ -42,12 +44,12 @@ module.exports = {
     try {
       
       decremetValue(queryByName, 'clicks_left', () => {
-        logEvent(eventObject);
+        logger.LogEvent(eventObject);
         callback();
       });
       
     } catch (err) {
-      handleErros(err, callback);
+      handleErros('AdClicked', err, callback);
     }
   },
 
@@ -56,12 +58,12 @@ module.exports = {
 
     try {
       decremetValue(queryByName, 'views_left', () => {
-      logEvent(eventObject);
+      logger.LogEvent(eventObject);
       callback();
-      });
+      });   
       
     } catch (err) {
-      handleErros(err, callback);
+      handleErros('AdViewed' ,err, callback);
     }
   }
 }
@@ -130,14 +132,8 @@ function decremetValue(queryByName, key, callback) {
   });
 }
 
-function logEvent(object) {
-  DAL.Insert(LOGS_COL, object, (data) => {
-      console.log('Event', data);
-  });
-}
-
-function handleErros(err, callback) {
-  // log somewhere else
+function handleErros(src, err, callback) {
+  logger.LogError(err.name, src ,err.message, err);
   console.log(err);
   callback(err.name);
 }
