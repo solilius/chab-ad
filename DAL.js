@@ -31,7 +31,7 @@ module.exports = {
                 if (err) {
                     logErrors(err);
                 } else {
-                    db.db(DB_NAME).collection(collection).insertOne(object, (err, result) => {
+                    db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }

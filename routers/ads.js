@@ -23,7 +23,7 @@ router.get('/:name', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-        DAL.Insert(ADS_COL, req.body, (data) => {
+        DAL.Insert(ADS_COL, req.body.ads, (data) => {
         res.send(data);
     });
 });

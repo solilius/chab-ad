@@ -1,6 +1,5 @@
 const DAL = require('./DAL');
 const schedule = require('node-schedule');
-const async = require('async');
 const CAMPAIGN_COL = 'campaigns';
 const LOGS_COL = 'logs';
 const ADS_COL = 'ads';
