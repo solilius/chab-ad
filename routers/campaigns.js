@@ -11,20 +11,20 @@ router.use('*', auth);
 // ################### API ################### //
 
 router.get('/checkname/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, 0, (data) => {
+    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, (data) => {
         res.send(data.length === 0);
     });
 });
 
 
 router.get('/', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {}, 0, (data) => {
+    DAL.Get(CAMPAIGN_COL, {}, (data) => {
         res.send(data);
     });
 });
 
 router.get('/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, 1, (data) => {
+    DAL.Get(CAMPAIGN_COL, {campaign_name: req.params.name}, (data) => {
         res.send(data);
     });
 });

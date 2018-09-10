@@ -15,15 +15,15 @@ router.get('/', (req, res) => {
 });
 
 router.post('/click', (req, res) => {
-    BL.AdClicked({campaign_name: req.body.name}, () => {
-        res.send("Clicked on '" +  req.body.name + "' got registered");
+    BL.AdClicked(req.body, () => {
+        res.send("Clicked on '" +  req.body.campain_name + "' got registered");
     });
 
 });
 
 router.post('/view', (req, res) => {
-    BL.AdViewed({campaign_name: req.body.name}, () => {
-        res.send("View on '" +  req.body.name + "' got registered");
+    BL.AdViewed(req.body, () => {
+        res.send("View on '" +  req.body.campain_name + "' got registered");
     });
 });
 

@@ -11,13 +11,13 @@ router.use('*', auth);
 // ################### API ################### //
 
 router.get('/', (req, res) => {
-    DAL.Get(ADS_COL, {}, 0, (data) => {
+    DAL.Get(ADS_COL, {}, (data) => {
         res.send(data);
     });
 });
 
 router.get('/:name', (req, res) => {
-    DAL.Get(ADS_COL, {campaingn_name: req.params.name}, 0, (data) => {
+    DAL.Get(ADS_COL, {campaingn_name: req.params.name}, (data) => {
         res.send(data);
     });
 });
