@@ -2,7 +2,7 @@ const DAL = require('./DAL');
 const schedule = require('node-schedule');
 const logger = require('./Logger');
 const CAMPAIGN_COL = 'campaigns';
-const LOGS_COL = 'logs';
+const ADS_COL = 'ads';
 
 module.exports = {
   ActiveCampaignSqudualer: () => {
