@@ -5,7 +5,7 @@ const CAMPAIGN_COL = 'campaigns';
 const ADS_COL = 'ads';
 
 module.exports = {
-  ActiveCampaignSqudualer: () => {
+  ActiveCampaignScheuduler: () => {
     try {
       schedule.scheduleJob('0 0 * * *', function () {
         deactivateCampaign({ "transaction_details.expiration_date": {$lte: new Date()}}, () => {
@@ -13,7 +13,7 @@ module.exports = {
         });
       });  
     } catch (err) {
-      handleErros('CampaignSqudualer', err, () =>{
+      handleErrors('CampaignSqudualer', err, () =>{
         console.log("CampaignSqudualer falied");
       });
     }
@@ -34,7 +34,7 @@ module.exports = {
         });
       
       } catch (err) {
-        handleErros('GetAds', err, callback);
+        handleErrors('GetAds', err, callback);
       }
   },
 
@@ -49,7 +49,7 @@ module.exports = {
       });
       
     } catch (err) {
-      handleErros('AdClicked', err, callback);
+      handleErrors('AdClicked', err, callback);
     }
   },
 
@@ -63,7 +63,7 @@ module.exports = {
       });   
       
     } catch (err) {
-      handleErros('AdViewed' ,err, callback);
+      handleErrors('AdViewed' ,err, callback);
     }
   }
 }
@@ -74,7 +74,7 @@ function getAd(pos){
   return new Promise((res, rej) =>{
   DAL.Get(ADS_COL, {isActive: true, positions: pos}, (data) =>{
     if(data.length === 0){
-      res({campaign_name: 'no_reslut'});
+      res({campaign_name: 'no_result'});
     }
       res(data[Math.floor(Math.random() * (data.length))])
         });
@@ -132,7 +132,7 @@ function decremetValue(queryByName, key, callback) {
   });
 }
 
-function handleErros(src, err, callback) {
+function handleErrors(src, err, callback) {
   logger.LogError(err.name, src ,err.message, err);
   console.log(err);
   callback(err.name);
