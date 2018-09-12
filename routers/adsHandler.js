@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.post('*', vaild);
 
-BL.ActiveCampaignSqudualer();
+BL.ActiveCampaignScheuduler();
 
 // ################### API ################### //
 
