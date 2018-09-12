@@ -1,0 +1,752 @@
+{
+  "front-version": "2.19.1",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "4ee37515-32a4-41ae-8a20-4955e53407d6",
+      "lastModified": "2018-09-10T21:39:47.428+03:00",
+      "name": "Chab-ad"
+    },
+    {
+      "type": "Service",
+      "id": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff",
+      "lastModified": "2018-09-10T00:32:58.901+03:00",
+      "name": "Ads",
+      "parentId": "4ee37515-32a4-41ae-8a20-4955e53407d6"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"positions\": [ \"nashim-4\"]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ads/my_campaign"
+      },
+      "id": "c2ebbd33-da98-481b-ba76-3d214cd11ca5",
+      "lastModified": "2018-09-10T00:40:57.752+03:00",
+      "name": "Delete Ad",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": null
+      },
+      "parentId": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaingn_name\": \"my_campaign2\",\n    \"isActive\": true,\n    \"positions\": [\n        \"chabad.info-1\",\n        \"chabad.info-m-2\",\n        \"nashim-3\"\n    ],\n    \"type\": \"image\",\n    \"url\": \"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n    \"onclick\": \"http://eevee.com/awesome\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ads/my_campaign"
+      },
+      "id": "d39e7605-d87b-4015-b239-673f803ec77c",
+      "lastModified": "2018-09-10T21:19:00.071+03:00",
+      "name": "Get Ad",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": null
+      },
+      "parentId": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaingn_name\": \"my_campaign2\",\n    \"isActive\": true,\n    \"positions\": [\n        \"chabad.info-1\",\n        \"chabad.info-m-2\",\n        \"nashim-3\"\n    ],\n    \"type\": \"image\",\n    \"url\": \"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n    \"onclick\": \"http://eevee.com/awesome\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ads/"
+      },
+      "id": "2f8d2a72-f3ca-47db-967a-4998ce26b1df",
+      "lastModified": "2018-09-10T00:39:33.144+03:00",
+      "name": "Get all Ads",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": null
+      },
+      "parentId": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBodyEditorHeight": 444,
+        "textBody": "{  \n   \"ads\":[  \n      {  \n         \"campaign_name\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-1\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      },\n      {  \n         \"campaign_name\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      }\n   ]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ads/"
+      },
+      "id": "fefe154c-4510-425e-a8c6-62dd96dd78e5",
+      "lastModified": "2018-09-10T19:24:57.052+03:00",
+      "name": "Insert Ads",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": null
+      },
+      "parentId": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"positions\": [ \"nashim-4\"]\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/ads/my_campaign"
+      },
+      "id": "1e36ccc6-b050-40a1-b580-1ce165606f34",
+      "lastModified": "2018-09-10T00:40:36.513+03:00",
+      "name": "Update Ad",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": null
+      },
+      "parentId": "8d9abb6f-392d-44c7-b032-da4c00a0e7ff"
+    },
+    {
+      "type": "Service",
+      "id": "091bd116-61eb-494e-9813-d8a9baf08e2d",
+      "lastModified": "2018-09-10T00:42:38.282+03:00",
+      "name": "AdsHandler",
+      "parentId": "4ee37515-32a4-41ae-8a20-4955e53407d6"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaign_name\": \"my_campaign\",\n    \"action\": \"clicked\",\n    \"message\": \"ad from <campain_name> on position <ad_position> was <action>\",\n    \"site\": \"http://chabad.info\",\n    \"ad_position\": \"chabad.info-m-2\",\n    \"ip\": \"0.0.0.0\",\n    \"date\": \"10/10/2010 12:12:12\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/adsHandler/click"
+      },
+      "id": "6a696205-fb41-4fcc-b3df-7d172c9e750f",
+      "lastModified": "2018-09-10T21:39:47.428+03:00",
+      "name": "Clicked",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "c2ebbd33-da98-481b-ba76-3d214cd11ca5"
+      },
+      "parentId": "091bd116-61eb-494e-9813-d8a9baf08e2d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campain_name\": \"my_campaign\",\n    \"action\": \"viewed\",\n    \"message\": \"ad from <campain_name> on position <ad_position> was <action>\",\n    \"site\": \"http://chabad.info\",\n    \"ad_position\": \"chabad.info-m-2\",\n    \"ip\": \"0.0.0.0\",\n    \"date\": \"10/10/2010 12:12:12\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "ads",
+              "value": "chabad.info-1,chabad.info-2,chabad.info-3,nashim-1"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/adsHandler/"
+      },
+      "id": "6e64c9b7-ff62-4e43-97b1-b1c068492945",
+      "lastModified": "2018-09-10T18:06:01.148+03:00",
+      "name": "Get Ads",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "c2ebbd33-da98-481b-ba76-3d214cd11ca5"
+      },
+      "parentId": "091bd116-61eb-494e-9813-d8a9baf08e2d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campain_name\": \"my_campaign\",\n    \"action\": \"viewed\",\n    \"message\": \"ad from <campain_name> on position <ad_position> was <action>\",\n    \"site\": \"http://chabad.info\",\n    \"ad_position\": \"chabad.info-m-2\",\n    \"ip\": \"0.0.0.0\",\n    \"date\": \"10/10/2010 12:12:12\"\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/adsHandler/view"
+      },
+      "id": "8d468664-4158-4320-97b0-65d666c76f5e",
+      "lastModified": "2018-09-10T01:28:24.041+03:00",
+      "name": "Viewded",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "c2ebbd33-da98-481b-ba76-3d214cd11ca5"
+      },
+      "parentId": "091bd116-61eb-494e-9813-d8a9baf08e2d"
+    },
+    {
+      "type": "Service",
+      "id": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d",
+      "lastModified": "2018-09-10T00:29:33.400+03:00",
+      "name": "Campaign",
+      "parentId": "4ee37515-32a4-41ae-8a20-4955e53407d6"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+        "name": "DELETE"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/campaigns/my_campaign"
+      },
+      "id": "793506e6-9e7b-4c0c-9bd3-a51908c04a41",
+      "lastModified": "2018-09-10T00:38:16.262+03:00",
+      "name": "Delete Campaign",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "547646cb-15cc-4697-9baa-9301dc9f9a0d"
+      },
+      "parentId": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/campaigns/my_campaign"
+      },
+      "id": "32a101a9-f620-451f-84fa-040b1cd0f9a0",
+      "lastModified": "2018-09-10T00:37:53.280+03:00",
+      "name": "Get Campaign",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "547646cb-15cc-4697-9baa-9301dc9f9a0d"
+      },
+      "parentId": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/campaigns/"
+      },
+      "id": "547646cb-15cc-4697-9baa-9301dc9f9a0d",
+      "lastModified": "2018-09-10T00:35:33.980+03:00",
+      "name": "Get all Campaigns",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "547646cb-15cc-4697-9baa-9301dc9f9a0d"
+      },
+      "parentId": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n    \"campaign_name\": \"my_campaign\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/campaigns/"
+      },
+      "id": "adbdcc88-7586-4b37-aa5e-2edc6540b1a6",
+      "lastModified": "2018-09-10T00:38:23.254+03:00",
+      "name": "Insert Campaign",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "547646cb-15cc-4697-9baa-9301dc9f9a0d"
+      },
+      "parentId": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d"
+    },
+    {
+      "uriEditor": true,
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+        "name": "PUT"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "bla",
+              "value": "blu"
+            }
+          ]
+        },
+        "bodyType": "Text",
+        "autoSetLength": true,
+        "textBody": "{\n  \"clicks_left\": 100\n}"
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "localhost:8080",
+        "path": "/campaigns/my_campaign"
+      },
+      "id": "aa44f3a4-cbe2-4d17-93b5-1c5497b3f403",
+      "lastModified": "2018-09-10T00:37:34.497+03:00",
+      "name": "Update Campaign",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "auth",
+          "value": "1234"
+        },
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {
+        "IS_FROM_HISTORY": "547646cb-15cc-4697-9baa-9301dc9f9a0d"
+      },
+      "parentId": "98efa7cd-e50a-47c6-82b2-ada8a27dc14d"
+    }
+  ]
+}
