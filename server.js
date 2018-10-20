@@ -21,7 +21,7 @@ app.use('/adsHandler', adsHandler);
 app.use('/ads', ads);
 
 app.get('/', (req, res) => {
-    res.sendFile('./index.html');
+    res.send('wqasap');
 });
 
 // ############# Start Server ############### //
