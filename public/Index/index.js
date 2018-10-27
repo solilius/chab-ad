@@ -21,3 +21,5 @@ $(document).ready(function(){
         }
     });
   };
+
+  localStorage.setItem("campaign", "none");

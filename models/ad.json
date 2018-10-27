@@ -10,3 +10,23 @@
     "url": "http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png",
     "onclick": "http://eevee.com/awesome"
 }
+
+{
+    "campaign_name": "my_campaign",
+    "isActive": true,
+    "positions": [
+        "chabad.info-1",
+        "chabad.info-m-2",
+        "nashim-3"
+    ],
+    "url": "http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png",
+    "onclick": "http://eevee.com/awesome",
+    "platform": ["נייח", "נייד"],
+    "sites": ["chabad.com", "nashim.net"],
+    "size": "400X500",
+    "expiration_date": "10/10/2011",
+    "starting_date": "10/10/2010",
+    "clicks": 23,
+    "viewes": 239,
+    "positions_names": ["sidebar-6", "header"]
+}
