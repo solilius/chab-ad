@@ -1,11 +1,19 @@
 const joi = require('joi');
 const adScheme = joi.object().keys({
     campaign_name: joi.string().required(),
+    ad_id: joi.string().required(),
     isActive: joi.bool().required(),
     positions: joi.array().min(1).required(),
-    type: joi.string().valid('image', 'gif').required(),
     url: joi.string().required(),
-    onclick: joi.string().required()
+    onclick: joi.string().required(),
+    size: joi.string().required(),
+    clicks: joi.number().required(),
+    viewes: joi.number().required(),
+    platform: joi.array().min(1).required(),
+    sites: joi.array().min(1).required(),
+    positions_names: joi.array().min(1).required(),
+    expiration_date: joi.date().required(),
+    starting_date:  joi.date().required()
 });
 
 const scheme = joi.object().keys({
