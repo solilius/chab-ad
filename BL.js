@@ -71,13 +71,15 @@ module.exports = {
 // ################### Private Methods ################### //
 
 function getAd(pos){
+
   return new Promise((res, rej) =>{
   DAL.Get(ADS_COL, {isActive: true, positions: pos}, (data) =>{
     if(data.length === 0){
       res({campaign_name: 'no_result'});
-    }
+    }else{
       res(data[Math.floor(Math.random() * (data.length))])
-        });
+    }
+      });
     });
 }
 
@@ -114,21 +116,42 @@ function deactivateResources(name){
 
 function decrementViews(ads){
   for (let i = 0; i < ads.length; i++) {
-    let queryByName = {campaign_name: ads[i].campaign_name};
-      decremetValue(queryByName, 'views_left', () =>{
-    });
+    let query = {
+        campaign:{campaign_name: ads[i].campaign_name},
+        ad: {ad_id: ads[i].ad_id}
+      };
+      decremetValue(query, 'views_left', () =>{});
   }
 }
 
-function decremetValue(queryByName, key, callback) {
-  let updateQuery = {$inc: { clicks_left: -1} };
-  if (key === "views_left")
-  {
-    updateQuery = {$inc: { views_left: -1} };
+function decremetValue(query, key, callback) {
+  let campaignUpdateQuery = {};
+  let adUpdateQuery = {};
+
+  switch (key) {
+    case "views_left":
+      campaignUpdateQuery = {$inc: { views_left: -1} };
+      adUpdateQuery = {$inc: { views: +1} };
+
+      break;
+    case "clicks_left":
+      campaignUpdateQuery = {$inc: { clicks_left: -1} };
+      adUpdateQuery = {$inc: { clicks: +1} };
+
+      break;
+      default:
+        callback();
+
+      break;
   }
-  DAL.Update(CAMPAIGN_COL, queryByName, updateQuery, (data) => {
+
+  DAL.Update(CAMPAIGN_COL, query.campaign, campaignUpdateQuery, (data) => {
     callback();
-    validateCampaign(queryByName); 
+    validateCampaign(query); 
+  });
+
+  DAL.Update(ADS_COL, query.ad, adUpdateQuery, (data) => {
+    callback();
   });
 }
 

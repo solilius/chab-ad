@@ -1,8 +1,9 @@
 const mongo = require('mongodb');
 const CONNECTION_URL = 'mongodb://sol:solsol44@ds249372.mlab.com:49372/heroku_tjxz75h9';
 const DB_NAME = 'heroku_tjxz75h9';
+const LOGS_COL = 'logs';
 
-module.exports = {
+module.exports = { 
 
     Get: (collection, query, callback) => {
         try {
