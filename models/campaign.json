@@ -7,11 +7,7 @@
         "starting_date": "2018-07-29",
         "expiration_date": "2018-08-29"
     },
-    "owner_info": {
-        "full_name": "Israel Israeli",
-        "phone": "+972507837211",
-        "business_name": "bla"
-    },
+    "owner_id": "qwe",
     "isActive": true,
     "views_left": 500,
     "clicks_left": 50

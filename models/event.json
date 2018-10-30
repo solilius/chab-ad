@@ -1,5 +1,6 @@
 {
     "campain_name": "my_campaign",
+    "ad_id": "my_campaign_ad_1",
     "action": "clicked",
     "message": "ad from <campain_name> on position <ad_position> was <action>",
     "site": "http://chabad.info",
