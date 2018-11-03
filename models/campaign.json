@@ -1,5 +1,6 @@
 {
-    "campaign_name": "my_campaign",
+    "campaign_id": "my_campaign",
+    "campaign_name": "name",
     "description": "bla bla bla campaign for bla bla bla",
     "transaction_details": {
         "views": 500,

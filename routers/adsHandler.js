@@ -19,14 +19,14 @@ router.get('/', (req, res) => {
 
 router.post('/click', (req, res) => {
     BL.AdClicked(req.body, () => {
-        res.send("Clicked on '" +  req.body.campaign_name + "' got registered");
+        res.send("Clicked on '" +  req.body.campaign_id + "' got registered");
     });
 
 });
 
 router.post('/view', (req, res) => {
     BL.AdViewed(req.body, () => {
-        res.send("View on '" +  req.body.campaign_name + "' got registered");
+        res.send("View on '" +  req.body.campaign_id + "' got registered");
     });
 });
 

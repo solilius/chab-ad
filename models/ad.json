@@ -1,5 +1,6 @@
 {
-    "campaign_name": "my_campaign",
+    "campaign_id": "123",
+    "campaign_name": "name",
     "ad_id": "my_campaign_ad_1",
     "isActive": true,
     "positions": [

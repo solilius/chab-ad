@@ -1,5 +1,6 @@
 const joi = require('joi');
 const scheme = joi.object().keys({
+    campaign_id: joi.string().required(),
     campaign_name: joi.string().required(),
     owner_id:  joi.string().required(),
     description: joi.string().required(),
