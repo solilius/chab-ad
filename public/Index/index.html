@@ -5,13 +5,28 @@
     <title>Chab-ad</title>
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-balham.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/Index/index.css">
 </head>
 <body>
 
-    <nav>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/BannersViewer/banners_viewer.html">Chab-ad</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="#">לקוחות</a></li>
+            <li><a href="#">מיקומים</a></li>
+            <li><a href="/CampaignPage/campaign_page.html">קמפיין חדש</a></li>
+            <li><a href="">תצוגת קמפיינים</a></li>
+            <li><a href="/BannersViewer/banners_viewer.html">תצוגת באנרים</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <!-- <nav>
         <div class="nav-wrapper">
             <a href="/BannersViewer/banners_viewer.html" class="brand-logo" style="margin-left: 10px">Chab-ad</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -19,12 +34,12 @@
                 <li><a href="#">מיקומים</a></li>
                 <li><a href="/CampaignPage/campaign_page.html">קמפיין חדש</a></li>
                 <li><a href="">תצוגת קמפיינים</a></li>
-                    <li><a href="/BannersViewer/banners_viewer.html">תצוגת באנרים</a></li>
+                <li><a href="/BannersViewer/banners_viewer.html">תצוגת באנרים</a></li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
-    <div id="view"></div>
+    <div id="view" class="container-fluid"></div>
 
     <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
