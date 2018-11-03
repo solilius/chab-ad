@@ -18,7 +18,7 @@ let ads = require('./routers/ads');
 
 app.use('/campaigns', campaigns);
 app.use('/adsHandler', adsHandler);
-app.use('/ads', ads);
+app.use('/banners', ads);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/Index/index.html');
