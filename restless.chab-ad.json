@@ -195,7 +195,7 @@
         "bodyType": "Text",
         "autoSetLength": true,
         "textBodyEditorHeight": 444,
-        "textBody": "{  \n   \"ads\":[  \n      {  \n         \"campaign_name\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-1\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      },\n      {  \n         \"campaign_name\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      }\n   ]\n}"
+        "textBody": "{  \n   \"ads\":[  \n      {  \n         \"campaign_id\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-1\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      },\n      {  \n         \"campaign_id\":\"my_campaign\",\n         \"isActive\":true,\n         \"positions\":[  \n            \"chabad.info-\",\n            \"nashim-1\"\n         ],\n         \"type\":\"image\",\n         \"url\":\"http://res.cloudinary.com/dukdfuywh/image/upload/v1536354560/eevee_tkvvb8.png\",\n         \"onclick\":\"http://eevee.com/awesome\"\n      }\n   ]\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -318,7 +318,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n    \"campaign_name\": \"my_campaign\",\n    \"action\": \"clicked\",\n    \"message\": \"ad from <campain_name> on position <ad_position> was <action>\",\n    \"site\": \"http://chabad.info\",\n    \"ad_position\": \"chabad.info-m-2\",\n    \"ip\": \"0.0.0.0\",\n    \"date\": \"10/10/2010 12:12:12\"\n}"
+        "textBody": "{\n    \"campaign_id\": \"my_campaign\",\n    \"action\": \"clicked\",\n    \"message\": \"ad from <campain_name> on position <ad_position> was <action>\",\n    \"site\": \"http://chabad.info\",\n    \"ad_position\": \"chabad.info-m-2\",\n    \"ip\": \"0.0.0.0\",\n    \"date\": \"10/10/2010 12:12:12\"\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -498,7 +498,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+        "textBody": "{\n    \"campaign_id\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -550,7 +550,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+        "textBody": "{\n    \"campaign_id\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -602,7 +602,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n    \"campaign_name\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+        "textBody": "{\n    \"campaign_id\": \"my_campaign2\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
       },
       "headersType": "Form",
       "uri": {
@@ -655,7 +655,7 @@
         },
         "bodyType": "Text",
         "autoSetLength": true,
-        "textBody": "{\n    \"campaign_name\": \"my_campaign\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
+        "textBody": "{\n    \"campaign_id\": \"my_campaign\",\n    \"description\": \"bla bla bla campaign for bla bla bla\",\n    \"transaction_details\": {\n        \"views\": 500,\n        \"clicks\": 50,\n        \"starting_date\": \"2018-07-29\",\n        \"expiration_date\": \"2019-08-29\"\n    },\n    \"owner_info\": {\n        \"full_name\": \"Israel Israeli\",\n        \"phone\": \"+972507837211\",\n        \"business_name\": \"bla\"\n    },\n    \"isActive\": true,\n    \"views_left\": 500,\n    \"clicks_left\": 50\n}"
       },
       "headersType": "Form",
       "uri": {
