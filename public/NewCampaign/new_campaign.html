@@ -15,19 +15,20 @@
             </label><br>
 
             <div class="input-group click-input">
-                <input type="text" class="form-control" aria-describedby="basic-addon2">
+                <input type="text" id="click" class="form-control" aria-describedby="basic-addon2">
                 <span class="input-group-addon" id="basic-addon2">בלחיצה</span>
             </div>
 
-            <button id="add-pos" onclick="addPosition()" class="btn btn-info">הוסף</button>
-            <button id="remove-pos" onclick="removePosition()" class="btn btn-danger">הסר</button><br>
+            <button id="save-add" onclick="saveAd()" class="btn btn-success"> הוסף פרסומת לרשימה</button>
+            <button id="remove-pos" onclick="removePosition()" class="btn btn-danger">הסר מיקום אחרון</button>
+            <button id="add-pos" onclick="addPosition()" class="btn btn-info">הוסף מיקום</button><br>
 
-            <div id="ads" style="overflow-y:scroll; max-height: 120px">
+            <div id="positions">
                 <div class="position" id="pos-1">
                     <div class="radio">
-                        <label class="checkbox-radio"><input type="radio" name="platform" id="both-1">שניהם</label>
-                        <label class="checkbox-radio"><input type="radio" name="platform" id="mobile-1">נייד</label>
-                        <label class="checkbox-radio"><input type="radio" name="platform" checked id="pc-1">נייח</label>
+                        <label class="checkbox-radio"><input type="radio" name="platform-1" value="both">שניהם</label>
+                        <label class="checkbox-radio"><input type="radio" name="platform-1" value="mobile">נייד</label>
+                        <label class="checkbox-radio"><input type="radio" name="platform-1" checked value="pc">נייח</label>
                     </div>
                     <select class="form-control my-selector" id="pos-select-1">
                         <option hidden>בחר מיקום</option>
@@ -127,13 +128,7 @@
 </div>
 
 <div class="row">
-    <div class="well well-lg ads-preview-list col-md-10 col-md-offset-1">
-        <div class="ad-preview" id="ad-preview-1">
-            <img class="ad-preview-img" src="http://fillmurray.com/g/300/300">
-            <div class="ad-preview-size">5555X5555</div>
-            <button class="remove-ad" onclick="removeAd('ad-1')">X</button>
-        </div>
-    </div>
+    <div class="well well-lg col-md-10 col-md-offset-1" id="ads-preview-list"></div>
 </div>
-
+<button class="btn btn-lg btn-success save" onclick="save()">שמור קמפיין</button>
 <script src="/NewCampaign/new_campaign.js" type="text/javascript" charset="utf-8"></script>

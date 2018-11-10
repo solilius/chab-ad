@@ -5,7 +5,11 @@ var chabadInfoPositions = ['qwe', 'asd'];
 var chabadInfoComPositions = ['zxc', 'vbn'];
 var nesheiPositions = ['123', '456'];
 
-var ads = 1;
+var posArray = [];
+var adArray = [];
+
+var position = 1;
+var ads = 0;
 
 function picSelected() {
     var file = event.target.files[0];
@@ -13,36 +17,25 @@ function picSelected() {
     formData.append('file', file);
     formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
-    axios({
-        url: CLOUDINARY,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-
-        data: formData
-    }).then(function (res) {
-        console.log();
+    post(CLOUDINARY, { 'Content-Type': 'application/x-www-form-urlencoded' }, formData, function (res) {
         document.getElementById('img-size').innerHTML = res.data.height + 'X' + res.data.width;
         document.getElementById('img-preview').src = res.data.secure_url;
-
-    }).catch(function (err) {
-        console.log(err);
-    })
+    });
 }
 
 function addPosition() {
-    ads++;
-    $("#ads").append(`<div class="position" id="pos-${ads}">
+    position++;
+    $("#positions").append(
+        `<div class="position" id="pos-${position}">
             <div class="radio">
-                <label class="checkbox-radio"><input type="radio" name="platform-${ads}" id="both-${ads}">שניהם</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${ads}" id="mobile-${ads}">נייד</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${ads}" checked id="pc-${ads}">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="both">שניהם</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="mobile">נייד</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${position}" checked value="pc">נייח</label>
             </div>
-            <select class="form-control my-selector" id="pos-select-${ads}">
+            <select class="form-control my-selector" id="pos-select-${position}">
                 <option hidden>בחר מיקום</option>
             </select>
-            <select class="form-control my-selector" id="site-select-${ads}" onchange="siteSelected(event)">
+            <select class="form-control my-selector" id="site-select-${position}" onchange="siteSelected(event)">
                 <option hidden>בחר אתר</option>
                 <option>chabad.info</option>
                 <option>chabadinfo.com</option>
@@ -52,8 +45,8 @@ function addPosition() {
 }
 
 function removePosition() {
-    ads--;
-    $("#ads").children().last().remove();
+    position--;
+    $("#positions").children().last().remove();
 }
 
 function siteSelected(e) {
@@ -79,5 +72,295 @@ function insertActions(id, positions) {
     $('#pos-select-' + id).empty()
     for (let i = 0; i < positions.length; i++) {
         select.options[select.options.length] = new Option(positions[i]);
+    }
+}
+
+function saveAd() {
+
+    if (isAdValid()) {
+
+        var src = document.getElementById('img-preview').src;
+        var size = document.getElementById('img-size').innerHTML;
+        $('#ads-preview-list').append(
+            `<div class="ad-preview" id="ad-preview-${ads}">
+            <img class="ad-preview-img" src="${src}">
+            <div class="ad-preview-size">${size}</div>
+            <button class="remove-ad" onclick="removeAd('ad-preview-${ads}')">X</button>
+        </div>`
+        );
+        addPositionsToArray();
+        addAdToArray();
+        clearAdForm();
+        ads++;
+    }
+}
+
+function isAdValid() {
+
+    if (document.getElementById('img-preview').src == 'http://fillmurray.com/g/300/300') {
+        swal("חסרים נתונים", "לא טענת תמונה", "error");
+        return false;
+
+    } else if (document.getElementById('click').value == "") {
+        swal("חסרים נתונים", "לא קיים נתיב בעת לחיצה על פרסומת", "error");
+        return false;
+
+    } else if (!isPositionsValid()) {
+        swal("חסרים נתונים", "אחד או יותר מהמיקומים שהכנסת איננו תקין", "error");
+        return false;
+
+    } else if(document.getElementById('positions').children.length === 0){
+                swal("חסרים נתונים", "לא הוספו מיקומים", "error");
+        }
+        else {
+        return true;
+    }
+}
+
+function isPositionsValid() {
+
+    for (let i = 1; i <= position; i++) {
+        if (document.getElementById('site-select-' + i).value == "בחר אתר" ||
+            document.getElementById('pos-select-' + i).value == "בחר מיקום") {
+            return false;
+        }
+
+    }
+    return true;
+}
+
+function addPositionsToArray() {
+    for (let i = 1; i <= position; i++) {
+
+        var site = document.getElementById('site-select-' + i).value;
+        var pos = document.getElementById('pos-select-' + i).value;
+
+        switch (document.querySelector(`input[name=platform-${i}]:checked`).value) {
+            case 'pc':
+                posArray.push(`${site}-${pos}`);
+                break;
+            case 'mobile':
+                posArray.push(`${site}-${pos}-m`);
+
+                break;
+
+            case 'both':
+                posArray.push(`${site}-${pos}`);
+                posArray.push(`${site}-${pos}-m`);
+
+                break;
+        }
+    }
+}
+
+function addAdToArray() {
+    var ad = {
+        positions: posArray,
+        url: document.getElementById('img-preview').src,
+        onclick: document.getElementById('click').value,
+        size: document.getElementById('img-size').innerHTML,
+    };
+    adArray.push(ad);
+    posArray = [];
+}
+
+function clearAdForm() {
+    document.getElementById('img-size').innerHTML = "";
+    document.getElementById('file-upload').value = "";
+    document.getElementById('click').value = "";
+    document.getElementById('img-preview').src = "http://fillmurray.com/g/300/300";
+
+    for (let i = 2; i <= position; i++) {
+        document.getElementById('pos-' + i).remove();
+    }
+    position = 1;
+}
+
+function removeAd(id) {
+    removeAdFromArray(id);
+    document.getElementById(id).remove();
+}
+
+function removeAdFromArray(id) {
+    adArray[id.split('ad-preview-')[1]] = null;
+}
+
+function save() {
+    console.log('save');
+    if (isCampaignValid()) {
+        var campaign = {
+            campaign_id: (+ new Date()).toString(),
+            campaign_name: document.getElementById('campaign_id').value,
+            description: document.getElementById('description').value,
+            transaction_details: {
+                views: document.getElementById('views').value,
+                clicks: document.getElementById('clicks').value,
+                starting_date: document.getElementById('starting_date').value,
+                expiration_date: document.getElementById('expiration_date').value,
+            },
+            client_info: {
+                name: document.getElementById('client_name').value,
+                phone: document.getElementById('client_phone').value,
+                email: document.getElementById('client_email').value,
+                price: document.getElementById('client_price').value,
+                balance: document.getElementById('client_balance').value,
+                details: document.getElementById('client_details').value
+            },
+            "views_left": document.getElementById('views').value,
+            "clicks_left": document.getElementById('clicks').value,
+            "isActive": true,
+        }
+        fillAdsArray(campaign);
+    }
+}
+
+function fillAdsArray(campaign) {
+    isEmpty = true;
+    for (let i = 0; i < adArray.length; i++) {
+        if (adArray[i] != null) {
+            isEmpty = false;
+            var data = getExtraData(adArray[i].positions);
+            adArray[i].campaign_id = campaign.campaign_id;
+            adArray[i].campaign_name = campaign.campaign_name;
+            adArray[i].add_id = campaign.campaign_id + i.toString();
+            adArray[i].platform = data.platforms;
+            adArray[i].sites = data.sites;
+            adArray[i].positions_names = data.names;
+            adArray[i].clicks = 0;
+            adArray[i].views = 0;
+            adArray[i].isActive = true;
+        }
+    }
+
+
+    if (isEmpty) {
+        swal({
+            title: "אין פרסומות בקמפיין",
+            text: "?האם ברצונך לשמור את הקמפיין כך",
+            icon: "warning",
+            buttons: true
+        }).then((isOk) => {
+            if (isOk) {
+                var header = { "auth": "1234" };
+                post('/campaigns', header, campaign, function (res) {
+                    swal("DAMPAIGN", "You clicked the button!", "success", {
+                        button: "Aww yiss!",
+                    });
+                });
+                post('/banners', header, adArray, function (res) {
+                    swal("ADS", "You clicked the button!", "success", {
+                        button: "Aww yiss!",
+                    });
+                });
+            }
+        });
+    } else {
+        var header = { "auth": "1234" };
+        post('/campaigns', header, campaign, function (res) {
+            swal("CAMPAIGN", "You clicked the button!", "success", {
+                button: "Aww yiss!",
+            });
+        });
+        post('/banners', header, adArray, function (res) {
+            swal("ADS", "You clicked the button!", "success", {
+                button: "Aww yiss!",
+            });
+        });
+    }
+}
+
+
+function post(url, headers, body, callback) {
+    console.log(url);
+    axios({
+        url: url,
+        method: 'POST',
+        headers: headers,
+        data: body
+    }).then(function (res) {
+        callback(res);
+
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
+
+function getExtraData(positions) {
+    var platforms = [];
+    var sites = [];
+    var names = [];
+    positions.forEach(function (pos) {
+        sites.push(pos.split('-')[0]);
+        names.push(pos.split('-')[1]);
+        if (pos.split('-').length == 3) {
+            platforms.push('נייד');
+        } else {
+            platforms.push('נייח');
+        }
+    });
+    var uniquePlatforms = [];
+    $.each(platforms, function (i, el) {
+        if ($.inArray(el, uniquePlatforms) === -1) uniquePlatforms.push(el);
+    });
+
+    var uniqueSites = [];
+    $.each(sites, function (i, el) {
+        if ($.inArray(el, uniqueSites) === -1) uniqueSites.push(el);
+    });
+
+    var uniqueNames = [];
+    $.each(names, function (i, el) {
+        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+    });
+
+    return {
+        platforms: uniquePlatforms,
+        sites: uniqueSites,
+        names: uniqueNames
+    }
+}
+
+function isCampaignValid() {
+    if (document.getElementById('campaign_id').value == "") {
+        swal("חסרים נתונים", "מלא שם קמפיין", "error");
+        return false;
+    } else if (document.getElementById('description').value == "") {
+        swal("חסרים נתונים", "מלא תאור קמפיין", "error");
+        return false;
+    } else if (document.getElementById('starting_date').value == "") {
+        swal("חסרים נתונים", "מלא תאריך התחלת קמפיין", "error");
+        return false;
+    } else if (document.getElementById('expiration_date').value == "") {
+        swal("חסרים נתונים", "מלא תאריך סיום קמפיין", "error");
+        return false;
+    } else if ((new Date(document.getElementById('expiration_date').value).getTime() / 1000) <=
+        (new Date(document.getElementById('starting_date').value).getTime() / 1000)) {
+        swal("טעות בזמנים", "תאריך סיום הקמפיין קטן מתאריך ההתחלה", "error");
+        return false;
+    } else if ((new Date(document.getElementById('expiration_date').value).getTime() / 1000) <=
+        (new Date().getTime() / 1000)) {
+        swal("טעות בזמנים", "תאריך סיום הקמפיין קטן מהיום ", "error");
+        return false;
+    } else if (document.getElementById('views').value <= 0) {
+        swal("חסרים נתונים", "מלא מספר צפיות לקמפיין", "error");
+        return false;
+    } else if (document.getElementById('clicks').value <= 0) {
+        swal("חסרים נתונים", "מלא מספר לחיצות לקמפיין", "error");
+        return false;
+    } else if (document.getElementById('client_name').value == "") {
+        swal("חסרים נתונים", "מלא שם לקוח", "error");
+        return false;
+    } else if (document.getElementById('client_phone').value == "" &&
+        document.getElementById('client_email').value == "") {
+        swal("חסרים נתונים", "מלא טלפון או אימייל של הלקוח", "error");
+        return false;
+    } else if (document.getElementById('client_price').value < 0) {
+        swal("חסרים נתונים", "מלא את מחיר הקמפיין", "error");
+        return false;
+    } else if (document.getElementById('client_balance').value < 0) {
+        swal("חסרים נתונים", "מלא את יתרת תשלום הלקוח", "error");
+        return false;
+    } else {
+        return true;
     }
 }

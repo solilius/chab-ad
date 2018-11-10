@@ -51,12 +51,12 @@ input{
 
 .click-input{
     margin-bottom: 10px;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 18%;
+    padding-right: 18%;
 }
 .my-well{
     margin-top: 30px;
-    height: 550px !important;
+    min-height: 550px !important;
     text-align: right;
 }
 
@@ -85,13 +85,15 @@ input{
     margin-top: 5px;
 }
 
-#ads{
+#positions{
     height: 150px;
     margin-top: 10px;
     overflow: hidden;
+    overflow-y:scroll;
+    max-height: 120px
 }
 
-.ads-preview-list{
+#ads-preview-list{
     margin-top: 30px;
     height: 250px;
     overflow-x: scroll;
@@ -128,4 +130,10 @@ input{
     position: relative;
     top: -210px;
     left: 15px;
+}
+
+.save{
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
 }
