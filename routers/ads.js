@@ -28,6 +28,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
         DAL.Insert(ADS_COL, req.body.ads, (data) => {
+            console.log(req.body);
         res.send(data);
     });
 });

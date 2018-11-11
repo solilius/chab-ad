@@ -14,8 +14,8 @@ const scheme = joi.object().keys({
     }).required(),
     client_info: joi.object().keys({
         name: joi.string(),
-        phone: joi.string(),
-        email: joi.string(),
+        phone: joi.string().allow('').optional(),
+        email: joi.string().allow('').optional(),
         price: joi.number(),
         balance: joi.number(),
         details: joi.string()
