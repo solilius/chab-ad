@@ -1,0 +1,17 @@
+.my-well{
+    margin-top: 30px;
+    min-height: 550px !important;
+    text-align: right;
+}
+
+input{
+    text-align: center;
+}
+
+.status{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 15px;
+    width: 100%;
+    text-align: center;
+}

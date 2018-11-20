@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="/CampaignPage/campaign_page.css">
+<link rel="stylesheet" href="/CampaignPage/switch.css">
+
+<div class="well well-lg my-well col-md-2 col-md-offset-6" >
+    <label class="col-2 col-form-label"> שם הלקוח</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="text" id="c_name" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> מספר הטלפון של הלקוח</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="tel" id="phone" class="form-control">
+    </div><br><br>
+    <label class="col-2 col-form-label"> עדכן האימייל שלהלקוח</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="email" id="email" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> עדכן את מחיר הקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="number" id="price" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> עדכן את יתרת התשלום</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="number" id="balance" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> ערוך מידע נוסף</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+        </span>
+        <input type="text" id="details" class="form-control">
+    </div>
+<br><br><br><br>
+    <button class="btn btn-lg btn-block btn-success" onclick="updateClient()">שמור שינויים</button>
+</div>
+
+<div class="well well-lg my-well col-md-3" style="margin-left: 4%">
+    <label class="col-2 col-form-label"> עדכן את שם הקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('name')">עדכן</button>
+        </span>
+        <input type="text" id="name" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> עדכן את תאור הקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('description')">עדכן</button>
+        </span>
+        <input type="text" id="description" class="form-control">
+    </div><br><br>
+    <label class="col-2 col-form-label"> עדכן מספר לקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('views')">עדכן</button>
+        </span>
+        <input type="number" id="views" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> עדכן מספר קליקים לקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('clicks')">עדכן</button>
+        </span>
+        <input type="number" id="clicks" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> שנה את תאריך תחילת הקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('start')">עדכן</button>
+        </span>
+        <input type="date" id="start" class="form-control">
+    </div><br><br>
+
+    <label class="col-2 col-form-label"> שנה את תאריך סיום הקמפיין</label>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" onclick="updateValue('end')">עדכן</button>
+        </span>
+        <input type="date" id="end" class="form-control">
+    </div><br><br>
+    <div class="status">
+        <label class="col-2 col-form-label"> סטטוס הקמפיין</label><br>
+        <label class="switch">
+            <input id="status" type="checkbox" onclick="updateValue('status')" checked>
+            <span class="slider round"> </span>
+        </label>
+    </div>
+</div>
+
+<script src="/CampaignPage/campaign_page.js" type="text/javascript" charset="utf-8"></script>
