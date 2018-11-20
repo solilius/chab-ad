@@ -241,13 +241,12 @@ function fillAdsArray(campaign) {
             buttons: true
         }).then((isOk) => {
             if (isOk) {
-                var header = { "auth": "1234" };
-                post('/campaigns', header, campaign, function (res) {
+                post('/campaigns', campaign, function (res) {
                     swal("DAMPAIGN", "You clicked the button!", "success", {
                         button: "Aww yiss!",
                     });
                 });
-                post('/banners', header, adArray, function (res) {
+                post('/banners', adArray, function (res) {
                     swal("ADS", "You clicked the button!", "success", {
                         button: "Aww yiss!",
                     });
@@ -255,13 +254,12 @@ function fillAdsArray(campaign) {
             }
         });
     } else {
-        var header = { "auth": "1234" };
-        post('/campaigns', header, campaign, function (res) {
+        post('/campaigns', campaign, function (res) {
             swal("CAMPAIGN", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });
         });
-        post('/banners', header, adArray, function (res) {
+        post('/banners', adArray, function (res) {
             swal("ADS", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });
@@ -270,12 +268,12 @@ function fillAdsArray(campaign) {
 }
 
 
-function post(url, headers, body, callback) {
+function post(url, body, callback) {
     console.log(url);
     axios({
         url: url,
         method: 'POST',
-        headers: headers,
+        headers: { "auth": "1234" },
         data: body
     }).then(function (res) {
         callback(res);
