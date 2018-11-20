@@ -12,21 +12,14 @@ router.post('/', vaild);
 
 // ################### API ################### //
 
-router.get('/checkname/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {campaign_id: req.params.name}, (data) => {
-        res.send(data.length === 0);
-    });
-});
-
-
 router.get('/', (req, res) => {
     DAL.Get(CAMPAIGN_COL, {}, (data) => {
         res.send(data);
     });
 });
 
-router.get('/:name', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {campaign_id: req.params.name}, (data) => {
+router.get('/:id', (req, res) => {
+    DAL.Get(CAMPAIGN_COL, {campaign_id: req.params.id}, (data) => {
         res.send(data);
     });
 });
@@ -39,14 +32,14 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:name', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, {campaign_id: req.params.name}, {$set: req.body}, (data) => {
+router.put('/:id', (req, res) => {
+    DAL.Update(CAMPAIGN_COL, {campaign_id: req.params.id}, {$set: req.body}, (data) => {
         res.send(data);
    });
 });
 
-router.delete('/:name', (req, res) => {
-    DAL.Delete(CAMPAIGN_COL, {campaign_id: req.params.name}, (data) => {
+router.delete('/:id', (req, res) => {
+    DAL.Delete(CAMPAIGN_COL, {campaign_id: req.params.id}, (data) => {
         res.send(data);
     });
 });
