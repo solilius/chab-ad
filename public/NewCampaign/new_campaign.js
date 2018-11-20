@@ -109,10 +109,10 @@ function isAdValid() {
         swal("חסרים נתונים", "אחד או יותר מהמיקומים שהכנסת איננו תקין", "error");
         return false;
 
-    } else if(document.getElementById('positions').children.length === 0){
-                swal("חסרים נתונים", "לא הוספו מיקומים", "error");
-        }
-        else {
+    } else if (document.getElementById('positions').children.length === 0) {
+        swal("חסרים נתונים", "לא הוספו מיקומים", "error");
+    }
+    else {
         return true;
     }
 }
@@ -186,7 +186,6 @@ function removeAdFromArray(id) {
 }
 
 function save() {
-    console.log('save');
     if (isCampaignValid()) {
         var campaign = {
             campaign_id: (+ new Date()).toString(),
@@ -206,9 +205,9 @@ function save() {
                 balance: document.getElementById('client_balance').value,
                 details: document.getElementById('client_details').value
             },
-            "views_left": document.getElementById('views').value,
-            "clicks_left": document.getElementById('clicks').value,
-            "isActive": true,
+            views_left: document.getElementById('views').value,
+            clicks_left: document.getElementById('clicks').value,
+            isActive: true,
         }
         fillAdsArray(campaign);
     }
@@ -219,10 +218,13 @@ function fillAdsArray(campaign) {
     for (let i = 0; i < adArray.length; i++) {
         if (adArray[i] != null) {
             isEmpty = false;
+            console.log(campaign);
             var data = getExtraData(adArray[i].positions);
             adArray[i].campaign_id = campaign.campaign_id;
             adArray[i].campaign_name = campaign.campaign_name;
-            adArray[i].add_id = campaign.campaign_id + i.toString();
+            adArray[i].starting_date = campaign.transaction_details.starting_date,
+                adArray[i].expiration_date = campaign.transaction_details.expiration_date,
+                adArray[i].ad_id = campaign.campaign_id + i.toString();
             adArray[i].platform = data.platforms;
             adArray[i].sites = data.sites;
             adArray[i].positions_names = data.names;
@@ -246,7 +248,10 @@ function fillAdsArray(campaign) {
                         button: "Aww yiss!",
                     });
                 });
-                post('/banners', adArray, function (res) {
+
+                console.log('post it')
+                post('/banners', header, adArray, function (res) {
+                    console.log('posted it')
                     swal("ADS", "You clicked the button!", "success", {
                         button: "Aww yiss!",
                     });
@@ -259,7 +264,7 @@ function fillAdsArray(campaign) {
                 button: "Aww yiss!",
             });
         });
-        post('/banners', adArray, function (res) {
+        post('/banners', header, { "ads": adArray }, function (res) {
             swal("ADS", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });

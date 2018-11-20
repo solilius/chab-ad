@@ -13,8 +13,8 @@ const adScheme = joi.object().keys({
     platform: joi.array().min(1).required(),
     sites: joi.array().min(1).required(),
     positions_names: joi.array().min(1).required(),
-    expiration_date: joi.date().required(),
-    starting_date:  joi.date().required()
+    expiration_date: joi.string().required(),
+    starting_date:  joi.string().required()
 });
 
 const scheme = joi.object().keys({
@@ -23,6 +23,7 @@ const scheme = joi.object().keys({
 
 module.exports = (req, res, next) => {
     joi.validate(req.body, scheme, (err) => {
+        console.log(req.body);
         if(err){
             res.status(400).send(err.details[0].message);
         } else {
