@@ -1,10 +1,12 @@
 const express = require('express');
 const DAL = require('../DAL');
+const BL = require('../BL');
 const bodyParser = require('body-parser');
 const auth = require('../middlewares/authenticator');
 const vaild = require('../middlewares/campaignVaidator');
 const router = express.Router();
 const CAMPAIGN_COL = 'campaigns';
+const ADS_COL = 'ads';
 
 router.use(bodyParser.json());
 router.use('*', auth);
@@ -19,13 +21,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    DAL.Get(CAMPAIGN_COL, {campaign_id: req.params.id}, (data) => {
+    DAL.Get(CAMPAIGN_COL, { campaign_id: req.params.id }, (data) => {
         res.send(data);
     });
 });
 
 router.post('/', (req, res) => {
-    
+
     req.body.transaction_details.expiration_date = new Date(req.body.transaction_details.expiration_date);
     DAL.Insert(CAMPAIGN_COL, [req.body], (data) => {
         res.send(data);
@@ -33,13 +35,53 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, {campaign_id: req.params.id}, {$set: req.body}, (data) => {
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
         res.send(data);
-   });
+    });
 });
 
+router.put('/:id/name', (req, res) => {
+
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
+        res.send(data);
+    });
+
+    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
+    });
+});
+
+router.put('/:id/date', (req, res) => {
+    data = req.body;
+    data.isActive = false;
+
+    if (new Date(data[Object.keys(data)[0]]).getTime() / 1000 < new Date().getTime() / 1000) {
+        data.isActive = true;
+    }
+
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
+        console.log(1, data);
+        res.send(data);
+    });
+
+    let ad_data = {
+        isActive: data.isActive,
+        starting_date: data[Object.keys(data)[0]]
+    }
+    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: ad_data }, (data) => {
+        console.log(2, data);
+    });
+});
+
+router.put('/:id/counter', (req, res) => {
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
+        BL.ValidatCounter({ campaign_id: req.params.id });
+        res.send(data);
+    });
+});
+
+
 router.delete('/:id', (req, res) => {
-    DAL.Delete(CAMPAIGN_COL, {campaign_id: req.params.id}, (data) => {
+    DAL.Delete(CAMPAIGN_COL, { campaign_id: req.params.id }, (data) => {
         res.send(data);
     });
 });
