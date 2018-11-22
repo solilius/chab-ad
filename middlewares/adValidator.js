@@ -23,7 +23,6 @@ const scheme = joi.object().keys({
 
 module.exports = (req, res, next) => {
     joi.validate(req.body, scheme, (err) => {
-        console.log(req.body);
         if(err){
             res.status(400).send(err.details[0].message);
         } else {
