@@ -3,7 +3,7 @@ const CONNECTION_URL = 'mongodb://sol:solsol44@ds249372.mlab.com:49372/heroku_tj
 const DB_NAME = 'heroku_tjxz75h9';
 const LOGS_COL = 'logs';
 
-module.exports = { 
+const DAL = { 
 
     Get: (collection, query, callback) => {
         try {
@@ -75,6 +75,7 @@ module.exports = {
     }
 }
 
+module.exports = DAL;
 // ################### Private Methods ################### //
 
 function handleDbResult(err, result, callback) {
@@ -98,7 +99,7 @@ function LogError(type, src, msg, excpt){
         exception: excpt
     }
 
-    this.Insert(LOGS_COL, [log], () => {
+    DAL.Insert(LOGS_COL, [log], () => {
         console.log("logged succesfuly");
    });
 }
