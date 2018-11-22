@@ -1,21 +1,25 @@
-var id = '1541809295207';
-var campaign;
-send('GET', {}, function (res) {
+var campaign_id = localStorage.getItem('campaign');
+var campaign = {};
+var ads = [];
+
+send( '/campaigns/' + campaign_id, 'GET', {}, function (res) {
     campaign = res.data[0];
     insertValues();
 });
 
 function updateValue(id) {
+    var url = '/campaigns/' + campaign_id;
+
     switch (id) {
         case 'name':
             var val = document.getElementById(id).value;
             var body = { "campaign_name": val };
-            send('PUT', body, function () { swal("שם הקמפיין עודכן", "", "success") });
+            send(url + '/name', 'PUT', body, function () { swal("שם הקמפיין עודכן", "", "success") });
             break;
         case 'description':
             var val = document.getElementById(id).value;
             var body = { "description": val };
-            send('PUT', body, function () { swal("תאור הקמפיין עודכן", "", "success") });
+            send(url, 'PUT', body, function () { swal("תאור הקמפיין עודכן", "", "success") });
             break;
         case 'views':
             var val = document.getElementById(id).value;
@@ -23,7 +27,7 @@ function updateValue(id) {
                 "views_left": (parseInt(val) - campaign.transaction_details.views) + campaign.views_left,
                 "transaction_details.views": parseInt(val)
             };
-            send('PUT', body, function () { swal("מספר הצפיות בקמפיין עודכן", "", "success") });
+            send(url, 'PUT', body, function () { swal("מספר הצפיות בקמפיין עודכן", "", "success") });
             break;
         case 'clicks':
             var val = document.getElementById(id).value;
@@ -31,18 +35,18 @@ function updateValue(id) {
                 "clicks_left": (parseInt(val) - campaign.transaction_details.clicks) + campaign.clicks_left,
                 "transaction_details.clicks": parseInt(val)
             };
-            send('PUT', body, function () { swal("מספר הקליקים בקמפיין עודכן", "", "success") });
+            send(url, 'PUT', body, function () { swal("מספר הקליקים בקמפיין עודכן", "", "success") });
             break;
         case 'start':
             var val = document.getElementById(id).value;
             var body = { "transaction_details.starting_date": val };
-            send('PUT', body, function () { swal("תאריך תחילת הקמפיין עודכן", "", "success") });
+            send(url + '/date', 'PUT', body, function () { swal("תאריך תחילת הקמפיין עודכן", "", "success") });
             break;
         case 'end':
             var val = document.getElementById(id).value;
             if (isDateValid()) {
                 var body = { "transaction_details.expiration_date": val + "T00:00:00.000Z" };
-                send('PUT', body, function () { swal("תאריך סיום הקמפיין עודכן", "", "success") });
+                send(url, 'PUT', body, function () { swal("תאריך סיום הקמפיין עודכן", "", "success") });
 
             } else {
                 swal("תאריך שגוי", "תאריך סיום הקמפיין לא יכול להיות קטן מתחילתו", "error")
@@ -51,7 +55,7 @@ function updateValue(id) {
         case 'status':
             var val = document.getElementById(id).checked;
             var body = { "isActive": val };
-            send('PUT', body, function () { swal("סטטוס הקמפיין עודכן", "", "success") });
+            send(url, 'PUT', body, function () { swal("סטטוס הקמפיין עודכן", "", "success") });
             break;
         default:
             break;
@@ -68,14 +72,14 @@ function updateClient() {
         details: document.getElementById('details').value,
     }
 
-    send('PUT', {"client_info":client}, function(res){
+    send('/campaigns/' + campaign_id, 'PUT', {"client_info":client}, function(res){
          swal("פרטי הלקוח עודכנו בהצלחה", "", "success");
     });
 }
 
-function send(method, body, callback) {
+function send(url, method, body, callback) {
     axios({
-        url: '/campaigns/' + id,
+        url: url,
         method: method,
         headers: { "auth": "1234" },
         data: body
