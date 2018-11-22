@@ -218,14 +218,12 @@ function fillAdsArray(campaign) {
     for (let i = 0; i < adArray.length; i++) {
         if (adArray[i] != null) {
             isEmpty = false;
-            console.log(campaign);
             var data = getExtraData(adArray[i].positions);
             adArray[i].campaign_id = campaign.campaign_id;
             adArray[i].campaign_name = campaign.campaign_name;
             adArray[i].starting_date = campaign.transaction_details.starting_date,
-                adArray[i].expiration_date = campaign.transaction_details.expiration_date,
-                adArray[i].ad_id = campaign.campaign_id + i.toString();
-            adArray[i].platform = data.platforms;
+            adArray[i].expiration_date = campaign.transaction_details.expiration_date,
+            adArray[i].ad_id = campaign.campaign_id + i.toString(); adArray[i].platform = data.platforms;
             adArray[i].sites = data.sites;
             adArray[i].positions_names = data.names;
             adArray[i].clicks = 0;
@@ -233,7 +231,6 @@ function fillAdsArray(campaign) {
             adArray[i].isActive = true;
         }
     }
-
 
     if (isEmpty) {
         swal({
@@ -243,15 +240,13 @@ function fillAdsArray(campaign) {
             buttons: true
         }).then((isOk) => {
             if (isOk) {
-                post('/campaigns', campaign, function (res) {
+                var header = { "auth": "1234" };
+                post('/campaigns', header, campaign, function (res) {
                     swal("DAMPAIGN", "You clicked the button!", "success", {
                         button: "Aww yiss!",
                     });
                 });
-
-                console.log('post it')
                 post('/banners', header, adArray, function (res) {
-                    console.log('posted it')
                     swal("ADS", "You clicked the button!", "success", {
                         button: "Aww yiss!",
                     });
@@ -259,12 +254,13 @@ function fillAdsArray(campaign) {
             }
         });
     } else {
-        post('/campaigns', campaign, function (res) {
+        var header = { "auth": "1234" };
+        post('/campaigns', header, campaign, function (res) {
             swal("CAMPAIGN", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });
         });
-        post('/banners', header, { "ads": adArray }, function (res) {
+        post('/banners', header, {"ads": adArray}, function (res) {
             swal("ADS", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });
@@ -273,12 +269,12 @@ function fillAdsArray(campaign) {
 }
 
 
-function post(url, body, callback) {
+function post(url, headers, body, callback) {
     console.log(url);
     axios({
         url: url,
         method: 'POST',
-        headers: { "auth": "1234" },
+        headers: headers,
         data: body
     }).then(function (res) {
         callback(res);
