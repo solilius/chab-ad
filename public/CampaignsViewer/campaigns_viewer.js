@@ -36,8 +36,8 @@ function getColumnDefs(){
         {headerName: "קמפיין", field: "campaign_name"},
         {headerName: "תאור", field: "description"},
         {headerName: "מזהה לקוח", field: "client_info.name"},
-        {headerName: "תאריך התחלה", field: "transaction_details.starting_date"},
-        {headerName: "תאריך סיום", field: "transaction_details.expiration_date", cellRenderer: function(params){ return params.value.split('T')[0]}},
+        {headerName: "תאריך התחלה", field: "starting_date"},
+        {headerName: "תאריך סיום", field: "expiration_date", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: " צפיות שנשארו", field: "views_left"},
         {headerName: " קליקים שנשארו", field: "clicks_left"},
         {headerName: "?פעיל", field: "isActive"}

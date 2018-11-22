@@ -6,12 +6,14 @@ const scheme = joi.object().keys({
     isActive: joi.bool().required(),
     views_left: joi.number().min(0).required(),
     clicks_left: joi.number().min(0).required(),
-    transaction_details: joi.object().keys({
-        views: joi.number().min(0).required(),
-        clicks: joi.number().min(0).required(),
-        starting_date: joi.date().required(),
-        expiration_date: joi.date().required()
-    }).required(),
+    views: joi.number().min(0).required(),
+    clicks: joi.number().min(0).required(),
+    starting_date: joi.date().required(),
+    expiration_date: joi.date().required(),
+    views: joi.number().min(0).required(),
+    clicks: joi.number().min(0).required(),
+    starting_date: joi.date().required(),
+    expiration_date: joi.date().required(),
     client_info: joi.object().keys({
         name: joi.string(),
         phone: joi.string().allow('').optional(),

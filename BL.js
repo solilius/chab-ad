@@ -8,7 +8,7 @@ module.exports = {
   ActiveCampaignScheuduler: () => {
     try {
       schedule.scheduleJob('0 0 * * *', function () {
-        deactivateCampaign({ "transaction_details.expiration_date": {$lte: new Date()}}, () => {
+        deactivateCampaign({ "expiration_date": {$lte: new Date()}}, () => {
           validateResources();
         });
       });  

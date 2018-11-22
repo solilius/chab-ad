@@ -28,7 +28,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
 
-    req.body.transaction_details.expiration_date = new Date(req.body.transaction_details.expiration_date);
+    req.body.expiration_date = new Date(req.body.expiration_date);
     DAL.Insert(CAMPAIGN_COL, [req.body], (data) => {
         res.send(data);
     });
@@ -54,7 +54,7 @@ router.put('/:id/date', (req, res) => {
     data = req.body;
     data.isActive = false;
 
-    if (new Date(data[Object.keys(data)[0]]).getTime() / 1000 < new Date().getTime() / 1000) {
+    if (new Date(data.starting_date).getTime() / 1000 < new Date().getTime() / 1000) {
         data.isActive = true;
     }
 
@@ -62,12 +62,7 @@ router.put('/:id/date', (req, res) => {
         console.log(1, data);
         res.send(data);
     });
-
-    let ad_data = {
-        isActive: data.isActive,
-        starting_date: data[Object.keys(data)[0]]
-    }
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: ad_data }, (data) => {
+    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
         console.log(2, data);
     });
 });

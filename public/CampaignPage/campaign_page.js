@@ -24,28 +24,28 @@ function updateValue(id) {
         case 'views':
             var val = document.getElementById(id).value;
             var body = {
-                "views_left": (parseInt(val) - campaign.transaction_details.views) + campaign.views_left,
-                "transaction_details.views": parseInt(val)
+                "views_left": (parseInt(val) - campaign.views) + campaign.views_left,
+                "views": parseInt(val)
             };
             send(url, 'PUT', body, function () { swal("מספר הצפיות בקמפיין עודכן", "", "success") });
             break;
         case 'clicks':
             var val = document.getElementById(id).value;
             var body = {
-                "clicks_left": (parseInt(val) - campaign.transaction_details.clicks) + campaign.clicks_left,
-                "transaction_details.clicks": parseInt(val)
+                "clicks_left": (parseInt(val) - campaign.clicks) + campaign.clicks_left,
+                "clicks": parseInt(val)
             };
             send(url, 'PUT', body, function () { swal("מספר הקליקים בקמפיין עודכן", "", "success") });
             break;
         case 'start':
             var val = document.getElementById(id).value;
-            var body = { "transaction_details.starting_date": val };
+            var body = { "starting_date": val };
             send(url + '/date', 'PUT', body, function () { swal("תאריך תחילת הקמפיין עודכן", "", "success") });
             break;
         case 'end':
             var val = document.getElementById(id).value;
             if (isDateValid()) {
-                var body = { "transaction_details.expiration_date": val + "T00:00:00.000Z" };
+                var body = { "expiration_date": val + "T00:00:00.000Z" };
                 send(url, 'PUT', body, function () { swal("תאריך סיום הקמפיין עודכן", "", "success") });
 
             } else {
@@ -93,10 +93,10 @@ function send(url, method, body, callback) {
 function insertValues() {
     document.getElementById('name').value = campaign.campaign_name;
     document.getElementById('description').value = campaign.description;
-    document.getElementById('views').value = campaign.transaction_details.views;
-    document.getElementById('clicks').value = campaign.transaction_details.clicks;
-    document.getElementById('start').value = campaign.transaction_details.starting_date;
-    document.getElementById('end').value = campaign.transaction_details.expiration_date.split('T')[0];
+    document.getElementById('views').value = campaign.views;
+    document.getElementById('clicks').value = campaign.clicks;
+    document.getElementById('start').value = campaign.starting_date;
+    document.getElementById('end').value = campaign.expiration_date.split('T')[0];
     document.getElementById('status').checked = campaign.isActive;
 
     document.getElementById('c_name').value = campaign.client_info.name;
@@ -108,5 +108,5 @@ function insertValues() {
 }
 
 function isDateValid() {
-    return (new Date(document.getElementById('end').value).getTime() / 1000) >= (new Date(campaign.transaction_details.starting_date).getTime() / 1000)
+    return (new Date(document.getElementById('end').value).getTime() / 1000) >= (new Date(campaign.starting_date).getTime() / 1000)
 }

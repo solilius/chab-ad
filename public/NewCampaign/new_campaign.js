@@ -191,12 +191,10 @@ function save() {
             campaign_id: (+ new Date()).toString(),
             campaign_name: document.getElementById('campaign_id').value,
             description: document.getElementById('description').value,
-            transaction_details: {
-                views: document.getElementById('views').value,
-                clicks: document.getElementById('clicks').value,
-                starting_date: document.getElementById('starting_date').value,
-                expiration_date: document.getElementById('expiration_date').value,
-            },
+            views: document.getElementById('views').value,
+            clicks: document.getElementById('clicks').value,
+            starting_date: document.getElementById('starting_date').value,
+            expiration_date: document.getElementById('expiration_date').value,
             client_info: {
                 name: document.getElementById('client_name').value,
                 phone: document.getElementById('client_phone').value,
@@ -221,9 +219,10 @@ function fillAdsArray(campaign) {
             var data = getExtraData(adArray[i].positions);
             adArray[i].campaign_id = campaign.campaign_id;
             adArray[i].campaign_name = campaign.campaign_name;
-            adArray[i].starting_date = campaign.transaction_details.starting_date,
-            adArray[i].expiration_date = campaign.transaction_details.expiration_date,
-            adArray[i].ad_id = campaign.campaign_id + i.toString(); adArray[i].platform = data.platforms;
+            adArray[i].starting_date = campaign.starting_date,
+            adArray[i].expiration_date = campaign.expiration_date,
+            adArray[i].ad_id = campaign.campaign_id + i.toString();
+            adArray[i].platform = data.platforms;
             adArray[i].sites = data.sites;
             adArray[i].positions_names = data.names;
             adArray[i].clicks = 0;
@@ -260,7 +259,7 @@ function fillAdsArray(campaign) {
                 button: "Aww yiss!",
             });
         });
-        post('/banners', header, {"ads": adArray}, function (res) {
+        post('/banners', header, { "ads": adArray }, function (res) {
             swal("ADS", "You clicked the button!", "success", {
                 button: "Aww yiss!",
             });

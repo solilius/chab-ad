@@ -2,12 +2,10 @@
     "campaign_id": "my_campaign",
     "campaign_name": "name",
     "description": "bla bla bla campaign for bla bla bla",
-    "transaction_details": {
-        "views": 500,
-        "clicks": 50,
-        "starting_date": "2018-07-29",
-        "expiration_date": "2018-08-29"
-    },
+    "views": 500,
+    "clicks": 50,
+    "starting_date": "2018-07-29",
+    "expiration_date": "2018-08-29",
     "owner_id": "qwe",
     "isActive": true,
     "views_left": 500,
