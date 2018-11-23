@@ -24,10 +24,4 @@ router.post('/click', (req, res) => {
 
 });
 
-router.post('/view', (req, res) => {
-    BL.AdViewed(req.body, () => {
-        res.send("View on '" +  req.body.campaign_id + "' got registered");
-    });
-});
-
 module.exports = [router];

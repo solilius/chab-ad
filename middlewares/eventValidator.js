@@ -2,7 +2,7 @@ const joi = require('joi');
 const scheme = joi.object().keys({
     campaign_id: joi.string().required(),
     ad_id: joi.string().required(),
-    action: joi.string().valid('clicked', 'viewed').required(),
+    action: joi.string().valid('clicked').required(),
     message: joi.string().required(),
     site: joi.string().required(),
     ad_position: joi.string().required(),
