@@ -40,7 +40,7 @@ function getColumnDefs(){
         {headerName: "פלטפורמה", field: "platform"},
         {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
-        {headerName: "ימים", field: "days", filter: "agNumberColumnFilter", },
+        {headerName: "ימים", field: "days", filter: "agNumberColumnFilter", cellRenderer:function(params){ return ((new Date(params.data.expiration_date).getTime() / 1000) - (new Date(params.data.starting_date).getTime() / 1000))/ 86400}},
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
         {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"}
       ];
