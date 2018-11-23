@@ -7,6 +7,10 @@ send('/campaigns/' + campaign_id, 'GET', {}, function (res) {
     insertValues();
 });
 
+$('input').bind('change keyup',function(){
+    document.getElementById('status').checked = isActive();
+});
+
 function updateValue(id) {
     var url = '/campaigns/' + campaign_id;
 
@@ -47,13 +51,6 @@ function updateValue(id) {
             } else {
                 swal("תאריך שגוי", "תאריך סיום הקמפיין לא יכול להיות קטן מתחילתו", "error")
             }
-            break;
-        case 'status':
-            var val = document.getElementById(id).checked;
-            var body = { "isActive": val };
-            send(url, 'PUT', body, function () { swal("סטטוס הקמפיין עודכן", "", "success") });
-            break;
-        default:
             break;
     }
 }
@@ -105,4 +102,11 @@ function insertValues() {
 
 function isDateValid(start, end) {
     return (new Date(start).getTime() / 1000) <= (new Date(end).getTime() / 1000)
+}
+
+function isActive(){
+    return (new Date(document.getElementById('start').value).getTime() / 1000) <= (new Date().getTime() / 1000) &&
+           (new Date(document.getElementById('end').value).getTime() / 1000) > (new Date().getTime() / 1000) && 
+           ((parseInt(document.getElementById('clicks').value) - campaign.clicks) + campaign.clicks_left > 0) &&
+           ((parseInt(document.getElementById('views').value) - campaign.views) + campaign.views_left > 0)
 }
