@@ -2,7 +2,7 @@ var campaign_id = localStorage.getItem('campaign');
 var campaign = {};
 var ads = [];
 
-send( '/campaigns/' + campaign_id, 'GET', {}, function (res) {
+send('/campaigns/' + campaign_id, 'GET', {}, function (res) {
     campaign = res.data[0];
     insertValues();
 });
@@ -21,32 +21,28 @@ function updateValue(id) {
             var body = { "description": val };
             send(url, 'PUT', body, function () { swal("תאור הקמפיין עודכן", "", "success") });
             break;
-        case 'views':
-            var val = document.getElementById(id).value;
+        case 'count':
+            var clicks = document.getElementById('clicks').value;
+            var views = document.getElementById('views').value;
+
             var body = {
-                "views_left": (parseInt(val) - campaign.views) + campaign.views_left,
-                "views": parseInt(val)
+                "clicks_left": (parseInt(clicks) - campaign.clicks) + campaign.clicks_left,
+                "clicks": parseInt(clicks),
+                "views_left": (parseInt(views) - campaign.clicks) + campaign.clicks_left,
+                "views": parseInt(views)
             };
-            send(url, 'PUT', body, function () { swal("מספר הצפיות בקמפיין עודכן", "", "success") });
+            send(url + '/count', 'PUT', body, function () { swal("המספר עודכן", "", "success") });
             break;
-        case 'clicks':
-            var val = document.getElementById(id).value;
-            var body = {
-                "clicks_left": (parseInt(val) - campaign.clicks) + campaign.clicks_left,
-                "clicks": parseInt(val)
-            };
-            send(url, 'PUT', body, function () { swal("מספר הקליקים בקמפיין עודכן", "", "success") });
-            break;
-        case 'start':
-            var val = document.getElementById(id).value;
-            var body = { "starting_date": val };
-            send(url + '/date', 'PUT', body, function () { swal("תאריך תחילת הקמפיין עודכן", "", "success") });
-            break;
-        case 'end':
-            var val = document.getElementById(id).value;
-            if (isDateValid()) {
-                var body = { "expiration_date": val + "T00:00:00.000Z" };
-                send(url, 'PUT', body, function () { swal("תאריך סיום הקמפיין עודכן", "", "success") });
+        case 'date':
+
+            var start = document.getElementById('start').value;
+            var end = document.getElementById('end').value;
+            if (isDateValid(start, end)) {
+                var body = {
+                    "starting_date": start + "T00:00:00.000Z",
+                    "expiration_date": end + "T00:00:00.000Z"
+                };
+                send(url + '/date', 'PUT', body, function () { swal("תאריך הקמפיין עודכן", "", "success") });
 
             } else {
                 swal("תאריך שגוי", "תאריך סיום הקמפיין לא יכול להיות קטן מתחילתו", "error")
@@ -72,8 +68,8 @@ function updateClient() {
         details: document.getElementById('details').value,
     }
 
-    send('/campaigns/' + campaign_id, 'PUT', {"client_info":client}, function(res){
-         swal("פרטי הלקוח עודכנו בהצלחה", "", "success");
+    send('/campaigns/' + campaign_id, 'PUT', { "client_info": client }, function (res) {
+        swal("פרטי הלקוח עודכנו בהצלחה", "", "success");
     });
 }
 
@@ -95,7 +91,7 @@ function insertValues() {
     document.getElementById('description').value = campaign.description;
     document.getElementById('views').value = campaign.views;
     document.getElementById('clicks').value = campaign.clicks;
-    document.getElementById('start').value = campaign.starting_date;
+    document.getElementById('start').value = campaign.starting_date.split('T')[0];
     document.getElementById('end').value = campaign.expiration_date.split('T')[0];
     document.getElementById('status').checked = campaign.isActive;
 
@@ -107,6 +103,6 @@ function insertValues() {
     document.getElementById('details').value = campaign.client_info.details;
 }
 
-function isDateValid() {
-    return (new Date(document.getElementById('end').value).getTime() / 1000) >= (new Date(campaign.starting_date).getTime() / 1000)
+function isDateValid(start, end) {
+    return (new Date(start).getTime() / 1000) <= (new Date(end).getTime() / 1000)
 }

@@ -54,7 +54,8 @@ router.put('/:id/date', (req, res) => {
     data = req.body;
     data.isActive = false;
 
-    if (new Date(data.starting_date).getTime() / 1000 < new Date().getTime() / 1000) {
+    if ((new Date(data.starting_date).getTime() / 1000 < new Date().getTime() / 1000) &&
+        (new Date(data.expiration_date).getTime() / 1000 > new Date().getTime() / 1000)) {
         data.isActive = true;
     }
 
@@ -67,13 +68,21 @@ router.put('/:id/date', (req, res) => {
     });
 });
 
-router.put('/:id/counter', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-        BL.ValidatCounter({ campaign_id: req.params.id });
+router.put('/:id/count', (req, res) => {
+    data = req.body;
+    data.isActive = false;
+
+    if ((data.clicks_left > 0) && (data.views_left > 0)) {
+        data.isActive = true;
+    }
+
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
         res.send(data);
     });
-});
 
+    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: {isActive: data.isActive} }, (data) => {
+    });
+});
 
 router.delete('/:id', (req, res) => {
     DAL.Delete(CAMPAIGN_COL, { campaign_id: req.params.id }, (data) => {
