@@ -38,8 +38,8 @@ function getColumnDefs(){
         {headerName: "גודל", field: "size"},
         {headerName: "אתרים", field: "sites"},
         {headerName: "פלטפורמה", field: "platform"},
-        {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter"},
-        {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter"},
+        {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
+        {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "ימים", field: "days", filter: "agNumberColumnFilter", },
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
         {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"}
