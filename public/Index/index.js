@@ -1,25 +1,26 @@
-$(document).ready(function(){
-    $('a').on('click', function(e){
+$(document).ready(function () {
+    $('a').on('click', function (e) {
         e.preventDefault();
         var ref = $(this).attr('href');
         goToPage(ref);
     });
-    
+    $('li').click(function () { $('li').removeClass("active"); $(this).addClass("active"); });
+
     goToPage('/BannersViewer/banners_viewer.html');
-  });
-  
-  function goToPage(ref){
+});
+
+function goToPage(ref) {
     $.ajax({
         url: ref,
         type: 'GET',
         dataType: 'text',
-        success: function(res){
+        success: function (res) {
             $('#view').html(res);
         },
-        error: function(err){
-            console.log('error: ',err);
+        error: function (err) {
+            console.log('error: ', err);
         }
     });
-  };
+};
 
-  localStorage.setItem("campaign", "none");
+localStorage.setItem("campaign", "none");
