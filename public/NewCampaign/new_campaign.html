@@ -91,7 +91,7 @@
         <div class="form-group row ">
             <label class="col-2 col-form-label">:שם קמפיין</label>
             <div class="col-10">
-                <input class="form-control" type="text" id="campaign_id">
+                <input class="form-control" type="text" id="campaign_name">
             </div>
         </div>
         <div class="form-group row">
@@ -107,21 +107,21 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-2 col-form-label">:תאריך סיום</label>
+            <label class="col-2 col-form-label">:מספר ימים</label>
             <div class="col-10">
-                <input class="form-control" type="date" id="expiration_date">
+                <input class="form-control" type="number" min="0" id="days" value=0>
             </div>
         </div>
         <div class="form-group row">
             <label for="example-tel-input" class="col-2 col-form-label">:צפיות</label>
             <div class="col-10">
-                <input class="form-control" type="number" id="views">
+                <input class="form-control" type="number" id="views" min="0" value=0>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-2 col-form-label">:לחיצות</label>
             <div class="col-10">
-                <input class="form-control" type="number" value="hunter2" id="clicks">
+                <input class="form-control" type="number" value=0 id="clicks" min="0" >
             </div>
         </div>
     </div>
@@ -131,4 +131,5 @@
     <div class="well well-lg col-md-10 col-md-offset-1" id="ads-preview-list"></div>
 </div>
 <button class="btn btn-lg btn-success save" onclick="save()">שמור קמפיין</button>
+<script src="/Common/Scripts/moment.js" type="text/javascript" charset="utf-8"></script>
 <script src="/NewCampaign/new_campaign.js" type="text/javascript" charset="utf-8"></script>

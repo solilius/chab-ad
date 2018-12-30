@@ -1,26 +1,22 @@
 const joi = require('joi');
 const scheme = joi.object().keys({
     campaign_id: joi.string().required(),
-    campaign_name: joi.string().required(),
-    description: joi.string().required(),
-    isActive: joi.bool().required(),
-    views_left: joi.number().min(0).required(),
+    campaign_name: joi.string().allow('').required(),
+    description: joi.string().allow('').required(),
     clicks_left: joi.number().min(0).required(),
-    views: joi.number().min(0).required(),
     clicks: joi.number().min(0).required(),
-    starting_date: joi.date().required(),
-    expiration_date: joi.date().required(),
+    views_left: joi.number().min(0).required(),
     views: joi.number().min(0).required(),
-    clicks: joi.number().min(0).required(),
-    starting_date: joi.date().required(),
-    expiration_date: joi.date().required(),
+    starting_date: joi.date().allow('').required(),
+    expiration_date: joi.date().allow('').required(),
+    days: joi.number().required(),
     client_info: joi.object().keys({
-        name: joi.string(),
+        name: joi.string().allow('').optional(),
         phone: joi.string().allow('').optional(),
         email: joi.string().allow('').optional(),
-        price: joi.number(),
-        balance: joi.number(),
-        details: joi.string()
+        price: joi.number().allow('').optional(),
+        balance: joi.number().allow('').optional(),
+        details: joi.string().allow('').optional()
     })
 });
 

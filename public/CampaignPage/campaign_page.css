@@ -2,6 +2,7 @@
     margin-top: 30px;
     min-height: 550px !important;
     text-align: right;
+
 }
 
 input{
@@ -14,4 +15,28 @@ input{
     border-radius: 15px;
     width: 100%;
     text-align: center;
+}
+
+
+#ads_list{
+    overflow-y: scroll;
+    width:100%;
+    height: 550px
+}
+
+.ad{
+    width: 100%;
+    height: 200px;
+    background: red;
+    padding-top: 10px;
+}
+
+.ad-data{
+
+background: blue;
+}
+
+img{
+    height: 180px;
+
 }

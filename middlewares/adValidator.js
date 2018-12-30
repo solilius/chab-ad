@@ -1,12 +1,12 @@
 const joi = require('joi');
 const adScheme = joi.object().keys({
     campaign_id: joi.string().required(),
-    campaign_name: joi.string().required(),
+    campaign_name: joi.string().allow('').optional(),
     ad_id: joi.string().required(),
     isActive: joi.bool().required(),
     positions: joi.array().min(1).required(),
     url: joi.string().required(),
-    onclick: joi.string().required(),
+    onclick: joi.string().allow('').optional(),
     size: joi.string().required(),
     clicks: joi.number().required(),
     views: joi.number().required(),

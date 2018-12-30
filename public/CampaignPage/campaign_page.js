@@ -1,10 +1,15 @@
-var campaign_id = localStorage.getItem('campaign');
+var campaign_id = '1542932065600'; //localStorage.getItem('campaign');
 var campaign = {};
 var ads = [];
 
 send('/campaigns/' + campaign_id, 'GET', {}, function (res) {
     campaign = res.data[0];
     insertValues();
+});
+
+send('/banners/' + campaign_id, 'GET', {}, function (res) {
+    ads = res.data;
+    console.log(ads);
 });
 
 $('input').bind('change keyup',function(){
