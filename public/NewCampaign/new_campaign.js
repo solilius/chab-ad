@@ -153,7 +153,6 @@ function siteSelected(e) {
   }
 }
 
-
 function insertActions(id, positions) {
   var select = document.getElementById("pos-select-" + id);
   $("#pos-select-" + id).empty();
@@ -162,23 +161,21 @@ function insertActions(id, positions) {
   }
 }
 function saveAd() {
-
-    if (isAdValid()) {
-
-        var src = document.getElementById('img-preview').src;
-        var size = document.getElementById('img-size').innerHTML;
-        $('#ads-preview-list').append(
-            `<div class="ad-preview" id="ad-preview-${ads}">
+  if (isAdValid()) {
+    var src = document.getElementById("img-preview").src;
+    var size = document.getElementById("img-size").innerHTML;
+    $("#ads-preview-list").append(
+      `<div class="ad-preview" id="ad-preview-${ads}">
             <img class="ad-preview-img" src="${src}">
             <div class="ad-preview-size">${size}</div>
             <button class="remove-ad" onclick="removeAd('ad-preview-${ads}')">X</button>
         </div>`
-        );
-        addPositionsToArray();
-        addAdToArray();
-        clearAdForm();
-        ads++;
-    }
+    );
+    addPositionsToArray();
+    addAdToArray();
+    clearAdForm();
+    ads++;
+  }
 }
 function isAdValid() {
   if (
@@ -315,39 +312,22 @@ function fillAdsArray(campaign) {
       buttons: true
     }).then(isOk => {
       if (isOk) {
-        var header = { auth: "1234" };
-        post("/campaigns", header, campaign, function(res) {
-          swal("DAMPAIGN", "You clicked the button!", "success", {
-            button: "Aww yiss!"
-          });
-        });
-        post("/banners", header, adArray, function(res) {
-          swal("ADS", "You clicked the button!", "success", {
-            button: "Aww yiss!"
+        post("/campaigns", { auth: "1234" }, campaign, function(res) {
+        swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
+          button: "סגור"
           });
         });
       }
     });
   } else {
     var header = { auth: "1234" };
-    var isCampaginSuccess = false;
-    var isAdsSuccess = false;
     post("/campaigns", header, campaign, function(res) {
-      isCampaginSuccess = true;
       post("/banners", header, { ads: adArray }, function(res) {
-        isAdsSuccess = true;
+        swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
+          button: "סגור"
+        });
       });
     });
-
-    if (isCampaginSuccess && isAdsSuccess) {
-      swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
-        button: "סגור"
-      });
-    } else {
-      swal("אופס", "ארעה שגיאה בהוספת הקמפיין", "error", {
-        button: "סגור"
-      });
-    }
   }
 }
 
@@ -405,7 +385,7 @@ function getExpirationDate() {
   if (document.getElementById("starting_date").value != "") {
     var start = new Date(document.getElementById("starting_date").value);
     var days = parseInt(document.getElementById("days").value);
-    
+
     return new Date(start.setDate(start.getDate() + days));
   }
   return "";
