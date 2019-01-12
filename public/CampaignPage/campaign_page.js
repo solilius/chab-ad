@@ -1,4 +1,4 @@
-var campaign_id = '1542932065600'; //localStorage.getItem('campaign');
+var campaign_id = localStorage.getItem('campaign');
 var campaign = {};
 var ads = [];
 
@@ -91,8 +91,8 @@ function send(url, method, body, callback) {
 function insertValues() {
     document.getElementById('name').value = campaign.campaign_name;
     document.getElementById('description').value = campaign.description;
-    document.getElementById('views').value = campaign.views;
-    document.getElementById('clicks').value = campaign.clicks;
+    document.getElementById('views').value = campaign.views_left;
+    document.getElementById('clicks').value = campaign.clicks_left;
     document.getElementById('start').value = campaign.starting_date.split('T')[0];
     document.getElementById('end').value = campaign.expiration_date.split('T')[0];
     document.getElementById('status').checked = campaign.isActive;
@@ -112,6 +112,6 @@ function isDateValid(start, end) {
 function isActive(){
     return (new Date(document.getElementById('start').value).getTime() / 1000) <= (new Date().getTime() / 1000) &&
            (new Date(document.getElementById('end').value).getTime() / 1000) > (new Date().getTime() / 1000) && 
-           ((parseInt(document.getElementById('clicks').value) - campaign.clicks) + campaign.clicks_left > 0) &&
-           ((parseInt(document.getElementById('views').value) - campaign.views) + campaign.views_left > 0)
+           ((parseInt(document.getElementById('clicks').value))  > 0) &&
+           ((parseInt(document.getElementById('views').value)) > 0)
 }
