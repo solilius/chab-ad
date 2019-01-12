@@ -110,9 +110,9 @@ function addPosition() {
   $("#positions").append(
     `<div class="position" id="pos-${position}">
             <div class="radio">
-                <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="both">שניהם</label>
                 <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="mobile">נייד</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${position}" checked value="pc">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${position}"  value="pc">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${position}" checked value="both">שניהם</label>
             </div>
             <select class="form-control my-selector" id="pos-select-${position}">
                 <option hidden>בחר מיקום</option>
