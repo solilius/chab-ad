@@ -350,9 +350,6 @@ function fillAdsArray(campaign) {
     }
   }
 }
-function postCampaign(){
-
-}
 
 function post(url, headers, body, callback) {
   axios({
@@ -407,7 +404,8 @@ function getExtraData(positions) {
 function getExpirationDate() {
   if (document.getElementById("starting_date").value != "") {
     var start = new Date(document.getElementById("starting_date").value);
-    var days = document.getElementById("days").value;
+    var days = parseInt(document.getElementById("days").value);
+    
     return new Date(start.setDate(start.getDate() + days));
   }
   return "";
