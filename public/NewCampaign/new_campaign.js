@@ -153,6 +153,7 @@ function siteSelected(e) {
   }
 }
 
+
 function insertActions(id, positions) {
   var select = document.getElementById("pos-select-" + id);
   $("#pos-select-" + id).empty();
@@ -160,7 +161,25 @@ function insertActions(id, positions) {
     select.options[select.options.length] = new Option(positions[i]);
   }
 }
+function saveAd() {
 
+    if (isAdValid()) {
+
+        var src = document.getElementById('img-preview').src;
+        var size = document.getElementById('img-size').innerHTML;
+        $('#ads-preview-list').append(
+            `<div class="ad-preview" id="ad-preview-${ads}">
+            <img class="ad-preview-img" src="${src}">
+            <div class="ad-preview-size">${size}</div>
+            <button class="remove-ad" onclick="removeAd('ad-preview-${ads}')">X</button>
+        </div>`
+        );
+        addPositionsToArray();
+        addAdToArray();
+        clearAdForm();
+        ads++;
+    }
+}
 function isAdValid() {
   if (
     document.getElementById("img-preview").src ==
