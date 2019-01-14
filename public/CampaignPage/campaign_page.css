@@ -27,16 +27,22 @@ input{
 .ad{
     width: 100%;
     height: 200px;
-    background: red;
     padding-top: 10px;
+    border: 2px solid gray;
 }
 
 .ad-data{
-
-background: blue;
+display: inline-block;
+font-size: 15px;
 }
 
 img{
     height: 180px;
 
+}
+
+.positions{
+    overflow-y: scroll;
+    max-height: 80px;
+    min-height: 80px;
 }
