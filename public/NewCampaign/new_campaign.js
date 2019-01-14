@@ -109,6 +109,7 @@ function addPosition() {
   position++;
   $("#positions").append(
     `<div class="position" id="pos-${position}">
+            <div class="btn btn-danger remove-pos-btn" onclick="removePosition('pos-${position}')">הסר</div>
             <div class="radio">
                 <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="mobile">נייד</label>
                 <label class="checkbox-radio"><input type="radio" name="platform-${position}"  value="pc">נייח</label>
@@ -127,12 +128,9 @@ function addPosition() {
   );
 }
 
-function removePosition() {
+function removePosition(id) {
   position--;
-  $("#positions")
-    .children()
-    .last()
-    .remove();
+  $("#" + id).remove();
 }
 
 function siteSelected(e) {

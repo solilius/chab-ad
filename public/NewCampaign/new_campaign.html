@@ -20,15 +20,16 @@
             </div>
 
             <button id="save-add" onclick="saveAd()" class="btn btn-success"> הוסף פרסומת לרשימה</button>
-            <button id="remove-pos" onclick="removePosition()" class="btn btn-danger">הסר מיקום אחרון</button>
             <button id="add-pos" onclick="addPosition()" class="btn btn-info">הוסף מיקום</button><br>
 
             <div id="positions">
                 <div class="position" id="pos-1">
+                    <div class="btn btn-danger" onclick="removePosition('pos-1')">הסר</div>
                     <div class="radio">
                         <label class="checkbox-radio"><input type="radio" name="platform-1" value="mobile">נייד</label>
                         <label class="checkbox-radio"><input type="radio" name="platform-1"  value="pc">נייח</label>
                         <label class="checkbox-radio"><input type="radio" name="platform-1" checked value="both">שניהם</label>
+
                     </div>
                     <select class="form-control my-selector" id="pos-select-1">
                         <option hidden>בחר מיקום</option>
