@@ -23,21 +23,19 @@ module.exports = {
         let ads = [];
 
         try {
-
             for (let i = 0; i < adsReqArr.length; i++) {
                 ads.push(getAd(adsReqArr[i]));
             }
 
             Promise.all(ads).then((data) => {
                 callback(data);
-                for (let i = 0; i < ads.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     let query = {
-                        campaign: { campaign_id: ads[i].campaign_id },
-                        ad: { ad_id: ads[i].ad_id }
+                        campaign: { campaign_id: data[i].campaign_id },
+                        ad: { ad_id: data[i].ad_id }
                     };
                     decremetValue(query, 'views_left', () => { });
                 }
-                decrementViews(data);
             });
 
         } catch (err) {
@@ -68,7 +66,7 @@ function getAd(pos) {
     return new Promise((res, rej) => {
         DAL.Get(ADS_COL, { isActive: true, positions: pos }, (data) => {
             if (data.length === 0) {
-                res({ campaign_id: 'no_result' });
+                res('no_result');
             } else {
                 res(data[Math.floor(Math.random() * (data.length))])
             }

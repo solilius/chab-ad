@@ -12,7 +12,7 @@ BL.ActiveCampaignScheuduler();
 // ################### API ################### //
 
 router.get('/', (req, res) => {
-    BL.GetAds(req.query.ads.split(','), (data) => {
+    BL.GetAds(req.query.banners.split(','), (data) => {
         res.send(data);
     });
 });
