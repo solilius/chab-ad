@@ -1,7 +1,11 @@
 .nav{
-   width: 93vw !important; 
+   width: 92vw; 
 }
 .gallery{
     margin-top: 7px;
     float: right;
+}
+
+#view{
+    margin-top: 7vh;
 }
