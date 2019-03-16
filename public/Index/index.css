@@ -1,7 +1,7 @@
-.bla{
-    color: blue;
+.nav{
+   width: 93vw !important; 
 }
-
-a{
-    font: red;
+.gallery{
+    margin-top: 7px;
+    float: right;
 }

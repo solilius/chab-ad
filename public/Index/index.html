@@ -11,27 +11,29 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="/BannersViewer/banners_viewer.html">Chab-ad</a>
           </div>
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav ">
             <li><a href="/CampaignPage/campaign_page.html">קמפיין </a></li>
             <li><a href="/NewCampaign/new_campaign.html">קמפיין חדש</a></li>
             <li><a href="/CampaignsViewer/campaigns_viewer.html">תצוגת קמפיינים</a></li>
             <li><a href="/BannersViewer/banners_viewer.html">תצוגת באנרים</a></li>
+            <li id="open-btn" class="myBtn">גלריה</li>
           </ul>
         </div>
       </nav>
 
     <div id="view" class="container-fluid"></div>
-
     <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.noStyle.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://media-library.cloudinary.com/global/all.js"></script>
     <script src="/Common/Scripts/axios.min.js" type="text/javascript"></script>
+    <script src="/Common/Scripts/cloudinary.js" type="text/javascript"></script>
     <script src="/Index/index.js" type="text/javascript"></script>
 </body>
 </html>
