@@ -1,11 +1,13 @@
+.form-group{
+    display: inline-block;
+}
 .campaign-input{
     text-align: center !important;
     margin-bottom: 0 !important;
 }
 
-.campaign-data-col{
+.well{
     text-align: right;
-    margin-left: 4%;
 }
 
 label{
@@ -24,7 +26,7 @@ input{
     text-align: center;
     font-size: 25px;
     font-style: bold;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .my-selector{
@@ -54,14 +56,8 @@ input{
     padding-left: 18%;
     padding-right: 18%;
 }
-.my-well{
-    margin-top: 30px;
-    min-height: 530px !important;
-    max-height: 540px !important;
-    text-align: right;
-}
 
-#img-preview{
+.img-preview{
     max-width: 80%;
     max-height: 250px;
 }
@@ -135,4 +131,16 @@ input{
     position: fixed;
     bottom: 20px;
     left: 20px;
+}
+
+.add-banners-container{
+    width: 100%;
+    text-align: center;
+}
+
+#banners{
+    margin-top: 10px;
+    max-height: 68vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
