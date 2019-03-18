@@ -84,41 +84,24 @@ var nesheiPositions = ["example-3", "example-4"];
 var posArray = [];
 var adArray = [];
 
-var position = 1;
+var positions = {};
 var ads = 0;
 
-function picSelected() {
-  var file = event.target.files[0];
-  var formData = new FormData();
-  formData.append("file", file);
-  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+function addPosition(id) {
+  var position = positions[id]++;
 
-  post(
-    CLOUDINARY,
-    { "Content-Type": "application/x-www-form-urlencoded" },
-    formData,
-    function(res) {
-      document.getElementById("img-size").innerHTML =
-        res.data.height + "X" + res.data.width;
-      document.getElementById("img-preview").src = res.data.secure_url;
-    }
-  );
-}
-
-function addPosition() {
-  position++;
-  $("#positions").append(
-    `<div class="position" id="pos-${position}">
-            <div class="btn btn-danger remove-pos-btn" onclick="removePosition('pos-${position}')">הסר</div>
+  $("#positions-" + id).append(
+    `<div class="position" id="pos-${id}-${position}">
+            <div class="btn btn-danger remove-pos-btn" onclick="removePosition(${id},${position})">הסר</div>
             <div class="radio">
-                <label class="checkbox-radio"><input type="radio" name="platform-${position}" value="mobile">נייד</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${position}"  value="pc">נייח</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${position}" checked value="both">שניהם</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" value="mobile">נייד</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}"  value="desktop">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" checked value="both">שניהם</label>
             </div>
-            <select class="form-control my-selector" id="pos-select-${position}">
+            <select class="form-control my-selector" id="pos-select-${id}-${position}">
                 <option hidden>בחר מיקום</option>
             </select>
-            <select class="form-control my-selector" id="site-select-${position}" onchange="siteSelected(event)">
+            <select class="form-control my-selector" id="site-select-${id}-${position}" onchange="siteSelected(event)">
                 <option hidden>בחר אתר</option>
                 <option>chabad.info</option>
                 <option>chabadinfo.com</option>
@@ -128,9 +111,14 @@ function addPosition() {
   );
 }
 
-function removePosition(id) {
-  position--;
-  $("#" + id).remove();
+function removePosition(id, pos) {
+  $(`#pos-${id}-${pos}`).remove();
+
+  for (let index = pos + 1; index < positions[id]; index++) {
+    $(`#pos-${id}-${index}`).attr("id", index - 1);
+  }
+
+  positions[id]--;
 }
 
 function siteSelected(e) {
@@ -158,74 +146,62 @@ function insertActions(id, positions) {
     select.options[select.options.length] = new Option(positions[i]);
   }
 }
-function saveAd() {
-  if (isAdValid()) {
-    var src = document.getElementById("img-preview").src;
-    var size = document.getElementById("img-size").innerHTML;
-    $("#ads-preview-list").append(
-      `<div class="ad-preview" id="ad-preview-${ads}">
-            <img class="ad-preview-img" src="${src}">
-            <div class="ad-preview-size">${size}</div>
-            <button class="remove-ad" onclick="removeAd('ad-preview-${ads}')">X</button>
-        </div>`
-    );
-    addPositionsToArray();
-    addAdToArray();
-    clearAdForm();
-    ads++;
-  }
-}
-function isAdValid() {
-  if (
-    document.getElementById("img-preview").src ==
-    "http://fillmurray.com/g/300/300"
-  ) {
-    swal("חסרים נתונים", "לא טענת תמונה", "error");
-    return false;
-  } else if (!isPositionsValid()) {
-    swal("חסרים נתונים", "אחד או יותר מהמיקומים שהכנסת איננו תקין", "error");
-    return false;
-  } else if (document.getElementById("positions").children.length === 0) {
-    swal("חסרים נתונים", "לא הוספו מיקומים", "error");
-  } else {
-    return true;
-  }
-}
+// function saveAd() {
+//   if (isAdValid()) {
+//     var src = document.getElementById("img-preview").src;
+//     var size = document.getElementById("img-size").innerHTML;
+//     addPositionsToArray();
+//     addAdToArray();
+//     clearAdForm();
+//     ads++;
+//   }
+// }
 
-function isPositionsValid() {
-  for (let i = 1; i <= position; i++) {
-    if (
-      document.getElementById("site-select-" + i).value == "בחר אתר" ||
-      document.getElementById("pos-select-" + i).value == "בחר מיקום"
-    ) {
-      return false;
-    }
-  }
-  return true;
-}
+// function isAdValid() {
+//   if (!isPositionsValid()) {
+//     swal("חסרים נתונים", "אחד או יותר מהמיקומים שהכנסת איננו תקין", "error");
+//     return false;
+//   } else if (document.getElementById("positions").children.length === 0) {
+//     swal("חסרים נתונים", "לא הוספו מיקומים", "error");
+//   } else {
+//     return true;
+//   }
+// }
 
-function addPositionsToArray() {
-  for (let i = 1; i <= position; i++) {
-    var site = document.getElementById("site-select-" + i).value;
-    var pos = document.getElementById("pos-select-" + i).value;
+// function isPositionsValid() {
+//   for (let i = 1; i <= position; i++) {
+//     if (
+//       document.getElementById("site-select-" + i).value == "בחר אתר" ||
+//       document.getElementById("pos-select-" + i).value == "בחר מיקום"
+//     ) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
-    switch (document.querySelector(`input[name=platform-${i}]:checked`).value) {
-      case "pc":
-        posArray.push(`${site}-${pos}`);
-        break;
-      case "mobile":
-        posArray.push(`${site}-${pos}-m`);
+// function addPositionsToArray() {
+//   for (let i = 1; i <= position; i++) {
+//     var site = document.getElementById("site-select-" + i).value;
+//     var pos = document.getElementById("pos-select-" + i).value;
 
-        break;
+//     switch (document.querySelector(`input[name=platform-${i}]:checked`).value) {
+//       case "desktop":
+//         posArray.push(`${site}-${pos}`);
+//         break;
+//       case "mobile":
+//         posArray.push(`${site}-${pos}-m`);
 
-      case "both":
-        posArray.push(`${site}-${pos}`);
-        posArray.push(`${site}-${pos}-m`);
+//         break;
 
-        break;
-    }
-  }
-}
+//       case "both":
+//         posArray.push(`${site}-${pos}`);
+//         posArray.push(`${site}-${pos}-m`);
+
+//         break;
+//     }
+//   }
+// }
 
 function addAdToArray() {
   var ad = {
@@ -238,50 +214,62 @@ function addAdToArray() {
   posArray = [];
 }
 
-function clearAdForm() {
-  document.getElementById("img-size").innerHTML = "";
-  document.getElementById("file-upload").value = "";
-  document.getElementById("click").value = "";
-  document.getElementById("img-preview").src = "/nopic.jpg";
+// function clearAdForm() {
+//   document.getElementById("img-size").innerHTML = "";
+//   document.getElementById("file-upload").value = "";
+//   document.getElementById("click").value = "";
+//   document.getElementById("img-preview").src = "/nopic.jpg";
 
-  for (let i = 2; i <= position; i++) {
-    document.getElementById("pos-" + i).remove();
-  }
-  position = 1;
-}
+//   for (let i = 2; i <= position; i++) {
+//     document.getElementById("pos-" + i).remove();
+//   }
+//   position = 1;
+// }
 
-function removeAd(id) {
-  removeAdFromArray(id);
-  document.getElementById(id).remove();
-}
+// function removeAd(id) {
+//   removeAdFromArray(id);
+//   document.getElementById(id).remove();
+// }
 
-function removeAdFromArray(id) {
-  adArray[id.split("ad-preview-")[1]] = null;
-}
+// function removeAdFromArray(id) {
+//   adArray[id.split("ad-preview-")[1]] = null;
+// }
 
-function save() {
-  var campaign = {
-    campaign_id: (+new Date()).toString(),
-    campaign_name: document.getElementById("campaign_name").value,
-    description: document.getElementById("description").value,
-    views: (document.getElementById("views").value === "") ? 2000000000 : document.getElementById("views").value,
-    clicks:(document.getElementById("clicks").value === "") ? 2000000000 : document.getElementById("clicks").value,
-    views_left:(document.getElementById("views").value === "") ? 2000000000 : parseInt(document.getElementById("views").value),
-    clicks_left:(document.getElementById("clicks").value === "") ? 2000000000 : parseInt(document.getElementById("clicks").value),
-    starting_date: document.getElementById("starting_date").value,
-    expiration_date: getExpirationDate(),
-    days: document.getElementById("days").value,
-    client_info: {
-      name: document.getElementById("client_name").value,
-      phone: document.getElementById("client_phone").value,
-      email: document.getElementById("client_email").value,
-      price: document.getElementById("client_price").value,
-      balance: document.getElementById("client_balance").value,
-      details: document.getElementById("client_details").value
-    }
-  };
-  fillAdsArray(campaign);
-}
+// function save() {
+//   var campaign = {
+//     campaign_id: (+new Date()).toString(),
+//     campaign_name: document.getElementById("campaign_name").value,
+//     description: document.getElementById("description").value,
+//     views:
+//       document.getElementById("views").value === ""
+//         ? 2000000000
+//         : document.getElementById("views").value,
+//     clicks:
+//       document.getElementById("clicks").value === ""
+//         ? 2000000000
+//         : document.getElementById("clicks").value,
+//     views_left:
+//       document.getElementById("views").value === ""
+//         ? 2000000000
+//         : parseInt(document.getElementById("views").value),
+//     clicks_left:
+//       document.getElementById("clicks").value === ""
+//         ? 2000000000
+//         : parseInt(document.getElementById("clicks").value),
+//     starting_date: document.getElementById("starting_date").value,
+//     expiration_date: getExpirationDate(),
+//     days: document.getElementById("days").value,
+//     client_info: {
+//       name: document.getElementById("client_name").value,
+//       phone: document.getElementById("client_phone").value,
+//       email: document.getElementById("client_email").value,
+//       price: document.getElementById("client_price").value,
+//       balance: document.getElementById("client_balance").value,
+//       details: document.getElementById("client_details").value
+//     }
+//   };
+//   fillAdsArray(campaign);
+// }
 
 function fillAdsArray(campaign) {
   isEmpty = true;
@@ -311,8 +299,8 @@ function fillAdsArray(campaign) {
     }).then(isOk => {
       if (isOk) {
         post("/campaigns", { auth: "1234" }, campaign, function(res) {
-        swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
-          button: "סגור"
+          swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
+            button: "סגור"
           });
         });
       }
@@ -379,12 +367,3 @@ function getExtraData(positions) {
   };
 }
 
-function getExpirationDate() {
-  if (document.getElementById("starting_date").value != "") {
-    var start = new Date(document.getElementById("starting_date").value);
-    var days = parseInt(document.getElementById("days").value);
-
-    return new Date(start.setDate(start.getDate() + days));
-  }
-  return "";
-}

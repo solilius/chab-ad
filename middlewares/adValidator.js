@@ -9,9 +9,6 @@ const adScheme = joi.object().keys({
     size: joi.string().required(),
     clicks: joi.number().required(),
     views: joi.number().required(),
-    platform: joi.array().min(1).required(),
-    sites: joi.array().min(1).required(),
-    positions_names: joi.array().min(1).required(),
     expiration_date: joi.string().required(),
     starting_date:  joi.string().required()
 });

@@ -87,46 +87,6 @@ input{
     max-height: 120px
 }
 
-#ads-preview-list{
-    margin-top: 30px;
-    height: 250px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: inline-flex;
-    direction: rtl;
-}
-
-.ad-preview{
-    float: right;
-    margin-left: 10px;
-}
-
-.ad-preview-img{
-    height: 190px;
-    border: 2px solid black;
-  }
-
-.ad-preview-size{
-    width: 190px;
-    text-align: center;
-    background: black;
-    color: white;
-    position: relative;
-    top: -20px;
-    width: 100%;
-}
-
-.remove-ad{
-    background: red;
-    border-radius: 50px;
-    width: 30px;
-    height: 30px;
-    color: white;
-    position: relative;
-    top: -200px;
-    left: -15px;
-}
-
 .save{
     position: fixed;
     bottom: 20px;
@@ -143,4 +103,9 @@ input{
     max-height: 68vh;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.btn-remove-banner{
+    position: relative;
+    top: 0px;
 }
