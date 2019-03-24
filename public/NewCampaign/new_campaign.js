@@ -146,62 +146,6 @@ function insertActions(id, positions) {
     select.options[select.options.length] = new Option(positions[i]);
   }
 }
-// function saveAd() {
-//   if (isAdValid()) {
-//     var src = document.getElementById("img-preview").src;
-//     var size = document.getElementById("img-size").innerHTML;
-//     addPositionsToArray();
-//     addAdToArray();
-//     clearAdForm();
-//     ads++;
-//   }
-// }
-
-// function isAdValid() {
-//   if (!isPositionsValid()) {
-//     swal("חסרים נתונים", "אחד או יותר מהמיקומים שהכנסת איננו תקין", "error");
-//     return false;
-//   } else if (document.getElementById("positions").children.length === 0) {
-//     swal("חסרים נתונים", "לא הוספו מיקומים", "error");
-//   } else {
-//     return true;
-//   }
-// }
-
-// function isPositionsValid() {
-//   for (let i = 1; i <= position; i++) {
-//     if (
-//       document.getElementById("site-select-" + i).value == "בחר אתר" ||
-//       document.getElementById("pos-select-" + i).value == "בחר מיקום"
-//     ) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
-
-// function addPositionsToArray() {
-//   for (let i = 1; i <= position; i++) {
-//     var site = document.getElementById("site-select-" + i).value;
-//     var pos = document.getElementById("pos-select-" + i).value;
-
-//     switch (document.querySelector(`input[name=platform-${i}]:checked`).value) {
-//       case "desktop":
-//         posArray.push(`${site}-${pos}`);
-//         break;
-//       case "mobile":
-//         posArray.push(`${site}-${pos}-m`);
-
-//         break;
-
-//       case "both":
-//         posArray.push(`${site}-${pos}`);
-//         posArray.push(`${site}-${pos}-m`);
-
-//         break;
-//     }
-//   }
-// }
 
 function addAdToArray() {
   var ad = {
@@ -213,63 +157,6 @@ function addAdToArray() {
   adArray.push(ad);
   posArray = [];
 }
-
-// function clearAdForm() {
-//   document.getElementById("img-size").innerHTML = "";
-//   document.getElementById("file-upload").value = "";
-//   document.getElementById("click").value = "";
-//   document.getElementById("img-preview").src = "/nopic.jpg";
-
-//   for (let i = 2; i <= position; i++) {
-//     document.getElementById("pos-" + i).remove();
-//   }
-//   position = 1;
-// }
-
-// function removeAd(id) {
-//   removeAdFromArray(id);
-//   document.getElementById(id).remove();
-// }
-
-// function removeAdFromArray(id) {
-//   adArray[id.split("ad-preview-")[1]] = null;
-// }
-
-// function save() {
-//   var campaign = {
-//     campaign_id: (+new Date()).toString(),
-//     campaign_name: document.getElementById("campaign_name").value,
-//     description: document.getElementById("description").value,
-//     views:
-//       document.getElementById("views").value === ""
-//         ? 2000000000
-//         : document.getElementById("views").value,
-//     clicks:
-//       document.getElementById("clicks").value === ""
-//         ? 2000000000
-//         : document.getElementById("clicks").value,
-//     views_left:
-//       document.getElementById("views").value === ""
-//         ? 2000000000
-//         : parseInt(document.getElementById("views").value),
-//     clicks_left:
-//       document.getElementById("clicks").value === ""
-//         ? 2000000000
-//         : parseInt(document.getElementById("clicks").value),
-//     starting_date: document.getElementById("starting_date").value,
-//     expiration_date: getExpirationDate(),
-//     days: document.getElementById("days").value,
-//     client_info: {
-//       name: document.getElementById("client_name").value,
-//       phone: document.getElementById("client_phone").value,
-//       email: document.getElementById("client_email").value,
-//       price: document.getElementById("client_price").value,
-//       balance: document.getElementById("client_balance").value,
-//       details: document.getElementById("client_details").value
-//     }
-//   };
-//   fillAdsArray(campaign);
-// }
 
 function fillAdsArray(campaign) {
   isEmpty = true;
@@ -317,20 +204,7 @@ function fillAdsArray(campaign) {
   }
 }
 
-function post(url, headers, body, callback) {
-  axios({
-    url: url,
-    method: "POST",
-    headers: headers,
-    data: body
-  })
-    .then(function(res) {
-      callback(res);
-    })
-    .catch(function(err) {
-      console.log(err);
-    });
-}
+
 
 function getExtraData(positions) {
   var platforms = [];
@@ -366,4 +240,3 @@ function getExtraData(positions) {
     names: uniqueNames
   };
 }
-

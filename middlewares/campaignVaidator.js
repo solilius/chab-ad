@@ -9,7 +9,7 @@ const scheme = joi.object().keys({
     views: joi.number().min(0).required(),
     starting_date: joi.date().allow('').required(),
     expiration_date: joi.date().allow('').required(),
-    days: joi.number().required(),
+    days: joi.string().required().allow(''),
     client_info: joi.object().keys({
         name: joi.string().allow('').optional(),
         phone: joi.string().allow('').optional(),

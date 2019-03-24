@@ -38,7 +38,6 @@ function getColumnDefs() {
         { headerName: "לקוח", field: "client_info.name" },
         { headerName: "תאריך התחלה", field: "starting_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
         { headerName: "תאריך סיום", field: "expiration_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
-        //{ headerName: "ימים", field: "days", filter: "agNumberColumnFilter", cellRenderer: function (params) { return ((new Date(params.data.expiration_date).getTime() / 1000) - (new Date(params.data.starting_date).getTime() / 1000)) / 86400 } },
         { headerName: "ימים", field: "days", filter: "agNumberColumnFilter"},
         { headerName: " צפיות שנשארו", field: "views_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : 0 } },
         { headerName: " קליקים שנשארו", field: "clicks_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : 0 } },

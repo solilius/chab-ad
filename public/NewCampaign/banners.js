@@ -72,7 +72,21 @@ function removeBanner(id) {
 }
 
 function save() {
-  var campaign = composeCampaign();
+  swal({
+    title: "שמירת קמפיין",
+    text: "?האם ברצונך לשמור את הקמפיין ",
+    icon: "warning",
+    buttons: true
+  }).then(isOk => {
+    if (isOk) {
+      var campaign = composeCampaign();
+      var banners = composeBanners(campaign);
+      upload(campaign, banners);
+    }
+  });
+}
+
+function composeBanners(campaign) {
   var banners = [];
   for (let i = 0; i < Object.keys(positions).length; i++) {
     if ($("#banner-" + i).val() !== undefined) {
@@ -91,7 +105,7 @@ function save() {
       };
     }
   }
-  console.log(banners);
+  return banners;
 }
 
 function composeCampaign() {
@@ -130,28 +144,43 @@ function getExpirationDate() {
 }
 
 function getPositions(bannerId) {
-debugger;
   var curPositions = [];
   for (let pos = 0; pos <= positions[bannerId]; pos++) {
     var site = $(`#site-select-${bannerId}-${pos}`).val();
     var position = $(`#pos-select-${bannerId}-${pos}`).val();
     var id = `${site}-${position}`;
-    switch ($(`input[name=platform-${bannerId}-${pos}]:checked`).val()) {
-      case "desktop":
-        curPositions.push(id);
-        break;
-      case "mobile":
-        curPositions.push(id + '-m');
+    if (id !== "בחר אתר-בחר מיקום") {
+      switch ($(`input[name=platform-${bannerId}-${pos}]:checked`).val()) {
+        case "desktop":
+          curPositions.push(id);
+          break;
+        case "mobile":
+          curPositions.push(id + "-m");
 
-        break;
+          break;
 
-      case "both":
-        curPositions.push(id);
-        curPositions.push(id + '-m');
+        case "both":
+          curPositions.push(id);
+          curPositions.push(id + "-m");
 
-        break;
+          break;
+      }
     }
   }
 
   return curPositions;
+}
+
+function upload(campaign, banners) {
+  var header = { "auth": "1234" };
+  axios.post("/campaigns", campaign, { headers: header }).then(function() {
+      axios.post("/banners", { banners: banners }, { headers: header }).then(function() {
+          swal("הקמפיין עלה בהצלחה", "", "success");
+        }).catch(function(err) {
+          swal("בעיה בהעלאת הבאנרים", "הקמפיין נוצר אבל הבאנרים לא הועלו", "error");
+        });
+    }).catch(function(err) {
+        console.log("qwe" + err);
+      swal("העלאת הקמפיין נכשלה", err.message, "error");
+    });
 }
