@@ -1,4 +1,9 @@
 var index = 0;
+var posArray = [];
+var adArray = [];
+var positions = {};
+var ads = 0;
+
 window.ml = cloudinary.createMediaLibrary(
   {
     cloud_name: "dukdfuywh",
@@ -71,116 +76,156 @@ function removeBanner(id) {
   $("#" + id).remove();
 }
 
-function save() {
-  swal({
-    title: "שמירת קמפיין",
-    text: "?האם ברצונך לשמור את הקמפיין ",
-    icon: "warning",
-    buttons: true
-  }).then(isOk => {
-    if (isOk) {
-      var campaign = composeCampaign();
-      var banners = composeBanners(campaign);
-      upload(campaign, banners);
-    }
-  });
+function addPosition(id) {
+  var position = positions[id]++;
+
+  $("#positions-" + id).append(
+    `<div class="position" id="pos-${id}-${position}">
+            <div class="btn btn-danger remove-pos-btn" onclick="removePosition(${id},${position})">הסר</div>
+            <div class="radio">
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" value="mobile">נייד</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}"  value="desktop">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" checked value="both">שניהם</label>
+            </div>
+            <select class="form-control my-selector" id="pos-select-${id}-${position}">
+                <option hidden>בחר מיקום</option>
+            </select>
+            <select class="form-control my-selector" id="site-select-${id}-${position}" onchange="siteSelected(event)">
+                <option hidden>בחר אתר</option>
+                <option>chabad.info</option>
+                <option>chabadinfo.com</option>
+                <option>neshei.com</option>
+            </select>
+        </div>`
+  );
 }
 
-function composeBanners(campaign) {
-  var banners = [];
-  for (let i = 0; i < Object.keys(positions).length; i++) {
-    if ($("#banner-" + i).val() !== undefined) {
-      banners[i] = {
-        campaign_id: campaign.campaign_id,
-        campaign_name: campaign.campaign_name,
-        ad_id: campaign.campaign_id + "_" + i,
-        url: $("#url-" + i).attr("src"),
-        onclick: $("#click-" + i).val(),
-        size: $("#img-size-" + i).text(),
-        starting_date: campaign.starting_date,
-        expiration_date: campaign.expiration_date,
-        clicks: 0,
-        views: 0,
-        positions: getPositions(i)
-      };
-    }
-  }
-  return banners;
-}
+function removePosition(id, pos) {
+  $(`#pos-${id}-${pos}`).remove();
 
-function composeCampaign() {
-  return {
-    campaign_id: (+new Date()).toString(),
-    campaign_name: $("#campaign_name").val(),
-    description: $("#description").val(),
-    views: $("#views").val() === "" ? 2000000000 : $("#views").val(),
-    clicks: $("#clicks").val() === "" ? 2000000000 : $("#clicks").val(),
-    views_left:
-      $("#views").val() === "" ? 2000000000 : parseInt($("#views").val()),
-    clicks_left:
-      $("#clicks").val() === "" ? 2000000000 : parseInt($("#clicks").val()),
-    starting_date: $("#starting_date").val(),
-    expiration_date: getExpirationDate(),
-    days: $("#days").val(),
-    client_info: {
-      name: $("#client_name").val(),
-      phone: $("#client_phone").val(),
-      email: $("#client_email").val(),
-      price: $("#client_price").val(),
-      balance: $("#client_balance").val(),
-      details: $("#client_details").val()
-    }
-  };
-}
-
-function getExpirationDate() {
-  if (document.getElementById("starting_date").value != "") {
-    var start = new Date(document.getElementById("starting_date").value);
-    var days = parseInt(document.getElementById("days").value);
-
-    return new Date(start.setDate(start.getDate() + days));
-  }
-  return "";
-}
-
-function getPositions(bannerId) {
-  var curPositions = [];
-  for (let pos = 0; pos <= positions[bannerId]; pos++) {
-    var site = $(`#site-select-${bannerId}-${pos}`).val();
-    var position = $(`#pos-select-${bannerId}-${pos}`).val();
-    var id = `${site}-${position}`;
-    if (id !== "בחר אתר-בחר מיקום") {
-      switch ($(`input[name=platform-${bannerId}-${pos}]:checked`).val()) {
-        case "desktop":
-          curPositions.push(id);
-          break;
-        case "mobile":
-          curPositions.push(id + "-m");
-
-          break;
-
-        case "both":
-          curPositions.push(id);
-          curPositions.push(id + "-m");
-
-          break;
-      }
-    }
+  for (let index = pos + 1; index < positions[id]; index++) {
+    $(`#pos-${id}-${index}`).attr("id", index - 1);
   }
 
-  return curPositions;
+  positions[id]--;
 }
 
-function upload(campaign, banners) {
-  var header = { "auth": "1234" };
-  axios.post("/campaigns", campaign, { headers: header }).then(function() {
-      axios.post("/banners", { banners: banners }, { headers: header }).then(function() {
-          swal("הקמפיין עלה בהצלחה", "", "success");
-        }).catch(function(err) {
-          swal("בעיה בהעלאת הבאנרים", "הקמפיין נוצר אבל הבאנרים לא הועלו", "error");
-        });
-    }).catch(function(err) {
-        console.log("qwe" + err);
-      swal("העלאת הקמפיין נכשלה", err.message, "error");
-    });
+function siteSelected(e) {
+  var id = e.target.id.split("site-select-")[1];
+  switch (document.getElementById(e.target.id).value) {
+    case "chabad.info":
+      insertActions(id, chabadInfoPositions);
+
+      break;
+    case "chabadinfo.com":
+      insertActions(id, chabadInfoComPositions);
+
+      break;
+    case "neshei.com":
+      insertActions(id, nesheiPositions);
+
+      break;
+  }
 }
+
+function insertActions(id, positions) {
+  var select = document.getElementById("pos-select-" + id);
+  $("#pos-select-" + id).empty();
+  for (let i = 0; i < positions.length; i++) {
+    select.options[select.options.length] = new Option(positions[i]);
+  }
+}
+
+// function addAdToArray() {
+//   var ad = {
+//     positions: posArray,
+//     url: document.getElementById("img-preview").src,
+//     onclick: document.getElementById("click").value,
+//     size: document.getElementById("img-size").innerHTML
+//   };
+//   adArray.push(ad);
+//   posArray = [];
+// }
+
+// function fillAdsArray(campaign) {
+//   isEmpty = true;
+//   for (let i = 0; i < adArray.length; i++) {
+//     if (adArray[i] != null) {
+//       isEmpty = false;
+//       var data = getExtraData(adArray[i].positions);
+//       adArray[i].campaign_id = campaign.campaign_id;
+//       adArray[i].campaign_name = campaign.campaign_name;
+//       (adArray[i].starting_date = campaign.starting_date),
+//         (adArray[i].expiration_date = campaign.expiration_date),
+//         (adArray[i].ad_id = campaign.campaign_id + i.toString()),
+//         (adArray[i].platform = data.platforms);
+//       adArray[i].sites = data.sites;
+//       adArray[i].positions_names = data.names;
+//       adArray[i].clicks = 0;
+//       adArray[i].views = 0;
+//     }
+//   }
+
+//   if (isEmpty) {
+//     swal({
+//       title: "אין פרסומות בקמפיין",
+//       text: "?האם ברצונך לשמור את הקמפיין כך",
+//       icon: "warning",
+//       buttons: true
+//     }).then(isOk => {
+//       if (isOk) {
+//         post("/campaigns", { auth: "1234" }, campaign, function(res) {
+//           swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
+//             button: "סגור"
+//           });
+//         });
+//       }
+//     });
+//   } else {
+//     var header = { auth: "1234" };
+//     post("/campaigns", header, campaign, function(res) {
+//       post("/banners", header, { ads: adArray }, function(res) {
+//         swal("מזל טוב", "הקמפיין התווסף בהצלחה", "success", {
+//           button: "סגור"
+//         });
+//       });
+//     });
+//   }
+// }
+
+
+
+// function getExtraData(positions) {
+//   var platforms = [];
+//   var sites = [];
+//   var names = [];
+//   positions.forEach(function(pos) {
+//     sites.push(pos.split("-")[0]);
+//     names.push(pos.split("-")[1]);
+//     if (pos.split("-").length == 3) {
+//       platforms.push("נייד");
+//     } else {
+//       platforms.push("נייח");
+//     }
+//   });
+//   var uniquePlatforms = [];
+//   $.each(platforms, function(i, el) {
+//     if ($.inArray(el, uniquePlatforms) === -1) uniquePlatforms.push(el);
+//   });
+
+//   var uniqueSites = [];
+//   $.each(sites, function(i, el) {
+//     if ($.inArray(el, uniqueSites) === -1) uniqueSites.push(el);
+//   });
+
+//   var uniqueNames = [];
+//   $.each(names, function(i, el) {
+//     if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+//   });
+
+//   return {
+//     platforms: uniquePlatforms,
+//     sites: uniqueSites,
+//     names: uniqueNames
+//   };
+// }
