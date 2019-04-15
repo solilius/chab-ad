@@ -13,7 +13,15 @@ send("/banners/" + campaign_id, "GET", {}, function(res) {
 });
 
 $("input").bind("change keyup", function() {
-  document.getElementById("status").checked = isActive();
+  if (isActive) {
+    $("#save-btn")
+      .addClass("btn-success")
+      .removeClass("btn-danger");
+  } else {
+    $("#save-btn")
+      .addClass("btn-danger")
+      .removeClass("btn-success");
+  }
 });
 
 function updateValue(id) {
@@ -103,54 +111,36 @@ function send(url, method, body, callback) {
 }
 
 function insertValues() {
-  document.getElementById("name").value = campaign.campaign_name;
-  document.getElementById("description").value = campaign.description;
-  document.getElementById("views").value = campaign.views_left;
-  document.getElementById("clicks").value = campaign.clicks_left;
-  document.getElementById("start").value = campaign.starting_date.split("T")[0];
-  document.getElementById("end").value = campaign.expiration_date.split("T")[0];
-  document.getElementById("status").checked = campaign.isActive;
-
-  document.getElementById("c_name").value = campaign.client_info.name;
-  document.getElementById("phone").value = campaign.client_info.phone;
-  document.getElementById("email").value = campaign.client_info.email;
-  document.getElementById("price").value = campaign.client_info.price;
-  document.getElementById("balance").value = campaign.client_info.balance;
-  document.getElementById("details").value = campaign.client_info.details;
+  $("#campaign_name").val(campaign.campaign_name);
+  $("#description").val(campaign.description);
+  $("#views").val(campaign.views_left);
+  $("#clicks").val(campaign.clicks_left);
+  $("#starting_date").val(campaign.starting_date.split("T")[0]);
+  $("#days").val(campaign.days);
+  $("#client_name").val(campaign.client_info.name);
+  $("#client_phone").val(campaign.client_info.phone);
+  $("#client_email").val(campaign.client_info.email);
+  $("#client_price").val(campaign.client_info.price);
+  $("#client_balance").val(campaign.client_info.balance);
+  $("#client_details").val(campaign.client_info.details);
+  if (!campaign.isActive) {
+    $("#save-btn")
+      .addClass("btn-danger")
+      .removeClass("btn-success");
+  }
 }
 
 function isDateValid(start, end) {
   return new Date(start).getTime() / 1000 <= new Date(end).getTime() / 1000;
 }
 
-function isActive() {
-  return (
-    new Date(document.getElementById("start").value).getTime() / 1000 <=
-      new Date().getTime() / 1000 &&
-    new Date(document.getElementById("end").value).getTime() / 1000 >
-      new Date().getTime() / 1000 &&
-    parseInt(document.getElementById("clicks").value) > 0 &&
-    parseInt(document.getElementById("views").value) > 0
-  );
+function isActive(){
+    return (($('#starting_date').val() !== "") || checkDate()) &&
+           (($('#days').val() !== "") || ($('#days').val() !== "0")) && 
+           (($('#views').val() !== "") || ($('#views').val() !== "0")) && 
+           (($('#clicks').val() !== "") || ($('#clicks').val() !== "0"))
 }
 
 function loadAds() {
-  for (var i = 0; i < ads.length; i++) {
-      var pos = ads[i].positions.toString().replace(',', '<br>');
-    $("#ads_list").append(
-      `<div class="ad">
-            <div class="col-md-8 ad-data">
-               ${ads[i].onclick} <b> :לינק בלחיצה</b>  <br>
-               ${ads[i].size} <b> :גודל</b> <br>
-               ${ads[i].views} <b> :הופעות</b>  <br>
-               ${ads[i].clicks} <b> :לחיצות</b>  <br>
-                <b> :מיקומים</b>  <br>
-                <div class="positions">${pos}</div>
-
-            </div>
-            <img  class="col-md-4" src="${ads[i].url}">
-        </div>
-        `
-    );
-  }
+  for (var i = 0; i < ads.length; i++) {}
 }

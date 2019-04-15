@@ -1,110 +1,137 @@
-<link rel="stylesheet" href="/CampaignPage/campaign_page.css">
-<link rel="stylesheet" href="/CampaignPage/switch.css">
+<link rel="stylesheet" href="/Common/Styles/campaign.css" />
+<div class="row well">
+  <div class="col-md-offset-1 col-md-5">
+    <div class="header">פרטי לקוח</div>
 
-<div class="well well-lg my-well col-md-6">
-    <div id="ads_list">
+    <div class="form-group">
+      <label>:טלפון</label>
+      <div class="col-10">
+        <input class="form-control" type="tel" id="client_phone" />
+      </div>
     </div>
+    <div class="form-group">
+      <label> :אימייל</label>
+      <div class="col-10">
+        <input class="form-control" type="email" id="client_email" />
+      </div>
+    </div>
+    <div class="form-group ">
+      <label>:שם </label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="client_name" />
+      </div>
+    </div>
+    <div class="form-group ">
+      <label>:מידע נוסף</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="client_details" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="example-tel-input">:יתרה לתשלום</label>
+      <div class="col-10">
+        <input class="form-control" type="number" id="client_balance" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>:מחיר</label>
+      <div class="col-10">
+        <input class="form-control" type="number" id="client_price" />
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-5">
+    <div class="header">פרטי קמפיין</div>
+
+    <div class="form-group">
+      <label>:תאריך התחלה</label>
+      <div class="col-10">
+        <input class="form-control" type="date" id="starting_date" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>:תאור</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="description" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>:שם קמפיין</label>
+      <div class="col-10">
+        <input class="form-control" type="text" id="campaign_name" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>:מספר ימים</label>
+      <div class="col-10">
+        <input
+          class="form-control"
+          type="number"
+          min="0"
+          id="days"
+          placeholder="0"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="example-tel-input">:צפיות</label>
+      <div class="col-10">
+        <input
+          class="form-control"
+          type="number"
+          id="views"
+          min="0"
+          placeholder="0"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>:לחיצות</label>
+      <div class="col-10">
+        <input
+          class="form-control"
+          type="number"
+          id="clicks"
+          min="0"
+          placeholder="0"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="well well-lg my-well col-md-2" style="margin-left: 3%">
-    <label class="col-2 col-form-label"> שם הלקוח</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="text" id="c_name" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> מספר הטלפון של הלקוח</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="tel" id="phone" class="form-control">
-    </div><br><br>
-    <label class="col-2 col-form-label"> עדכן האימייל שלהלקוח</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="email" id="email" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> עדכן את מחיר הקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="number" id="price" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> עדכן את יתרת התשלום</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="number" id="balance" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> ערוך מידע נוסף</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-        </span>
-        <input type="text" id="details" class="form-control">
+<div class="row">
+  <div class="add-banners-container">
+    <button id="add-banners"></button>
+    <div>
+      <div id="banners"></div>
     </div>
-<br><br><br><br>
-    <button class="btn btn-lg btn-block btn-success" onclick="updateClient()">שמור שינויים</button>
+  </div>
 </div>
+<br />
 
-<div class="well well-lg my-well col-md-3" style="margin-left: 4%">
-    <label class="col-2 col-form-label"> עדכן את שם הקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('name')">עדכן</button>
-        </span>
-        <input type="text" id="name" class="form-control">
-    </div><br><br>
+<button class="btn btn-lg btn-success save" onclick="save()" id="save-btn">
+  שמור שינויים
+</button>
 
-    <label class="col-2 col-form-label"> עדכן את תאור הקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('description')">עדכן</button>
-        </span>
-        <input type="text" id="description" class="form-control">
-    </div><br><br>
-    <label class="col-2 col-form-label"> עדכן מספר צפיות שנשארו לקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('count')">עדכן</button>
-        </span>
-        <input type="number" min="0" id="views" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> עדכן מספר קליקים שנשארו לקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('count')">עדכן</button>
-        </span>
-        <input type="number" min="0" id="clicks" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> שנה את תאריך תחילת הקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('date')">עדכן</button>
-        </span>
-        <input type="date" id="start" class="form-control">
-    </div><br><br>
-
-    <label class="col-2 col-form-label"> שנה את תאריך סיום הקמפיין</label>
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button class="btn btn-success" type="button" onclick="updateValue('date')">עדכן</button>
-        </span>
-        <input type="date" id="end" class="form-control">
-    </div><br><br>
-    <div class="status">
-        <label class="col-2 col-form-label">  הסטטוס על פי הנתונים כרגע</label><br>
-        <label class="switch">
-            <input id="status" type="checkbox" checked disabled>
-            <span class="slider round"> </span>
-        </label>
-    </div>
-</div>
-
-<script src="/CampaignPage/campaign_page.js" type="text/javascript" charset="utf-8"></script>
+<script
+  src="/Common/Scripts/moment.js"
+  type="text/javascript"
+  charset="utf-8"
+></script>
+<script
+  src="/Common/Scripts/banners.js"
+  type="text/javascript"
+  charset="utf-8"
+></script>
+<script
+  src="/CampaignPage/campaign_page.js"
+  type="text/javascript"
+  charset="utf-8"
+></script>
+<script
+  src="/Common/Scripts/positions.js"
+  type="text/javascript"
+  charset="utf-8"
+></script>

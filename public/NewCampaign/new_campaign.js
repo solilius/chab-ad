@@ -43,7 +43,7 @@ function isActive(){
     return (($('#starting_date').val() !== "") || checkDate()) &&
            (($('#days').val() !== "") || ($('#days').val() !== "0")) && 
            (($('#views').val() !== "") || ($('#views').val() !== "0")) && 
-           (($('#clicks').val() !== "") || ($('#clicks').val() !== "0")) && 
+           (($('#clicks').val() !== "") || ($('#clicks').val() !== "0"))
 }
 
 function checkDate(){
