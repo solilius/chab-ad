@@ -102,12 +102,14 @@ function upload(campaign, banners) {
   var header = { "auth": "1234" };
   axios.post("/campaigns", campaign, { headers: header }).then(function() {
       axios.post("/banners", { banners: banners }, { headers: header }).then(function() {
-          swal("הקמפיין עלה בהצלחה", "", "success");
+          swal("הקמפיין עלה בהצלחה", "", "success").then(function(){
+            localStorage.setItem("campaign", campaign.campaign_id);
+            goToPage('/CampaignPage/campaign_page.html');
+          });
         }).catch(function(err) {
           swal("בעיה בהעלאת הבאנרים", "הקמפיין נוצר אבל הבאנרים לא הועלו", "error");
         });
     }).catch(function(err) {
-        console.log("qwe" + err);
       swal("העלאת הקמפיין נכשלה", err.message, "error");
     });
 }
