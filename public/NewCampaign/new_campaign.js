@@ -27,6 +27,7 @@ function composeCampaign() {
     starting_date: $("#starting_date").val(),
     expiration_date: getExpirationDate(),
     days: $("#days").val(),
+    isActive: isActive(),
     client_info: {
       name: $("#client_name").val(),
       phone: $("#client_phone").val(),
@@ -36,6 +37,19 @@ function composeCampaign() {
       details: $("#client_details").val()
     }
   };
+}
+
+function isActive(){
+    return (($('#starting_date').val() !== "") || checkDate()) &&
+           (($('#days').val() !== "") || ($('#days').val() !== "0")) && 
+           (($('#views').val() !== "") || ($('#views').val() !== "0")) && 
+           (($('#clicks').val() !== "") || ($('#clicks').val() !== "0")) && 
+}
+
+function checkDate(){
+    var date = new Date($('#starting_date').val()).getTime();
+    var now = new Date().getTime();
+    return (date <= now)
 }
 
 function composeBanners(campaign) {
