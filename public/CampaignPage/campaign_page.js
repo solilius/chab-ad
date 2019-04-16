@@ -1,6 +1,5 @@
 var campaign_id = localStorage.getItem("campaign");
 var campaign = {};
-var ads = [];
 
 send("/campaigns/" + campaign_id, "GET", {}, function(res) {
   campaign = res.data[0];
@@ -8,12 +7,11 @@ send("/campaigns/" + campaign_id, "GET", {}, function(res) {
 });
 
 send("/banners/" + campaign_id, "GET", {}, function(res) {
-  ads = res.data;
-  loadAds();
+  loadAds(res.data);
 });
 
 $("input").bind("change keyup", function() {
-  if (isActive) {
+  if (isActive()) {
     $("#save-btn")
       .addClass("btn-success")
       .removeClass("btn-danger");
@@ -135,12 +133,34 @@ function isDateValid(start, end) {
 }
 
 function isActive(){
-    return (($('#starting_date').val() !== "") || checkDate()) &&
-           (($('#days').val() !== "") || ($('#days').val() !== "0")) && 
-           (($('#views').val() !== "") || ($('#views').val() !== "0")) && 
-           (($('#clicks').val() !== "") || ($('#clicks').val() !== "0"))
+    return (($('#starting_date').val() !== "") && checkDate()) &&
+           (($('#days').val() !== "") && ($('#days').val() !== "0")) && 
+           (($('#views').val() !== "") && ($('#views').val() !== "0")) && 
+           (($('#clicks').val() !== "") && ($('#clicks').val() !== "0"))
 }
 
-function loadAds() {
-  for (var i = 0; i < ads.length; i++) {}
+function loadAds(banners) {
+  for (var i = 0; i < banners.length; i++) {
+      var data = {
+          url: banners[i].url,
+          width: banners[i].size.split("X")[0],
+          height: banners[i].size.split("X")[1]
+      }
+
+      insertBanner(data, i);
+      $('#click-' + i).val(banners[i].onclick);
+      $('#img-size-' + i).val(banners[i].size);
+      removePosition(i, 0);
+      for (var p = 0; p < banners[i].positions.length; p++) {
+          addPosition(i);
+          var site = banners[i].positions[p].split("-")[0];
+          var pos = banners[i].positions[p].split("-")[1];
+          var platform = (banners[i].positions[p].split("-")[2] == undefined) ? "desktop" : "mobile";
+          $('#site-select-' + i + "-" + p).val(site);
+          siteSelected('site-select-' + i + "-" + p);
+          $('#pos-select-' + i + "-" + p).val(pos);
+          document.getElementById("platform-" + i + "-" + p + "-both" ).checked = false;
+          document.getElementById("platform-" + i + "-" + p + "-" + platform).checked = true;
+      }
+  }
 }
