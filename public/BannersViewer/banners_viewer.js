@@ -40,9 +40,11 @@ function getColumnDefs(){
         {headerName: "פלטפורמה", field: "platform"},
         {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
-        {headerName: "ימים", field: "days", filter: "agNumberColumnFilter"},
+        {headerName: "ימים שנשארו", field: "expiration_date", filter: "agNumberColumnFilter", cellRenderer: function(params){ return getDays(params.value)}},
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
-        {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"}
+        {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"},
+        { headerName: "פעיל?", field: "isActive" }
+
       ];
 }
 
@@ -68,4 +70,11 @@ function getGridOptions(rowData){
 
 function createGrid(data){
     new agGrid.Grid(document.querySelector('#myGrid'), getGridOptions(data));
+}
+
+function getDays(expiration){
+    var today = new Date();
+    var exp = new Date(expiration);
+    var left = Math.floor((exp.getTime() - today.getTime()) / 86400000);
+    return (left <= 0 || isNaN(left)) ? 0 : left;
 }
