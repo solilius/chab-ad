@@ -47,7 +47,7 @@ const DAL = {
                 if (err) {
                     handleErros('Update', err, callback);
                 } else {
-                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, (err, result) => {
+                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : true }, (err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }

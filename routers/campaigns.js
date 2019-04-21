@@ -35,52 +35,22 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-        res.send(data);
-    });
-});
 
-router.put('/:id/name', (req, res) => {
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-        res.send(data);
-    });
-
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-    });
-});
-
-router.put('/:id/date', (req, res) => {
-    data = req.body;
-    data.isActive = false;
-
-    if ((new Date(data.starting_date).getTime() / 1000 < new Date().getTime() / 1000) &&
-        (new Date(data.expiration_date).getTime() / 1000 > new Date().getTime() / 1000)) {
-        data.isActive = true;
+    let banner = {
+        campaign_name: req.body.campaign_name,
+        starting_date: req.body.starting_date,
+        expiration_date: req.body.expiration_date,
+        clicks_left: req.body.clicks_left,
+        views_left: req.body.views_left,
+        isActive: req.body.isActive
     }
 
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        console.log(1, data);
-        res.send(data);
-    });
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        console.log(2, data);
-    });
-});
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
 
-router.put('/:id/count', (req, res) => {
-    data = req.body;
-    data.isActive = false;
-
-    if ((data.clicks_left > 0) && (data.views_left > 0)) {
-        data.isActive = true;
-    }
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        res.send(data);
-    });
-
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: {isActive: data.isActive} }, (data) => {
+        // update the banners data
+        DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: banner }, (data) => {
+            res.send(data);
+        });
     });
 });
 
