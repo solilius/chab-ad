@@ -52,7 +52,8 @@ function composeBanners(campaign) {
         expiration_date: campaign.expiration_date,
         clicks: 0,
         views: 0,
-        positions: getPositions(i)
+        positions: getPositions(i),
+        isActive: campaign.isActive
       };
     }
   }
