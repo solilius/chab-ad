@@ -37,7 +37,7 @@ router.post("/", (req, res) => {
 
 router.put("/", (req, res) => {
     req.body.banners.forEach(banner => {
-        DAL.Update(ADS_COL,{ ad_id: banner.ad_id },{ $set: banner } ,data => {});
+        DAL.Update(ADS_COL,{ ad_id: banner.ad_id },{ $set: banner }, true, data => {});
     });
     res.send("updated");
 });

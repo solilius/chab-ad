@@ -36,21 +36,8 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
 
-    let banner = {
-        campaign_name: req.body.campaign_name,
-        starting_date: req.body.starting_date,
-        expiration_date: req.body.expiration_date,
-        clicks_left: req.body.clicks_left,
-        views_left: req.body.views_left,
-        isActive: req.body.isActive
-    }
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-
-        // update the banners data
-        DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: banner }, (data) => {
-            res.send(data);
-        });
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, true, (data) => {
+        res.send(data);
     });
 });
 
