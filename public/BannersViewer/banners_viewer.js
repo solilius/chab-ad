@@ -81,7 +81,20 @@ function getDays(expiration){
 function printPositions(positions){
     var final = "";
     positions.forEach(pos => {
-        final += pos + "\n";
+        final += foramtPosition(pos) + "\n";
     });
     return final.substring(0, final.length - 1); 
+}
+
+function foramtPosition(pos){
+    var data = pos.split('-');
+    var formated = "<div style='text-align:left'><b>" + data[0] + "</b>-" + data[1];
+    if (data[2] == undefined){
+        formated +="-<b>desktop</b>";
+    }else {
+        formated +="-<b>mobile</b>";
+    }
+        formated +="</br></div>";
+        console.log(formated);
+    return formated;
 }
