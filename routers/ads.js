@@ -35,15 +35,11 @@ router.post("/", (req, res) => {
   }
 });
 
-router.put("/:name", (req, res) => {
-  DAL.Update(
-    ADS_COL,
-    { campaign_id: req.params.name },
-    { $set: req.body },
-    data => {
-      res.send(data);
-    }
-  );
+router.put("/", (req, res) => {
+    req.body.banners.forEach(banner => {
+        DAL.Update(ADS_COL,{ ad_id: banner.ad_id },{ $set: banner }, true, data => {});
+    });
+    res.send("updated");
 });
 
 router.delete("/:name", (req, res) => {

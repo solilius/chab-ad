@@ -40,7 +40,6 @@ app.listen(port, (err) => {
     }
 });
 
-
 app.get('/t', (req, res) => {
     res.sendFile(__dirname + '/test.html');
 });

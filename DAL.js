@@ -39,7 +39,7 @@ const DAL = {
             handleErros('Insert', error, callback);
         }
     },
-    Update: (collection, query, updateObject, callback) => {
+    Update: (collection, query, updateObject, toUpsert, callback) => {
         try {
             mongo.connect(CONNECTION_URL, {
                 useNewUrlParser: true
@@ -47,7 +47,7 @@ const DAL = {
                 if (err) {
                     handleErros('Update', err, callback);
                 } else {
-                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, (err, result) => {
+                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : toUpsert }, (err, result) => {
                         handleDbResult(err, result, callback);
                     });
                 }

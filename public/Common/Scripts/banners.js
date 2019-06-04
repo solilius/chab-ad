@@ -3,9 +3,9 @@ var positions = {};
 
 window.ml = cloudinary.createMediaLibrary(
   {
-    cloud_name: "dukdfuywh",
-    api_key: "253593891576371",
-    username: "solipod8@gmail.com",
+    cloud_name: "chabad",
+    api_key: "489282358545823",
+    username: "chab_ad@mail.com",
     button_class: "btn btn-lg btn-info",
     button_caption: "בחר תמונה"
   },
@@ -55,7 +55,7 @@ function insertBanner(data, bannerId) {
             <select class="form-control my-selector" id="pos-select-${bannerId}-0">
               <option hidden>בחר מיקום</option>
             </select>
-            <select class="form-control my-selector" id="site-select-${bannerId}-0" onchange="siteSelected(event)">
+            <select class="form-control my-selector" id="site-select-${bannerId}-0" onchange="siteSelected('site-select-${bannerId}-0')">
               <option hidden>בחר אתר</option>
               <option>chabad.info</option>
               <option>chabadinfo.com</option>
@@ -80,14 +80,14 @@ function addPosition(id) {
     `<div class="position" id="pos-${id}-${position}">
             <div class="btn btn-danger remove-pos-btn" onclick="removePosition(${id},${position})">הסר</div>
             <div class="radio">
-                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" value="mobile">נייד</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}"  value="desktop">נייח</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" checked value="both">שניהם</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-mobile" value="mobile">נייד</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-desktop"  value="desktop">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-both" checked value="both">שניהם</label>
             </div>
             <select class="form-control my-selector" id="pos-select-${id}-${position}">
                 <option hidden>בחר מיקום</option>
             </select>
-            <select class="form-control my-selector" id="site-select-${id}-${position}" onchange="siteSelected(event)">
+            <select class="form-control my-selector" id="site-select-${id}-${position}" onchange="siteSelected('site-select-${id}-${position}')">
                 <option hidden>בחר אתר</option>
                 <option>chabad.info</option>
                 <option>chabadinfo.com</option>
@@ -107,9 +107,9 @@ function removePosition(id, pos) {
   positions[id]--;
 }
 
-function siteSelected(e) {
-  var id = e.target.id.split("site-select-")[1];
-  switch (document.getElementById(e.target.id).value) {
+function siteSelected(siteId) {
+  var id = siteId.split("site-select-")[1];
+  switch (document.getElementById(siteId).value) {
     case "chabad.info":
       insertActions(id, chabadInfoPositions);
 

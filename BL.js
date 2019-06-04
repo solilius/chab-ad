@@ -75,14 +75,14 @@ function getAd(pos) {
 }
 
 function validateCampaign(query, active) {
-    DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, (data) => {
+    DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, false, (data) => {
         console.log('Campaigns modified: ' + data.modifiedCount);
         validateResources(query, active);
     });
 }
 
 function validateResources(query, active) {
-    DAL.Update(ADS_COL, query, { $set: { isActive: active } }, (data) => {
+    DAL.Update(ADS_COL, query, { $set: { isActive: active } }, false, (data) => {
         console.log('Resources modified: ' + data.modifiedCount);
     });
 }
@@ -110,14 +110,14 @@ function decremetValue(query, key, callback) {
 
     DAL.Update(CAMPAIGN_COL, query.campaign, campaignUpdateQuery, (data) => {
         callback();
-        DAL.Get(CAMPAIGN_COL, query, (data) => {
+        DAL.Get(CAMPAIGN_COL, query, false,(data) => {
             if ((data[0] !== undefined) && ((data[0].views_left <= 0) || (data[0].clicks_left <= 0))) {
                 validateCampaign(query, false);
             }
         });
     });
 
-    DAL.Update(ADS_COL, query.ad, adUpdateQuery, (data) => {
+    DAL.Update(ADS_COL, query.ad, adUpdateQuery, false,(data) => {
         callback();
     });
 }

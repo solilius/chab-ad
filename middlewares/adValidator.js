@@ -10,7 +10,8 @@ const adScheme = joi.object().keys({
     clicks: joi.number().required(),
     views: joi.number().required(),
     expiration_date: joi.string().allow('').required(),
-    starting_date:  joi.string().allow('').required()
+    starting_date:  joi.string().allow('').required(),
+    isActive: joi.bool().required()
 });
 
 const scheme = joi.object().keys({

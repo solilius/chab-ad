@@ -35,52 +35,9 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
+
+    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, true, (data) => {
         res.send(data);
-    });
-});
-
-router.put('/:id/name', (req, res) => {
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-        res.send(data);
-    });
-
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: req.body }, (data) => {
-    });
-});
-
-router.put('/:id/date', (req, res) => {
-    data = req.body;
-    data.isActive = false;
-
-    if ((new Date(data.starting_date).getTime() / 1000 < new Date().getTime() / 1000) &&
-        (new Date(data.expiration_date).getTime() / 1000 > new Date().getTime() / 1000)) {
-        data.isActive = true;
-    }
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        console.log(1, data);
-        res.send(data);
-    });
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        console.log(2, data);
-    });
-});
-
-router.put('/:id/count', (req, res) => {
-    data = req.body;
-    data.isActive = false;
-
-    if ((data.clicks_left > 0) && (data.views_left > 0)) {
-        data.isActive = true;
-    }
-
-    DAL.Update(CAMPAIGN_COL, { campaign_id: req.params.id }, { $set: data }, (data) => {
-        res.send(data);
-    });
-
-    DAL.Update(ADS_COL, { campaign_id: req.params.id }, { $set: {isActive: data.isActive} }, (data) => {
     });
 });
 
