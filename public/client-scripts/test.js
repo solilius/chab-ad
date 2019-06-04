@@ -1,5 +1,5 @@
-var IDS = ["test.info-music_right_top"];
-var MOBILE_IDS = ["test.info-music_right_top-m"];
+var IDS = ["chabadinfo.com-example_1"];
+var MOBILE_IDS = ["chabadinfo.com-example_1-m"];
 var currIds = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
 
 requestAds();
