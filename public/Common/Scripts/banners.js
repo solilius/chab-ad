@@ -46,7 +46,7 @@ function insertBanner(data, bannerId) {
             <div class="radio">
               <label class="checkbox-radio">
                 <input type="radio" name="platform-${bannerId}-0" value="mobile"/>נייד</label>
-              <label class="checkbox-radio"><input type="radio" name="platform-${bannerId}-0" value="pc" />נייח
+              <label class="checkbox-radio"><input type="radio" name="platform-${bannerId}-0" value="desktop" />נייח
               </label>
               <label class="checkbox-radio">
                   <input type="radio" name="platform-${bannerId}-0" checked value="both"/> שניהם
