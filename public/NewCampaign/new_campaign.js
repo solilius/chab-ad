@@ -1,3 +1,15 @@
+$("input").bind("change keyup", function() {
+  if (isActive()) {
+    $("#save-btn")
+      .addClass("btn-success")
+      .removeClass("btn-danger");
+  } else {
+    $("#save-btn")
+      .addClass("btn-danger")
+      .removeClass("btn-success");
+  }
+});
+
 function save() {
   swal({
     title: "שמירת קמפיין",
@@ -28,3 +40,4 @@ function upload(campaign, banners) {
       swal("העלאת הקמפיין נכשלה", err.message, "error");
     });
 }
+
