@@ -102,23 +102,18 @@ function decremetValue(query, key, callback) {
             adUpdateQuery = { $inc: { clicks: +1 } };
 
             break;
-        default:
-            callback();
-
-            break;
     }
 
-    DAL.Update(CAMPAIGN_COL, query.campaign, campaignUpdateQuery, (data) => {
-        callback();
-        DAL.Get(CAMPAIGN_COL, query, false,(data) => {
+    DAL.Update(CAMPAIGN_COL, query.campaign, campaignUpdateQuery, false, (data) => {
+        DAL.Get(CAMPAIGN_COL, query ,(data) => {
             if ((data[0] !== undefined) && ((data[0].views_left <= 0) || (data[0].clicks_left <= 0))) {
                 validateCampaign(query, false);
             }
         });
     });
 
-    DAL.Update(ADS_COL, query.ad, adUpdateQuery, false,(data) => {
-        callback();
+    DAL.Update(ADS_COL, query.ad, adUpdateQuery, false, () => {
+
     });
 }
 

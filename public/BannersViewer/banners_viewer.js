@@ -7,8 +7,6 @@ axios({
     createGrid(data.data);
 });
 
- 
-
   function onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
 }
@@ -18,8 +16,6 @@ function onRowDoubleClicked(e){
     // console.log("data:", e.data);
     localStorage.setItem("campaign",  e.data.campaign_id);
     goToPage('/CampaignPage/campaign_page.html');
-
-
 }
 
 function onRightClick(e){
@@ -42,7 +38,6 @@ function getColumnDefs(){
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
         {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"},
         { headerName: "פעיל?", field: "isActive" }
-
       ];
 }
 
@@ -59,11 +54,7 @@ function getGridOptions(rowData){
         rowSelection: 'single',
         onRowDoubleClicked: onRowDoubleClicked,
         onCellContextMenu: onRightClick,
-        pagination: true,
-        paginationAutoPageSize: true,
-        paginationNumberFormatter: function(params) {
-            return params.value.toLocaleString();
-        }
+        pagination: true
       };
 }
 
@@ -95,6 +86,5 @@ function foramtPosition(pos){
         formated +="-<b>mobile</b>";
     }
         formated +="</br></div>";
-        console.log(formated);
     return formated;
 }
