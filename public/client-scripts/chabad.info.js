@@ -1,4 +1,4 @@
-var SERVER = "https://chab-ad.herokuapp.com/";
+var SERVER = "https://chab-ad.herokuapp.com";
 var IDS = ["chabadinfo.com-example_1"];
 var MOBILE_IDS = ["chabadinfo.com-example_1-m"];
 var currIds = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
