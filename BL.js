@@ -30,11 +30,12 @@ module.exports = {
             Promise.all(ads).then((data) => {
                 callback(data);
                 for (let i = 0; i < data.length; i++) {
-                    let query = {
-                        campaign: { campaign_id: data[i].campaign_id },
-                        ad: { ad_id: data[i].ad_id }
-                    };
-                    decremetValue(query, 'views_left', () => { });
+                    // let query = {
+                    //     campaign: { campaign_id: data[i].campaign_id },
+                    //     ad: { ad_id: data[i].ad_id }
+                    // };
+                    // decremetValue(query, 'views_left');
+                    decremetValue(data[i].campaign_id, data[i].ad_id, 'views_left');
                 }
             });
 
@@ -43,16 +44,12 @@ module.exports = {
         }
     },
 
-    AdClicked: (eventObject, callback) => {
-        let query = { campaign_id: eventObject.campaign_id };
+    AdClicked: (eventObject) => {
+        //let query = { campaign_id: eventObject.campaign_id };
 
         try {
-
-            decremetValue(query, 'clicks_left', () => {
-                logger.LogEvent(eventObject);
-                callback();
-            });
-
+            //decremetValue(query, 'clicks_left');
+            decremetValue(eventObject.campaign_id, eventObject.ad_id, 'clicks_left');
         } catch (err) {
             handleErrors('AdClicked', err, callback);
         }
@@ -87,7 +84,7 @@ function validateResources(query, active) {
     });
 }
 
-function decremetValue(query, key, callback) {
+function decremetValue(campaignId, adId, key) {
     let campaignUpdateQuery = {};
     let adUpdateQuery = {};
 
@@ -104,15 +101,15 @@ function decremetValue(query, key, callback) {
             break;
     }
 
-    DAL.Update(CAMPAIGN_COL, query.campaign, campaignUpdateQuery, false, (data) => {
-        DAL.Get(CAMPAIGN_COL, query ,(data) => {
+    DAL.Update(CAMPAIGN_COL, {campaign_id: campaignId}, campaignUpdateQuery, false, (data) => {
+        DAL.Get(CAMPAIGN_COL, {campaign_id: campaignId} ,(data) => {
             if ((data[0] !== undefined) && ((data[0].views_left <= 0) || (data[0].clicks_left <= 0))) {
                 validateCampaign(query, false);
             }
         });
     });
 
-    DAL.Update(ADS_COL, query.ad, adUpdateQuery, false, () => {
+    DAL.Update(ADS_COL, {ad_id: adId}, adUpdateQuery, false, () => {
 
     });
 }

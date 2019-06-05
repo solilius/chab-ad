@@ -18,10 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/click', (req, res) => {
-    BL.AdClicked(req.body, () => {
-        res.send("Clicked on '" +  req.body.campaign_id + "' got registered");
-    });
-
+    BL.AdClicked(req.body);
+    res.send();
 });
-
 module.exports = [router];
