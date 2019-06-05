@@ -1,3 +1,4 @@
+var SERVER = "https://chab-ad.herokuapp.com/";
 var IDS = ["chabadinfo.com-example_1"];
 var MOBILE_IDS = ["chabadinfo.com-example_1-m"];
 var currIds = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
@@ -12,7 +13,7 @@ function requestAds(){
                 insertAds(JSON.parse(xhr.response));
         }
     };
-    xhr.open('GET', '/bannersHandler/?banners=' + idsToString(currIds));
+    xhr.open('GET', SERVER + '/bannersHandler/?banners=' + idsToString(currIds));
     xhr.send();
 }
 
@@ -45,11 +46,9 @@ function onAdClicked(event, index){
         date: new Date()
     }
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/bannersHandler/click', true);
+    xhr.open('POST', SERVER + '/bannersHandler/click', true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(body));
 
     window.open(ads_array[index].onclick, '_blank');
 }
-
-
