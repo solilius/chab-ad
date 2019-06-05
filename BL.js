@@ -104,7 +104,7 @@ function decremetValue(campaignId, adId, key) {
     DAL.Update(CAMPAIGN_COL, {campaign_id: campaignId}, campaignUpdateQuery, false, (data) => {
         DAL.Get(CAMPAIGN_COL, {campaign_id: campaignId} ,(data) => {
             if ((data[0] !== undefined) && ((data[0].views_left <= 0) || (data[0].clicks_left <= 0))) {
-                validateCampaign(query, false);
+                validateCampaign({campaign_id: campaignId}, false);
             }
         });
     });
