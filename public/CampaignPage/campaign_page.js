@@ -48,39 +48,47 @@ function isDateValid(start, end) {
 
 function loadAds(banners) {
   for (var i = 0; i < banners.length; i++) {
-      var data = {
-          url: banners[i].url,
-          width: banners[i].size.split("X")[0],
-          height: banners[i].size.split("X")[1]
-      }
+    var data = {
+      url: banners[i].url,
+      width: banners[i].size.split("X")[0],
+      height: banners[i].size.split("X")[1],
+      ad_id: banners[i].ad_id
+    };
 
-      insertBanner(data, i);
-      $('#click-' + i).val(banners[i].onclick);
-      $('#img-size-' + i).val(banners[i].size);
-      removePosition(i, 0);
-      for (var p = 0; p < banners[i].positions.length; p++) {
-          addPosition(i);
-          var site = banners[i].positions[p].split("-")[0];
-          var pos = banners[i].positions[p].split("-")[1];
-          var platform = (banners[i].positions[p].split("-")[2] == undefined) ? "desktop" : "mobile";
-          $('#site-select-' + i + "-" + p).val(site);
-          siteSelected('site-select-' + i + "-" + p);
-          $('#pos-select-' + i + "-" + p).val(pos);
-          document.getElementById("platform-" + i + "-" + p + "-both" ).checked = false;
-          document.getElementById("platform-" + i + "-" + p + "-" + platform).checked = true;
-      }
+    insertBanner(data, i);
+    $("#click-" + i).val(banners[i].onclick);
+    $("#img-size-" + i).val(banners[i].size);
+    removePosition(i, 0);
+    for (var p = 0; p < banners[i].positions.length; p++) {
+      addPosition(i);
+      var site = banners[i].positions[p].split("-")[0];
+      var pos = banners[i].positions[p].split("-")[1];
+      var platform =
+        banners[i].positions[p].split("-")[2] == undefined
+          ? "desktop"
+          : "mobile";
+      $("#site-select-" + i + "-" + p).val(site);
+      siteSelected("site-select-" + i + "-" + p);
+      $("#pos-select-" + i + "-" + p).val(pos);
+      document.getElementById(
+        "platform-" + i + "-" + p + "-both"
+      ).checked = false;
+      document.getElementById(
+        "platform-" + i + "-" + p + "-" + platform
+      ).checked = true;
+    }
   }
 }
 
-function save(){
-    var my_campaign = composeCampaign();
-    my_campaign.campaign_id = campaign.campaign_id;
-    send("/campaigns/" + campaign_id, "PUT", my_campaign, function(res){
-
-        send("/banners/", "PUT", {banners: composeBanners(my_campaign)}, function(res){
-            swal("הקמפיין עודכן בהצלחה", "", "success")
-        });
+function save() {
+  deleteBanners()
+  var my_campaign = composeCampaign();
+  my_campaign.campaign_id = campaign.campaign_id;
+  send("/campaigns/" + campaign_id, "PUT", my_campaign, function(res) {
+    send("/banners/", "PUT", { banners: composeBanners(my_campaign) }, function(res) {
+      swal("הקמפיין עודכן בהצלחה", "", "success");
     });
+  });
 }
 
 function send(url, method, body, callback) {
@@ -96,4 +104,15 @@ function send(url, method, body, callback) {
     .catch(function(err) {
       console.log(err);
     });
+}
+
+function deleteBanners() {
+  deleteBannersArray.forEach(bannerId => {
+    axios({
+      method: "delete",
+      url: "/banners/",
+      data: {id: bannerId},
+      headers: { auth: "1234" }
+    });
+  });
 }

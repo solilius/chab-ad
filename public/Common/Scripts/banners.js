@@ -1,5 +1,6 @@
 var index = 0;
 var positions = {};
+var deleteBannersArray = [];
 
 window.ml = cloudinary.createMediaLibrary(
   {
@@ -22,7 +23,7 @@ window.ml = cloudinary.createMediaLibrary(
 function insertBanner(data, bannerId) {
   positions[bannerId] = 1;
   $("#banners").prepend(
-    `<br><div id="banner-${bannerId}" class="row">
+    `<br><div id="banner-${bannerId}" name="${data.ad_id}" class="row">
     <div class="col-md-offset-3 col-md-6 well">
       <button class="btn btn-danger btn-remove-banner" onclick="removeBanner('banner-${bannerId}')">X </button>
       <div class="img-preview-container">
@@ -70,6 +71,8 @@ function insertBanner(data, bannerId) {
 }
 
 function removeBanner(id) {
+  deleteBannersArray.push($("#" + id).attr("name"));
+  delete positions[id.replace("banner-", "")];
   $("#" + id).remove();
 }
 
