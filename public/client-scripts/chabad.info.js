@@ -184,6 +184,11 @@ function onAdClicked(event, index){
         date: new Date()
     }
     var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("clicked", body);
+        }
+    };
     xhr.open('POST', SERVER + '/bannersHandler/click', true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(body));
