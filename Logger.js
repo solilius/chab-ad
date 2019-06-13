@@ -7,7 +7,8 @@ module.exports = {
             type: type,
             source: src,
             message: msg,
-            exception: excpt
+            exception: excpt,
+            time: new Date()
         }
         sendLog(log);
     },
