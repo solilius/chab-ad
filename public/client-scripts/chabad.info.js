@@ -153,11 +153,13 @@ function insertAds(ads){
     ads_array = ads;
     for(var i=0; i < ads.length; i++){
         var banner = document.getElementById(currIds[i]);
-        if(ads[i] !== "no_result"){
-        banner.src = ads[i].url;
-        banner.name = i;
-        } else{
-            banner.src = "https://chab-ad.herokuapp.com/empty.jpg"
+        if(banner !== null){
+            if(ads[i] !== "no_result"){
+                banner.src = ads[i].url;
+                banner.name = i;
+                } else{
+                    banner.src = "https://chab-ad.herokuapp.com/empty.jpg";
+                }
         }
     }
 }
