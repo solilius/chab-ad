@@ -15,13 +15,12 @@ const DAL = {
                 } else {
                     db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
                         handleDbResult(err, result, callback);
+                        mongo.close();
                     });
                 }
             });
         } catch (error) {
             handleErros('Get', error, callback);
-        } finally{
-            mongo.close();
         }
     },
     Insert: (collection, object, callback) => {
@@ -34,13 +33,12 @@ const DAL = {
                 } else {
                     db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
                         handleDbResult(err, result, callback);
+                        mongo.close();
                     });
                 }
             });
         } catch (error) {
             handleErros('Insert', error, callback);
-        } finally{
-            mongo.close();
         }
     },
     Update: (collection, query, updateObject, toUpsert, callback) => {
@@ -50,6 +48,8 @@ const DAL = {
             }, (err, db) => {
                 if (err) {
                     handleErros('Update', err, callback);
+                    mongo.close();
+
                 } else {
                     db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : toUpsert }, (err, result) => {
                         handleDbResult(err, result, callback);
@@ -58,8 +58,6 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Update', error, callback);
-        } finally{
-            mongo.close();
         }
     },
     Delete: (collection, query, callback) => {
@@ -69,6 +67,8 @@ const DAL = {
             }, (err, db) => {
                 if (err) {
                     handleErros('Delete', err, callback);
+                    mongo.close();
+
                 } else {
                     db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
                         handleDbResult(err, result, callback);
@@ -77,8 +77,6 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Delete', error, callback);
-        } finally{
-            mongo.close();
         }
     }
 }
