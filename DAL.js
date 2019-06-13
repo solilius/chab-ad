@@ -25,16 +25,8 @@ const DAL = {
     },
     Insert: (collection, object, callback) => {
         try {
-            mongo.connect(CONNECTION_URL, {
-                useNewUrlParser: true
-            }, (err, db) => {
-                if (err) {
-                    handleErros('Insert', err, callback);
-                } else {
-                    db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
-                        handleDbResult(err, result, callback);
-                    });
-                }
+            db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
+                handleDbResult(err, result, callback);
             });
         } catch (error) {
             handleErros('Insert', error, callback);
@@ -42,17 +34,8 @@ const DAL = {
     },
     Update: (collection, query, updateObject, toUpsert, callback) => {
         try {
-            mongo.connect(CONNECTION_URL, {
-                useNewUrlParser: true
-            }, (err, db) => {
-                if (err) {
-                    handleErros('Update', err, callback);
-
-                } else {
-                    db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : toUpsert }, (err, result) => {
-                        handleDbResult(err, result, callback);
-                    });
-                }
+            db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : toUpsert }, (err, result) => {
+                handleDbResult(err, result, callback);
             });
         } catch (error) {
             handleErros('Update', error, callback);
@@ -60,17 +43,8 @@ const DAL = {
     },
     Delete: (collection, query, callback) => {
         try {
-            mongo.connect(CONNECTION_URL, {
-                useNewUrlParser: true
-            }, (err, db) => {
-                if (err) {
-                    handleErros('Delete', err, callback);
-
-                } else {
-                    db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
-                        handleDbResult(err, result, callback);
-                    });
-                }
+            db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
+                handleDbResult(err, result, callback);
             });
         } catch (error) {
             handleErros('Delete', error, callback);
