@@ -15,7 +15,6 @@ const DAL = {
                 } else {
                     db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
                         handleDbResult(err, result, callback);
-                        mongo.close();
                     });
                 }
             });
@@ -33,7 +32,6 @@ const DAL = {
                 } else {
                     db.db(DB_NAME).collection(collection).insertMany(object, (err, result) => {
                         handleDbResult(err, result, callback);
-                        mongo.close();
                     });
                 }
             });
@@ -48,7 +46,6 @@ const DAL = {
             }, (err, db) => {
                 if (err) {
                     handleErros('Update', err, callback);
-                    mongo.close();
 
                 } else {
                     db.db(DB_NAME).collection(collection).updateMany(query, updateObject, { upsert : toUpsert }, (err, result) => {
@@ -67,7 +64,6 @@ const DAL = {
             }, (err, db) => {
                 if (err) {
                     handleErros('Delete', err, callback);
-                    mongo.close();
 
                 } else {
                     db.db(DB_NAME).collection(collection).deleteMany(query, (err, result) => {
