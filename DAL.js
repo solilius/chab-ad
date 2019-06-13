@@ -20,6 +20,8 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Get', error, callback);
+        } finally{
+            mongo.close();
         }
     },
     Insert: (collection, object, callback) => {
@@ -37,6 +39,8 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Insert', error, callback);
+        } finally{
+            mongo.close();
         }
     },
     Update: (collection, query, updateObject, toUpsert, callback) => {
@@ -54,6 +58,8 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Update', error, callback);
+        } finally{
+            mongo.close();
         }
     },
     Delete: (collection, query, callback) => {
@@ -71,6 +77,8 @@ const DAL = {
             });
         } catch (error) {
             handleErros('Delete', error, callback);
+        } finally{
+            mongo.close();
         }
     }
 }
