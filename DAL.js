@@ -1,22 +1,23 @@
 const mongo = require('mongodb');
-const CONNECTION_URL = 'mongodb://sol:solsol44@ds249372.mlab.com:49372/heroku_tjxz75h9';
+const CONNECTION_URI = 'mongodb://sol:solsol44@ds249372.mlab.com:49372/heroku_tjxz75h9';
 const DB_NAME = 'heroku_tjxz75h9';
 const LOGS_COL = 'logs';
+let db;
+
+mongo.connect(CONNECTION_URI, (err, database) => {
+    if(err){
+        console.log(err);
+    }else{
+        db = database;
+    }
+});
 
 const DAL = { 
 
     Get: (collection, query, callback) => {
         try {
-            mongo.connect(CONNECTION_URL, {
-                useNewUrlParser: true
-            }, (err, db) => {
-                if (err) {
-                    handleErros('Get', err, callback);
-                } else {
-                    db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
-                        handleDbResult(err, result, callback);
-                    });
-                }
+            db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
+                handleDbResult(err, result, callback);
             });
         } catch (error) {
             handleErros('Get', error, callback);
