@@ -130,8 +130,7 @@ var MOBILE_IDS =[
     "chabad.info-sidebar_under_deot_3-m",
     "chabad.info-under_mag_widget-m",
     "chabad.info-midcol_under_buisindex_1-m",
-    "chabad.info-midcol_under_buisindex_2-m",
-\
+    "chabad.info-midcol_under_buisindex_2-m"
 ];
 
 var currIds = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
