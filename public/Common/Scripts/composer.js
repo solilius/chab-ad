@@ -37,7 +37,7 @@ function checkDate(){
     return (date <= now)
 }
 
-function composeBanners(campaign) {
+function composeBanners(campaign, isNew) {
   var banners = [];
   for (let i = 0; i < Object.keys(positions).length; i++) {
     if ($("#banner-" + i).val() !== undefined) {
@@ -50,11 +50,13 @@ function composeBanners(campaign) {
         size: $("#img-size-" + i).text(),
         starting_date: campaign.starting_date,
         expiration_date: campaign.expiration_date,
-        clicks: 0,
-        views: 0,
         positions: getPositions(i),
         isActive: campaign.isActive
       };
+      if(isNew){
+        banners[i].clicks = 0; 
+        banners[i].views = 0; 
+      }
     }
   }
   return banners;

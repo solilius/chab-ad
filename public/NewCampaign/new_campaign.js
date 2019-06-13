@@ -21,7 +21,7 @@ function save() {
   }).then(isOk => {
     if (isOk) {
       var campaign = composeCampaign();
-      var banners = composeBanners(campaign);
+      var banners = composeBanners(campaign, true);
       upload(campaign, banners);
     }
   });

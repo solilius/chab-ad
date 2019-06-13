@@ -85,7 +85,7 @@ function save() {
   var my_campaign = composeCampaign();
   my_campaign.campaign_id = campaign.campaign_id;
   send("/campaigns/" + campaign_id, "PUT", my_campaign, function(res) {
-    send("/banners/", "PUT", { banners: composeBanners(my_campaign) }, function(res) {
+    send("/banners/", "PUT", { banners: composeBanners(my_campaign, false) }, function(res) {
       swal("הקמפיין עודכן בהצלחה", "", "success");
     });
   });
