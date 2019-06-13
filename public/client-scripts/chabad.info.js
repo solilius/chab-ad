@@ -186,7 +186,9 @@ function onAdClicked(event, index){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("clicked", body);
+            console.log("clicked (:", body);
+        }else{
+            console.log("clicked ):", xhr);
         }
     };
     xhr.open('POST', SERVER + '/bannersHandler/click', true);
