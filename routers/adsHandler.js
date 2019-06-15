@@ -18,7 +18,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/click', (req, res) => {
-    console.log('CLICKEDDDDDDDDDDD');
     BL.AdClicked(req.body);
     res.send();
 });
