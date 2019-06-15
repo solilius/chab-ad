@@ -10,8 +10,8 @@ module.exports = {
         try {
             let now = moment().format();
             schedule.scheduleJob('0 0 * * *', function () {
-                validateCampaign({ "starting_date": { $lte: now }, "expiration_date": { $gte: now } }, true);
-                validateCampaign({ "expiration_date": { $lte: now } }, false);
+                changeCampaignState({ "starting_date": { $lte: now }, "expiration_date": { $gte: now } }, true);
+                changeCampaignState({ "expiration_date": { $lte: now } }, false);
             });
         } catch (err) {
             handleErrors('CampaignSqudualer', err, () => {
@@ -30,7 +30,9 @@ module.exports = {
             Promise.all(ads).then((data) => {
                 callback(data);
                 for (let i = 0; i < data.length; i++) {
-                    decremetValue(data[i].campaign_id, data[i].ad_id, 'views_left');
+                    if(data[i] !== "no_result"){
+                        decremetValue(data[i].campaign_id, data[i].ad_id, 'views_left');
+                    }
                 }
             });
 
@@ -64,16 +66,9 @@ function getAd(pos) {
     });
 }
 
-function validateCampaign(query, active) {
+function changeCampaignState(query, active) {
     DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, false, (data) => {
-        console.log('Campaigns modified: ' + data.modifiedCount);
-        validateResources(query, active);
-    });
-}
-
-function validateResources(query, active) {
-    DAL.Update(ADS_COL, query, { $set: { isActive: active } }, false, (data) => {
-        console.log('Resources modified: ' + data.modifiedCount);
+        DAL.Update(ADS_COL, query, { $set: { isActive: active } }, false, (data) => {});
     });
 }
 
@@ -97,14 +92,12 @@ function decremetValue(campaignId, adId, key) {
     DAL.Update(CAMPAIGN_COL, {campaign_id: campaignId}, campaignUpdateQuery, false, (data) => {
         DAL.Get(CAMPAIGN_COL, {campaign_id: campaignId} ,(data) => {
             if ((data[0] !== undefined) && ((data[0].views_left <= 0) || (data[0].clicks_left <= 0))) {
-                validateCampaign({campaign_id: campaignId}, false);
+                changeCampaignState({campaign_id: campaignId}, false);
             }
         });
     });
 
-    DAL.Update(ADS_COL, {ad_id: adId}, adUpdateQuery, false, () => {
-
-    });
+    DAL.Update(ADS_COL, {ad_id: adId}, adUpdateQuery, false, () => {});
 }
 
 function handleErrors(src, err, callback) {
