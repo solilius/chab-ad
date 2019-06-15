@@ -30,11 +30,6 @@ module.exports = {
             Promise.all(ads).then((data) => {
                 callback(data);
                 for (let i = 0; i < data.length; i++) {
-                    // let query = {
-                    //     campaign: { campaign_id: data[i].campaign_id },
-                    //     ad: { ad_id: data[i].ad_id }
-                    // };
-                    // decremetValue(query, 'views_left');
                     decremetValue(data[i].campaign_id, data[i].ad_id, 'views_left');
                 }
             });
@@ -45,10 +40,8 @@ module.exports = {
     },
 
     AdClicked: (eventObject) => {
-        //let query = { campaign_id: eventObject.campaign_id };
 
         try {
-            //decremetValue(query, 'clicks_left');
             decremetValue(eventObject.campaign_id, eventObject.ad_id, 'clicks_left');
         } catch (err) {
             handleErrors('AdClicked', err, callback);
