@@ -39,8 +39,8 @@ function getColumnDefs() {
         { headerName: "תאריך התחלה", field: "starting_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
         { headerName: "תאריך סיום", field: "expiration_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
         { headerName: "ימים", field: "days", filter: "agNumberColumnFilter"},
-        { headerName: " צפיות שנשארו", field: "views_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : 0 } },
-        { headerName: " קליקים שנשארו", field: "clicks_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : 0 } },
+        { headerName: " צפיות שנשארו", field: "views_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
+        { headerName: " קליקים שנשארו", field: "clicks_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
         { headerName: "פעיל?", field: "isActive" }
     ];
 }

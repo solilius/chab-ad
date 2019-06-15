@@ -1,3 +1,5 @@
+validateActivity();
+
 function composeCampaign() {
   return {
     campaign_id: (+new Date()).toString(),
@@ -26,9 +28,7 @@ function composeCampaign() {
 
 function isActive(){
     return (($('#starting_date').val() !== "") && checkDate()) &&
-           (($('#days').val() !== "") && ($('#days').val() !== "0")) && 
-           (($('#views').val() !== "") && ($('#views').val() !== "0")) && 
-           (($('#clicks').val() !== "") && ($('#clicks').val() !== "0"))
+           (($('#days').val() !== "") && ($('#days').val() !== "0"))
 }
 
 function checkDate(){
@@ -98,4 +98,14 @@ function getExpirationDate() {
     return new Date(start.setDate(start.getDate() + days));
   }
   return "";
+}
+
+function validateActivity(){
+    $("input").bind("change keyup", function() {
+        if (isActive()) {
+            $("#save-btn").addClass("btn-success").removeClass("btn-danger");
+        } else {
+            $("#save-btn").addClass("btn-danger").removeClass("btn-success");
+        }
+    });
 }

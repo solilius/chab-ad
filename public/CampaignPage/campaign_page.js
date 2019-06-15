@@ -10,18 +10,6 @@ send("/banners/" + campaign_id, "GET", {}, function(res) {
   loadAds(res.data);
 });
 
-$("input").bind("change keyup", function() {
-  if (isActive()) {
-    $("#save-btn")
-      .addClass("btn-success")
-      .removeClass("btn-danger");
-  } else {
-    $("#save-btn")
-      .addClass("btn-danger")
-      .removeClass("btn-success");
-  }
-});
-
 function insertValues() {
   $("#campaign_name").val(campaign.campaign_name);
   $("#description").val(campaign.description);
