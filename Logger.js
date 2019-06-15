@@ -7,8 +7,7 @@ module.exports = {
             type: type,
             source: src,
             message: msg,
-            exception: excpt,
-            time: new Date()
+            exception: excpt
         }
         sendLog(log);
     },
@@ -21,7 +20,7 @@ module.exports = {
 // ################### Private Methods ################### //
 
 function sendLog(log){
+    log.time = new Date().toLocaleDateString() + "_" + new Date().toLocaleTimeString();
     DAL.Insert(LOGS_COL, [log], () => {
-         console.log("logged succesfuly");
     });
 }
