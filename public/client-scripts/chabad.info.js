@@ -184,16 +184,9 @@ function onAdClicked(event, index){
         date: new Date()
     }
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("clicked (:", body);
-        }else{
-            console.log("clicked ):", xhr);
-            window.open(ads_array[index].onclick, '_blank');
-        }
-    };
     xhr.open('POST', SERVER + '/bannersHandler/click', true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(body));
 
+    window.open(ads_array[index].onclick, '_blank');
 }
