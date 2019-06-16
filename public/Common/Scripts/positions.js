@@ -75,6 +75,7 @@ var chabadInfoPositions = [
     "midcol_under_tehilimwidget",
     "midcol_under_linkbuttons"
   ];
-  var chabadInfoComPositions = ["example_1", "example_2"];
-  var nesheiPositions = ["example_3", "example_4"];
-  
+var chabadInfoComPositions = ["example_1", "example_2"];
+var nesheiPositions = ["example_3", "example_4"];
+var shtraymel = ["example_5", "example_6"];
+   

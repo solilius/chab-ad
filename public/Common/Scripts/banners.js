@@ -61,8 +61,9 @@ function insertBanner(data, bannerId) {
               <option>chabad.info</option>
               <option>chabadinfo.com</option>
               <option>neshei.com</option>
+              <option>shtraymel.co.il</option>
             </select>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
@@ -125,6 +126,9 @@ function siteSelected(siteId) {
       insertActions(id, nesheiPositions);
 
       break;
+      case "shtraymel.co.il":
+         insertActions(id, shtraymel);
+         break; 
   }
 }
 
