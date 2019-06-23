@@ -159,7 +159,7 @@ function insertAds(ads){
                 banner.name = i;
                 } else{
                     banner.src = "https://chab-ad.herokuapp.com/empty.jpg";
-                    banner.width = 0;
+                    banner.classList("width", 0);
                 }
         }
     }
