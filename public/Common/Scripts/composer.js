@@ -27,14 +27,14 @@ function composeCampaign() {
 }
 
 function isActive(){
-    return (($('#starting_date').val() !== "") && checkDate()) &&
-           (($('#days').val() !== "") && ($('#days').val() !== "0"))
+    return (($('#starting_date').val() !== "") && 
+           (($('#days').val() !== "") && ($('#days').val() !== "0")) && checkDate($('#days').val()))
 }
 
-function checkDate(){
+function checkDate(addDays){
     var date = new Date($('#starting_date').val()).getTime();
     var now = new Date().getTime();
-    return (date <= now)
+    return (date <= now) && (date + (addDays * 86400000) > now);
 }
 
 function composeBanners(campaign, isNew) {
