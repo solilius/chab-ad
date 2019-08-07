@@ -30,9 +30,9 @@ localStorage.setItem("campaign", "none");
 
 window.ml = cloudinary.createMediaLibrary(
   {
-    cloud_name: "du91jnecw",
-    api_key: "464382197244945",
-    username: "chabad.info.img@gmail.com",
+    cloud_name: "chabbad",
+    api_key: "863763734362528",
+    username: "cha.badim.ages@gmail.com",
     button_class: "btn btn-info gallery ",
     button_caption: "גלריה"
   },
