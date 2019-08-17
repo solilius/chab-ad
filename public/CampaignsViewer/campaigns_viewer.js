@@ -41,7 +41,7 @@ function getColumnDefs() {
         { headerName: "ימים", field: "days", filter: "agNumberColumnFilter"},
         { headerName: " צפיות שנשארו", field: "views_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
         { headerName: " קליקים שנשארו", field: "clicks_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
-        { headerName: "פעיל?", field: "isActive" }
+        { headerName: "סטטוס", field: "isActive"  ,cellRenderer: function(params){ return getActivity(params.value)}}
     ];
 }
 
@@ -56,15 +56,18 @@ function getGridOptions(rowData) {
         enableFilter: true,
         rowSelection: 'single',
         onRowDoubleClicked: onRowDoubleClicked,
-        onCellContextMenu: onRightClick,
-        pagination: true,
-        paginationAutoPageSize: true,
-        paginationNumberFormatter: function (params) {
-            return params.value.toLocaleString();
-        }
+        onCellContextMenu: onRightClick
     };
 }
 
 function createGrid(data) {
     new agGrid.Grid(document.querySelector('#myGrid'), getGridOptions(data));
+}
+
+function getActivity(isActive){
+    if (isActive){
+        return "<div style='color: lightgreen'><b> פעיל </b></div>";
+    } else {
+        return "<div style='color: red'><b> לא פעיל </b></div>";
+    }
 }

@@ -28,7 +28,7 @@ function onRightClick(e){
 function getColumnDefs(){
 
     return [
-        {headerName: "קמפיין", field: "campaign_name"},
+        {headerName: "קמפיין", field: "campaign_name", cellClass: 'cell-wrap-text'},
         {headerName: "באנר", field: "url", cellRenderer: function(params){ return '<img style="height:20px;" src="' + params.value + '">'}},
         {headerName: "גודל", field: "size"},
         {headerName: "מיקומים", field: "positions", cellClass: 'cell-wrap-text', suppressSizeToFit: true, autoHeight: true, cellRenderer: function(params){ return printPositions(params.value)}},
@@ -37,7 +37,7 @@ function getColumnDefs(){
         {headerName: "ימים שנשארו", field: "expiration_date", filter: "agNumberColumnFilter", cellRenderer: function(params){ return getDays(params.value)}},
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
         {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"},
-        { headerName: "פעיל?", field: "isActive" }
+        { headerName: "סטטוס", field: "isActive", cellRenderer: function(params){ return getActivity(params.value)} }
       ];
 }
 
@@ -45,7 +45,8 @@ function getGridOptions(rowData){
     return {
         columnDefs: getColumnDefs(),
         rowData: rowData,
-        rowHeight: 100,
+        rowHeight: 450,
+        rowStyle: {'margin-bottom': '50px'},
         enableRtl: true,
         enableColResize: true,
         onFirstDataRendered: onFirstDataRendered,
@@ -54,7 +55,6 @@ function getGridOptions(rowData){
         rowSelection: 'single',
         onRowDoubleClicked: onRowDoubleClicked,
         onCellContextMenu: onRightClick,
-        pagination: true
       };
 }
 
@@ -87,4 +87,12 @@ function foramtPosition(pos){
     }
         formated +="</br></div>";
     return formated;
+}
+
+function getActivity(isActive){
+    if (isActive){
+        return "<div style='color: lightgreen'><b> פעיל </b></div>";
+    } else {
+        return "<div style='color: red'><b> לא פעיל </b></div>";
+    }
 }
