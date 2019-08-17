@@ -50,6 +50,8 @@ function getGridOptions(rowData) {
         columnDefs: getColumnDefs(),
         rowData: rowData,
         enableRtl: true,
+        rowHeight: 50,
+        rowStyle: {'padding': '10px'},
         enableColResize: true,
         onFirstDataRendered: onFirstDataRendered,
         enableSorting: true,
