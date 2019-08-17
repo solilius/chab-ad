@@ -103,9 +103,9 @@ function getExpirationDate() {
 function validateActivity(){
     $("input").bind("change keyup", function() {
         if (isActive()) {
-            $("#save-btn").addClass("btn-success").removeClass("btn-danger");
+            $("#save-btn").addClass("btn-success").removeClass("btn-warning");
         } else {
-            $("#save-btn").addClass("btn-danger").removeClass("btn-success");
+            $("#save-btn").addClass("btn-warning").removeClass("btn-success");
         }
     });
 }

@@ -93,6 +93,12 @@ input{
     left: 20px;
 }
 
+.delete{
+    position: fixed;
+    bottom: 20px;
+    left: 150px;  
+}
+
 .add-banners-container{
     width: 100%;
     text-align: center;
