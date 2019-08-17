@@ -29,7 +29,7 @@ function getColumnDefs(){
 
     return [
         {headerName: "קמפיין", field: "campaign_name", cellClass: 'cell-wrap-text'},
-        {headerName: "באנר", field: "url", cellRenderer: function(params){ return '<img style="height:20px;" src="' + params.value + '">'}},
+        {headerName: "באנר", field: "url", cellRenderer: function(params){ return '<img style="height:80px;" src="' + params.value + '">'}},
         {headerName: "גודל", field: "size"},
         {headerName: "מיקומים", field: "positions",  cellRenderer: function(params){ return printPositions(params.value)}},
         {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
