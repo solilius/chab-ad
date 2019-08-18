@@ -93,6 +93,12 @@ input{
     left: 20px;
 }
 
+.duplicate{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
 .delete{
     position: fixed;
     bottom: 20px;

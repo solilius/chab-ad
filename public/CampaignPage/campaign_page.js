@@ -139,3 +139,14 @@ function deleteAllBanners() {
       swal("אראה שגיאה במהלך מחיקת הבאנרים", "", "error");
     });
 }
+
+function duplicate(){
+    axios.get('campaigns/duplicate/' + campaign_id, {headers: { auth: "1234" }}).then(function(res){
+        swal("הקמפיין שוכפל בהצלחה", "", "success").then(function() {
+            localStorage.setItem("campaign", res.data);
+            goToPage('/CampaignPage/campaign_page.html');
+        }).catch(function(){
+            swal("אראה שגיאה במהלך שכפול הקמפיין ", "", "error")
+        })
+    })
+}
