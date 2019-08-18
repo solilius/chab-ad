@@ -28,7 +28,8 @@ function insertBanner(data, bannerId) {
       <button class="btn btn-danger btn-remove-banner" onclick="removeBanner('banner-${bannerId}')">X </button>
       <div class="img-preview-container">
         <img id="url-${bannerId}" src="${data.url}" class="img-preview"/>
-        <div id="img-size-${bannerId}">${data.width}X${data.height}</div>
+        <div id="img-size-${bannerId}">${data.width}X${data.height}</div><br>
+        <div><b>views:</b> ${data.views} &nbsp;&nbsp;&nbsp; <b>clicks:</b> ${data.clicks}</div><br>
       </div>
 
       <div class="ad-info">

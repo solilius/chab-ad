@@ -40,7 +40,9 @@ function loadAds(banners) {
       url: banners[i].url,
       width: banners[i].size.split("X")[0],
       height: banners[i].size.split("X")[1],
-      ad_id: banners[i].ad_id
+      ad_id: banners[i].ad_id,
+      clicks: banners[i].clicks,
+      views: banners[i].views
     };
 
     insertBanner(data, i);
