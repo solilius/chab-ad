@@ -1,14 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const DAL = require("../DAL");
-const auth = require("../middlewares/authenticator");
 const vaild = require("../middlewares/adValidator");
 
 const router = express.Router();
 const ADS_COL = "ads";
 
 router.use(bodyParser.json());
-router.use("*", auth);
 router.post("/", vaild);
 
 // ################### API ################### //

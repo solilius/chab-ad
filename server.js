@@ -5,29 +5,32 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const passport = require('passport');
+const auth = require('./routes/auth');
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(passport.initialize());
 app.use(express.static(__dirname + '/public'));
+app.use(cors());
+
+require('dotenv').config();
+require('./middlewares/passport-config')(passport);
 
 // ################ ROUTERS ################# //
 
-let campaigns = require('./routers/campaigns');
-let adsHandler = require('./routers/adsHandler');
-let ads = require('./routers/ads');
+let campaigns = require('./routes/campaigns');
+let adsHandler = require('./routes/adsHandler');
+let ads = require('./routes/ads');
 
 // ################## API ################### //
 
 app.use('/campaigns', campaigns);
 app.use('/bannersHandler', adsHandler);
 app.use('/banners', ads);
+app.use('/auth', auth);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/Index/index.html');
-});
-
-app.get('/img', (req, res) => {
-    res.sendFile(__dirname + '//img.html');
 });
 
 // ############# Start Server ############### //
@@ -38,8 +41,4 @@ app.listen(port, (err) => {
     } else {
         console.log('Server is up, Port: ' + port);
     }
-});
-
-app.get('/t', (req, res) => {
-    res.sendFile(__dirname + '/test.html');
 });

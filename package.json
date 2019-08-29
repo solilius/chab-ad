@@ -4,13 +4,26 @@
   "description": "ad manager",
   "main": "server.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "compression": "^1.7.4",
+    "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
     "express": "^4.16.3",
+    "express-session": "^1.16.2",
+    "helmet": "^3.20.0",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
     "joi": "^13.6.0",
     "moment": "^2.22.2",
     "mongodb": "^3.1.4",
-    "node-schedule": "^1.3.0"
+    "morgan": "^1.9.1",
+    "node-schedule": "^1.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {

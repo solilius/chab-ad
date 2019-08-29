@@ -1,15 +1,11 @@
 const express = require('express');
 const DAL = require('../DAL');
-const BL = require('../BL');
 const bodyParser = require('body-parser');
-const auth = require('../middlewares/authenticator');
 const vaild = require('../middlewares/campaignVaidator');
 const router = express.Router();
 const CAMPAIGN_COL = 'campaigns';
-const ADS_COL = 'ads';
 
 router.use(bodyParser.json());
-router.use('*', auth);
 router.post('/', vaild);
 
 // ################### API ################### //
