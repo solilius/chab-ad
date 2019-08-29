@@ -25,7 +25,7 @@ function insertValues() {
   $("#client_details").val(campaign.client_info.details);
   if (!campaign.isActive) {
     $("#save-btn")
-      .addClass("btn-danger")
+      .addClass("btn-warning")
       .removeClass("btn-success");
   }
 }
@@ -40,7 +40,9 @@ function loadAds(banners) {
       url: banners[i].url,
       width: banners[i].size.split("X")[0],
       height: banners[i].size.split("X")[1],
-      ad_id: banners[i].ad_id
+      ad_id: banners[i].ad_id,
+      clicks: banners[i].clicks,
+      views: banners[i].views
     };
 
     insertBanner(data, i);
@@ -69,13 +71,18 @@ function loadAds(banners) {
 }
 
 function save() {
-  deleteBanners()
+  deleteBanners();
   var my_campaign = composeCampaign();
   my_campaign.campaign_id = campaign.campaign_id;
   send("/campaigns/" + campaign_id, "PUT", my_campaign, function(res) {
-    send("/banners/", "PUT", { banners: composeBanners(my_campaign, false) }, function(res) {
-      swal("הקמפיין עודכן בהצלחה", "", "success");
-    });
+    send(
+      "/banners/",
+      "PUT",
+      { banners: composeBanners(my_campaign, false) },
+      function(res) {
+        swal("הקמפיין עודכן בהצלחה", "", "success");
+      }
+    );
   });
 }
 
@@ -99,8 +106,62 @@ function deleteBanners() {
     axios({
       method: "delete",
       url: "/banners/",
-      data: {id: bannerId},
+      data: { id: bannerId },
       headers: { auth: "1234" }
     });
   });
+}
+
+function deleteCampaign() {
+  swal({
+    title: "מחיקה",
+    text: "האם אתה בטוח שברצונך למחוק את הקמפיין?",
+    icon: "warning",
+    buttons: true
+  }).then(function(isOk) {
+    if (isOk) {
+      axios({
+        method: "delete",
+        url: "/campaigns/" + campaign_id,
+        headers: { auth: "1234" }
+      })
+        .then(function(response) {
+          deleteAllBanners();
+        })
+        .catch(function(error) {
+          swal("אראה שגיאה במהלך מחיקת הקמפיין", "", "error");
+        });
+    }
+  });
+
+  function deleteAllBanners() {
+    axios({
+      method: "delete",
+      url: "/banners/campaign/" + campaign_id,
+      headers: { auth: "1234" }
+    })
+      .then(function(response) {
+        swal("הקמפיין נמחק בהצלחה", "", "success").then(function() {
+          goToPage("/CampaignsViewer/campaigns_viewer.html");
+        });
+      })
+      .catch(function(error) {
+        swal("אראה שגיאה במהלך מחיקת הבאנרים", "", "error");
+      });
+  }
+}
+
+function duplicate() {
+  axios
+    .get("campaigns/duplicate/" + campaign_id, { headers: { auth: "1234" } })
+    .then(function(res) {
+      swal("הקמפיין שוכפל בהצלחה", "", "success")
+        .then(function() {
+          localStorage.setItem("campaign", res.data);
+          goToPage("/CampaignPage/campaign_page.html");
+        })
+        .catch(function() {
+          swal("אראה שגיאה במהלך שכפול הקמפיין ", "", "error");
+        });
+    });
 }

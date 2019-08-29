@@ -48,4 +48,10 @@ router.delete("/", (req, res) => {
   });
 });
 
+router.delete("/campaign/:campaignId", (req, res) => {
+  DAL.Delete(ADS_COL, { campaign_id: req.params.campaignId }, data => {
+    res.send(data);
+  });
+});
+
 module.exports = [router];
