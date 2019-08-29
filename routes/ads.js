@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const DAL = require("../DAL");
 const vaild = require("../middlewares/adValidator");
-
 const router = express.Router();
 const ADS_COL = "ads";
 

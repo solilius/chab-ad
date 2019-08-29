@@ -8,13 +8,16 @@ $(document).ready(function() {
     $("li").removeClass("active");
     $(this).addClass("active");
   });
-
-  goToPage("/BannersViewer/banners_viewer.html");
+  goToPage("/Login/login.html");
 });
 
 function goToPage(ref) {
+  var url = ref;
+  if (localStorage.getItem("token") == null) {
+      url = "/Login/login.html"
+  }
   $.ajax({
-    url: ref,
+    url: url,
     type: "GET",
     dataType: "text",
     success: function(res) {
@@ -45,3 +48,8 @@ window.ml = cloudinary.createMediaLibrary(
   },
   document.getElementById("open-btn")
 );
+
+function logout(){
+    localStorage.removeItem('token');
+    goToPage("/Login/login.html");
+}

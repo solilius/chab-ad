@@ -9,3 +9,10 @@ nav{
 #view{
     margin-top: 7vh;
 }
+
+.btn-logout{
+    margin-top: 7px;
+    float: right;
+    margin-left: 5px;
+}
+
