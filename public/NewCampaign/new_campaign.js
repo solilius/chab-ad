@@ -18,7 +18,7 @@ function save() {
 }
 
 function upload(campaign, banners) {
-  var header = { "auth": "1234" };
+  var header = { "Authorization": localStorage.getItem('token') };
   axios.post("/campaigns", campaign, { headers: header }).then(function() {
       axios.post("/banners", { banners: banners }, { headers: header }).then(function() {
           swal("הקמפיין עלה בהצלחה", "", "success").then(function(){

@@ -21,6 +21,7 @@ router.get("/duplicate/:id", (req, res) => {
 
   // Get the campaign details
   DAL.Get(CAMPAIGN_COL, { campaign_id: req.params.id }, campaigns => {
+
     // Insert the duplicated campaign
     DAL.Insert(CAMPAIGN_COL, [duplicateCampaign(campaigns[0])], data => {
 

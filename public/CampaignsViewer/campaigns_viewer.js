@@ -1,33 +1,18 @@
-
 axios({
     url: '/campaigns',
     method: 'get',
-    headers: { "auth": "1234" }
+    headers: { "Authorization": localStorage.getItem('token') }
 }).then(function (data) {
     createGrid(data.data);
 });
 
-
-
 function onFirstDataRendered(params) {
-    //document.addEventListener('contextmenu', event => event.preventDefault());
     params.api.sizeColumnsToFit();
 }
 
 function onRowDoubleClicked(e) {
-    //console.log("Double Clicked!");
-    // console.log("data:", e.data);
     localStorage.setItem("campaign", e.data.campaign_id);
     goToPage('/CampaignPage/campaign_page.html');
-
-
-}
-
-function onRightClick(e) {
-    // console.log('Right Clicked!');
-    // console.log("sort by:", e.value);
-    // console.log("column:", e.colDef.field);
-    // filter
 }
 
 function getColumnDefs() {
@@ -57,8 +42,7 @@ function getGridOptions(rowData) {
         enableSorting: true,
         enableFilter: true,
         rowSelection: 'single',
-        onRowDoubleClicked: onRowDoubleClicked,
-        onCellContextMenu: onRightClick
+        onRowDoubleClicked: onRowDoubleClicked
     };
 }
 

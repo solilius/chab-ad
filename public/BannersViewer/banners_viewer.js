@@ -2,7 +2,7 @@
 axios({
     url: '/banners',
     method: 'get',
-    headers: {"auth": "1234"}
+    headers: {"Authorization": localStorage.getItem('token')}
 }).then(function(data){
     createGrid(data.data);
 });

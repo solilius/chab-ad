@@ -15,6 +15,7 @@ app.use(cors());
 
 require('dotenv').config();
 require('./middlewares/passport-config')(passport);
+app.use(passport.authenticate('jwt', { session: false }));
 
 // ################ ROUTERS ################# //
 

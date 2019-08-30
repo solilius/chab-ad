@@ -90,7 +90,7 @@ function send(url, method, body, callback) {
   axios({
     url: url,
     method: method,
-    headers: { auth: "1234" },
+    headers: { auth: localStorage.getItem('token') },
     data: body
   })
     .then(function(res) {
@@ -107,7 +107,7 @@ function deleteBanners() {
       method: "delete",
       url: "/banners/",
       data: { id: bannerId },
-      headers: { auth: "1234" }
+      headers: { auth: localStorage.getItem('token') }
     });
   });
 }
@@ -123,7 +123,7 @@ function deleteCampaign() {
       axios({
         method: "delete",
         url: "/campaigns/" + campaign_id,
-        headers: { auth: "1234" }
+        headers: { auth: localStorage.getItem('token') }
       })
         .then(function(response) {
           deleteAllBanners();
@@ -138,7 +138,7 @@ function deleteCampaign() {
     axios({
       method: "delete",
       url: "/banners/campaign/" + campaign_id,
-      headers: { auth: "1234" }
+      headers: { auth: localStorage.getItem('token') }
     })
       .then(function(response) {
         swal("הקמפיין נמחק בהצלחה", "", "success").then(function() {
@@ -153,7 +153,7 @@ function deleteCampaign() {
 
 function duplicate() {
   axios
-    .get("campaigns/duplicate/" + campaign_id, { headers: { auth: "1234" } })
+    .get("campaigns/duplicate/" + campaign_id, { headers: { auth: localStorage.getItem('token') } })
     .then(function(res) {
       swal("הקמפיין שוכפל בהצלחה", "", "success")
         .then(function() {
