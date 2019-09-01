@@ -2,24 +2,6 @@ var index = 0;
 var positions = {};
 var deleteBannersArray = [];
 
-window.ml = cloudinary.createMediaLibrary(
-  {
-    cloud_name: "chabbad",
-    api_key: "863763734362528",
-    username: "cha.badim.ages@gmail.com",
-    button_class: "btn btn-lg btn-info",
-    button_caption: "בחר תמונה"
-  },
-  {
-    insertHandler: function(data) {
-      data.assets.forEach(asset => {
-        insertBanner(asset, index++);
-      });
-    }
-  },
-  document.getElementById("add-banners")
-);
-
 function insertBanner(data, bannerId) {
   positions[bannerId] = 1;
   $("#banners").prepend(

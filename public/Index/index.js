@@ -31,24 +31,6 @@ function goToPage(ref) {
 
 localStorage.setItem("campaign", "none");
 
-window.ml = cloudinary.createMediaLibrary(
-  {
-    cloud_name: "chabbad",
-    api_key: "863763734362528",
-    username: "cha.badim.ages@gmail.com",
-    button_class: "btn btn-info gallery ",
-    button_caption: "גלריה"
-  },
-  {
-    insertHandler: function(data) {
-      data.assets.forEach(asset => {
-        console.log("Inserted asset:", JSON.stringify(asset, null, 2));
-      });
-    }
-  },
-  document.getElementById("open-btn")
-);
-
 function logout(){
     localStorage.removeItem('token');
     goToPage("/Login/login.html");
