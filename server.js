@@ -15,12 +15,12 @@ app.use(cors());
 
 require('dotenv').config();
 require('./middlewares/passport-config')(passport);
-app.use(passport.authenticate('jwt', { session: false }));
 
 // ################ ROUTERS ################# //
 
 let campaigns = require('./routes/campaigns');
 let adsHandler = require('./routes/adsHandler');
+let media = require('./routes/media');
 let ads = require('./routes/ads');
 
 // ################## API ################### //
@@ -28,6 +28,7 @@ let ads = require('./routes/ads');
 app.use('/campaigns', campaigns);
 app.use('/bannersHandler', adsHandler);
 app.use('/banners', ads);
+app.use('/media', media);
 app.use('/auth', auth);
 
 app.get('/', (req, res) => {

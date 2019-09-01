@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const DAL = require("../DAL");
 const bodyParser = require("body-parser");
 const vaild = require("../middlewares/campaignVaidator");
@@ -6,6 +7,7 @@ const router = express.Router();
 const CAMPAIGN_COL = "campaigns";
 const ADS_COL = "ads";
 
+router.use(passport.authenticate('jwt', { session: false }));
 router.use(bodyParser.json());
 router.post("/", vaild);
 
