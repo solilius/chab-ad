@@ -1,12 +1,12 @@
 var campaign_id = localStorage.getItem("campaign");
 var campaign = {};
 
-send("/campaigns/" + campaign_id, "GET", {}, function(res) {
+send("/campaigns/" + campaign_id, "GET", {headers: { Authorization: localStorage.getItem('token') }}, function(res) {
   campaign = res.data[0];
   insertValues();
 });
 
-send("/banners/" + campaign_id, "GET", {}, function(res) {
+send("/banners/" + campaign_id, "GET", {headers: { Authorization: localStorage.getItem('token') }}, function(res) {
   loadAds(res.data);
 });
 
@@ -90,7 +90,7 @@ function send(url, method, body, callback) {
   axios({
     url: url,
     method: method,
-    headers: { auth: localStorage.getItem('token') },
+    headers: { Authorization: localStorage.getItem('token') },
     data: body
   })
     .then(function(res) {
@@ -107,7 +107,7 @@ function deleteBanners() {
       method: "delete",
       url: "/banners/",
       data: { id: bannerId },
-      headers: { auth: localStorage.getItem('token') }
+      headers: { Authorization: localStorage.getItem('token') }
     });
   });
 }
@@ -123,7 +123,7 @@ function deleteCampaign() {
       axios({
         method: "delete",
         url: "/campaigns/" + campaign_id,
-        headers: { auth: localStorage.getItem('token') }
+        headers: { Authorization: localStorage.getItem('token') }
       })
         .then(function(response) {
           deleteAllBanners();
@@ -138,7 +138,7 @@ function deleteCampaign() {
     axios({
       method: "delete",
       url: "/banners/campaign/" + campaign_id,
-      headers: { auth: localStorage.getItem('token') }
+      headers: { Authorization: localStorage.getItem('token') }
     })
       .then(function(response) {
         swal("הקמפיין נמחק בהצלחה", "", "success").then(function() {
@@ -153,7 +153,7 @@ function deleteCampaign() {
 
 function duplicate() {
   axios
-    .get("campaigns/duplicate/" + campaign_id, { headers: { auth: localStorage.getItem('token') } })
+    .get("campaigns/duplicate/" + campaign_id, { headers: { Authorization: localStorage.getItem('token') } })
     .then(function(res) {
       swal("הקמפיין שוכפל בהצלחה", "", "success")
         .then(function() {

@@ -121,3 +121,46 @@ input{
     position: relative;
     top: 0px;
 }
+
+.modal-title{
+    text-align: center;
+}
+
+.modal-dialog{
+margin: 20vw;
+width: 60vw;
+
+}
+
+.modal-body{
+ padding: 0;
+}
+
+.media{
+    overflow-y: scroll;
+}
+.media-item{
+    padding: 1vw;
+    width: 19.5vw;
+    cursor: pointer;
+}
+
+.media-item:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+.media-item:active{
+    transform: scale(1);
+    transition: 0.1s;
+}
+
+.update-url:hover{
+    cursor: pointer ;
+    background: lightgray;
+}
+
+.update-url:active{
+    cursor: pointer;
+    background: grey;
+}

@@ -49,8 +49,10 @@ function readFile() {
         var h = this.height;
         var body = {
           base64: e.target.result,
-          width: w,
-          height: h
+          dimensions: {
+            width: w,
+            height: h
+          }
         };
         axios.put("/media", body, { headers: header }).then(function(data) {
             if (data.data == "uploaded") {

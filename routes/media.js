@@ -82,9 +82,8 @@ module.exports = [router];
 
 function getMediaObject(fileName, dimensions) {
   return {
-    base_url: FTP_BASE_URL,
-    path: FTP_PATH,
-    name: fileName,
+    url: FTP_BASE_URL + FTP_PATH + fileName,
+    ftp_path: FTP_PATH + fileName,
     width: dimensions.width,
     height: dimensions.height,
     date: new Date(Date.now()).toISOString()

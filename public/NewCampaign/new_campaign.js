@@ -1,4 +1,3 @@
-
 // set todat as default date 
 $('#starting_date').val(new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2));
 

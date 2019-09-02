@@ -1,6 +1,26 @@
 var index = 0;
 var positions = {};
 var deleteBannersArray = [];
+var mediaArr;
+
+axios({
+    url: '/media',
+    method: 'get',
+    headers: { "Authorization": localStorage.getItem('token') }
+}).then(function (data) {
+    mediaArr = data.data;
+    for (let i = 0; i < mediaArr.length; i++) {
+        $("#media").prepend(
+            `<img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>`
+        );
+    }
+});
+
+function prepareBanner(id){
+    mediaArr[id].views = 0;
+    mediaArr[id].clicks = 0;
+    insertBanner(mediaArr[id], id);
+}
 
 function insertBanner(data, bannerId) {
   positions[bannerId] = 1;
@@ -16,8 +36,12 @@ function insertBanner(data, bannerId) {
 
       <div class="ad-info">
         <div class="input-group click-input">
+          <input type="text" id="editable-url-${bannerId}" value="${data.url}" class="form-control" aria-describedby="basic-addon2"/>
+          <span class="input-group-addon update-url" onclick="updateImage(${bannerId})" id="basic-addon2">עדכן</span>
+        </div>
+        <div class="input-group click-input">
           <input type="text" id="click-${bannerId}" class="form-control" aria-describedby="basic-addon2"/>
-          <span class="input-group-addon" id="basic-addon2">בלחיצה</span>
+          <span class="input-group-addon update-url" id="basic-addon2" onclick="openClickWeb(${bannerId})">בלחיצה</span>
         </div>
         <button id="add-pos" onclick="addPosition(${bannerId})" class="btn btn-info">
           הוסף מיקום</button ><br/>
@@ -52,6 +76,19 @@ function insertBanner(data, bannerId) {
     </div>
   </div>`
   );
+}
+
+function updateImage(id){
+  $('#url-' + id).attr('src', $('#editable-url-' + id).val());
+  var img = new Image();
+    img.src = $('#editable-url-' + id).val();
+    img.onload = function() {
+      $('#img-size-' + id).text(this.width + "X" + this.height);
+  }
+}
+
+function openClickWeb(id){
+    window.open($('#click-' + id).val(), '_blank');  
 }
 
 function removeBanner(id) {
