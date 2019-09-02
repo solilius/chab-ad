@@ -14,7 +14,7 @@ $(document).ready(function() {
 function goToPage(ref) {
   var url = ref;
   if (localStorage.getItem("token") == null) {
-      url = "/Login/login.html"
+    url = "/Login/login.html";
   }
   $.ajax({
     url: url,
@@ -31,7 +31,28 @@ function goToPage(ref) {
 
 localStorage.setItem("campaign", "none");
 
-function logout(){
-    localStorage.removeItem('token');
-    goToPage("/Login/login.html");
+function logout() {
+  localStorage.removeItem("token");
+  goToPage("/Login/login.html");
 }
+
+function readFile() {
+  if (this.files && this.files[0]) {
+    var FR = new FileReader();
+
+    FR.addEventListener("load", function(e) {
+      var header = { Authorization: localStorage.getItem("token") };
+      axios.put("/media", {base64: e.target.result, type: $("#imageUpload").val().split('.')[1]}, { headers: header }).then(function() {
+                swal("התמונה הועלת בהצלחה","", "success");
+            })
+            .catch(function(err) {
+                console.log(err);
+              swal("העלאת התמונה נכשלה","", "error");
+            });
+    });
+
+    FR.readAsDataURL(this.files[0]);
+  }
+}
+
+document.getElementById("imageUpload").addEventListener("change", readFile);

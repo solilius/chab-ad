@@ -4,6 +4,7 @@
   "description": "ad manager",
   "main": "server.js",
   "dependencies": {
+    "base64-to-image": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "compression": "^1.7.4",
@@ -23,7 +24,8 @@
     "node-schedule": "^1.3.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "ssh2-sftp-client-fast": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {
