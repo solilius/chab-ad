@@ -32,9 +32,9 @@ function isActive(){
 }
 
 function checkDate(addDays){
-    var date = new Date($('#starting_date').val()).getTime();
+    var date = new Date($('#starting_date').val() + "T00:00:00").getTime();
     var now = new Date().getTime();
-    return (date <= now) && (date + (addDays * 86400000) > now);
+    return (date <= now) && (date + (addDays * 86400000) >= now);
 }
 
 function composeBanners(campaign, isNew) {
