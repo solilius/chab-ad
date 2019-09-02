@@ -32,44 +32,59 @@ router.get("/", (req, res) => {
 });
 
 router.put("/", (req, res) => {
-  // Convert to file  
+  // Convert to file
   let file = base64ToImage(req.body.base64, `./`);
-  
-  // Copy to FTP server
-  sftp.put(`${__dirname}/../${file.fileName}`, `${FTP_PATH}${file.fileName}`).then(data => {
 
-      // Delete the file localy
-      fs.unlink(`${__dirname}/../${file.fileName}`, () => {
+  let sftp = new Client();
+  sftp.connect(CONNECTION).then(() => {
 
-        // Save object in the DB  
-        DAL.Insert(MEDIA_COL, [getMediaObject(file.fileName)], (data) => {
+    // Copy to FTP server
+    sftp.put(`${__dirname}/../${file.fileName}`, `${FTP_PATH}${file.fileName}`).then(data => {
+
+        // Delete the file localy
+        fs.unlink(`${__dirname}/../${file.fileName}`, () => {
+
+          // Save object in the DB
+          DAL.Insert(MEDIA_COL, [getMediaObject(file.fileName)], data => {
             res.send("uploaded");
+            sftp.end();
+          });
         });
-      });
-    }).catch(err => { 
-      console.log(err);
-      res.send("falied");
-    });
+      }).catch(err => {
+        console.log(err);
+        res.send("falied");
+        sftp.end();
+      })
+  });
 });
 
 router.delete("/:filename", (req, res) => {
-  sftp.delete("/chab-ad/" + req.params.filename).then(data => {
-      DAL.Delete(MEDIA_COL, {name: req.params.filename}, (data) =>{
+  let sftp = new Client();
+  sftp.connect(CONNECTION).then(() =>{
+
+    // Delete file from FTP server  
+    sftp.delete("/chab-ad/" + req.params.filename).then(data => {
+
+      // Delete object from the DB  
+      DAL.Delete(MEDIA_COL, { name: req.params.filename }, data => {
         res.send("deleted");
+        sftp.end();
       });
     }).catch(err => {
       console.log(err);
       res.send("falied");
+      sftp.end();
     });
+  });
 });
 
 module.exports = [router];
 
-function getMediaObject(fileName){
-    return {
-        base_url: FTP_BASE_URL,
-        path: FTP_PATH,
-        name: fileName,
-        date: new Date(Date.now()).toISOString()
-    }
+function getMediaObject(fileName) {
+  return {
+    base_url: FTP_BASE_URL,
+    path: FTP_PATH,
+    name: fileName,
+    date: new Date(Date.now()).toISOString()
+  };
 }

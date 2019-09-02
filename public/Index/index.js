@@ -42,8 +42,12 @@ function readFile() {
 
     FR.addEventListener("load", function(e) {
       var header = { Authorization: localStorage.getItem("token") };
-      axios.put("/media", {base64: e.target.result, type: $("#imageUpload").val().split('.')[1]}, { headers: header }).then(function() {
-                swal("התמונה הועלת בהצלחה","", "success");
+      axios.put("/media", {base64: e.target.result, type: $("#imageUpload").val().split('.')[1]}, { headers: header }).then(function(data) {
+                if(data.data == "uploaded"){
+                    swal("התמונה הועלת בהצלחה","", "success");
+                } else {
+                    swal("העלאת התמונה נכשלה","", "error");
+                }
             })
             .catch(function(err) {
                 console.log(err);
