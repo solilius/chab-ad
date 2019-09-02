@@ -45,7 +45,7 @@ router.put("/", (req, res) => {
         fs.unlink(`${__dirname}/../${file.fileName}`, () => {
 
           // Save object in the DB
-          DAL.Insert(MEDIA_COL, [getMediaObject(file.fileName)], data => {
+          DAL.Insert(MEDIA_COL, [getMediaObject(file.fileName, req.body.dimensions )], data => {
             res.send("uploaded");
             sftp.end();
           });
@@ -80,11 +80,13 @@ router.delete("/:filename", (req, res) => {
 
 module.exports = [router];
 
-function getMediaObject(fileName) {
+function getMediaObject(fileName, dimensions) {
   return {
     base_url: FTP_BASE_URL,
     path: FTP_PATH,
     name: fileName,
+    width: dimensions.width,
+    height: dimensions.height,
     date: new Date(Date.now()).toISOString()
   };
 }

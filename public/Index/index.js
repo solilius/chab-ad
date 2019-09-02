@@ -42,19 +42,28 @@ function readFile() {
 
     FR.addEventListener("load", function(e) {
       var header = { Authorization: localStorage.getItem("token") };
-      axios.put("/media", {base64: e.target.result, type: $("#imageUpload").val().split('.')[1]}, { headers: header }).then(function(data) {
-                if(data.data == "uploaded"){
-                    swal("התמונה הועלת בהצלחה","", "success");
-                } else {
-                    swal("העלאת התמונה נכשלה","", "error");
-                }
-            })
-            .catch(function(err) {
-                console.log(err);
-              swal("העלאת התמונה נכשלה","", "error");
-            });
+      var img = new Image();
+      img.src = e.target.result;
+      img.onload = function() {
+        var w = this.width;
+        var h = this.height;
+        var body = {
+          base64: e.target.result,
+          width: w,
+          height: h
+        };
+        axios.put("/media", body, { headers: header }).then(function(data) {
+            if (data.data == "uploaded") {
+              swal("התמונה הועלת בהצלחה", "", "success");
+            } else {
+              swal("העלאת התמונה נכשלה", "", "error");
+            }
+          }).catch(function(err) {
+            console.log(err);
+            swal("העלאת התמונה נכשלה", "", "error");
+          });
+      };
     });
-
     FR.readAsDataURL(this.files[0]);
   }
 }
