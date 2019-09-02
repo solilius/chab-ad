@@ -19,7 +19,7 @@ axios({
 function prepareBanner(id){
     mediaArr[id].views = 0;
     mediaArr[id].clicks = 0;
-    insertBanner(mediaArr[id], id);
+    insertBanner(mediaArr[id], index++);
 }
 
 function insertBanner(data, bannerId) {
@@ -116,6 +116,7 @@ function addPosition(id) {
                 <option>chabad.info</option>
                 <option>chabadinfo.com</option>
                 <option>neshei.com</option>
+                <option>shtraymel.co.il</option>
             </select>
         </div>`
   );

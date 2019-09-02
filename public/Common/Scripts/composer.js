@@ -39,9 +39,8 @@ function checkDate(addDays){
 
 function composeBanners(campaign, isNew) {
   var banners = [];
-  for (let i = 0; i < Object.keys(positions).length; i++) {
-    if ($("#banner-" + i).val() !== undefined) {
-      banners[i] = {
+  for (i in positions) {
+      var tempBanner = {
         campaign_id: campaign.campaign_id,
         campaign_name: campaign.campaign_name,
         ad_id: campaign.campaign_id + "_" + $("#url-" + i).attr("src"),
@@ -54,10 +53,10 @@ function composeBanners(campaign, isNew) {
         isActive: campaign.isActive
       };
       if(isNew){
-        banners[i].clicks = 0; 
-        banners[i].views = 0; 
+        tempBanner.clicks = 0; 
+        tempBanner.views = 0; 
       }
-    }
+      banners.push(tempBanner);
   }
   return banners;
 }
