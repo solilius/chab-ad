@@ -91,13 +91,13 @@ function getPositions(bannerId) {
 }
 
 function getExpirationDate() {
-  if (document.getElementById("starting_date").value != "") {
+    debugger;
+  if ($("#starting_date").val() != "" && $("#days").val() != "") {
     var start = new Date(document.getElementById("starting_date").value);
     var days = parseInt(document.getElementById("days").value);
-
     return new Date(start.setDate(start.getDate() + days));
   }
-  return "";
+  return new Date();
 }
 
 function validateActivity(){
