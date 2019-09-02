@@ -91,7 +91,6 @@ function getPositions(bannerId) {
 }
 
 function getExpirationDate() {
-    debugger;
   if ($("#starting_date").val() != "" && $("#days").val() != "") {
     var start = new Date(document.getElementById("starting_date").value);
     var days = parseInt(document.getElementById("days").value);
