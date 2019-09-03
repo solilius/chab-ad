@@ -3,18 +3,20 @@ var positions = {};
 var deleteBannersArray = [];
 var mediaArr;
 
-axios({
-    url: '/media',
-    method: 'get',
-    headers: { "Authorization": localStorage.getItem('token') }
-}).then(function (data) {
-    mediaArr = data.data;
-    for (let i = 0; i < mediaArr.length; i++) {
-        $("#media").prepend(
-            `<img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>`
-        );
-    }
-});
+function loadMedia(){
+    axios({
+        url: '/media',
+        method: 'get',
+        headers: { "Authorization": localStorage.getItem('token') }
+    }).then(function (data) {
+        mediaArr = data.data;
+        for (let i = 0; i < mediaArr.length; i++) {
+            $("#media").prepend(
+                `<img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>`
+            );
+        }
+    });
+}
 
 function prepareBanner(id){
     mediaArr[id].views = 0;

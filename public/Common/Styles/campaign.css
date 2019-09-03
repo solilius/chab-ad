@@ -112,7 +112,7 @@ input{
 
 #banners{
     margin-top: 10px;
-    max-height: 68vh;
+    max-height: 65vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -127,18 +127,16 @@ input{
 }
 
 .modal-dialog{
-margin: 20vw;
-width: 60vw;
-
+    margin: 20vw;
+    width: 60vw;
 }
 
 .modal-body{
- padding: 0;
-}
-
-.media{
+    padding: 0;
+    max-height: 60vh;
     overflow-y: scroll;
 }
+
 .media-item{
     padding: 1vw;
     width: 19.5vw;

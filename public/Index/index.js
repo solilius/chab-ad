@@ -36,19 +36,21 @@ function logout() {
   goToPage("/Login/login.html");
 }
 
-function readFile() {
-  if (this.files && this.files[0]) {
-    var FR = new FileReader();
-
-    FR.addEventListener("load", function(e) {
-      var header = { Authorization: localStorage.getItem("token") };
+$("#imageUpload").on("change", function(event) {
+  var counter = 1;  
+  var header = { Authorization: localStorage.getItem("token") };
+  var files = event.target.files;
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var picReader = new FileReader();
+    picReader.addEventListener("load", function(event) {
       var img = new Image();
-      img.src = e.target.result;
+      img.src = event.target.result;
       img.onload = function() {
         var w = this.width;
         var h = this.height;
         var body = {
-          base64: e.target.result,
+          base64: event.target.result,
           dimensions: {
             width: w,
             height: h
@@ -56,7 +58,7 @@ function readFile() {
         };
         axios.put("/media", body, { headers: header }).then(function(data) {
             if (data.data == "uploaded") {
-              swal("התמונה הועלת בהצלחה", "", "success");
+              swal(counter++ + "/" + files.length + " התמונה הועלת בהצלחה ", "", "success");  
             } else {
               swal("העלאת התמונה נכשלה", "", "error");
             }
@@ -66,8 +68,6 @@ function readFile() {
           });
       };
     });
-    FR.readAsDataURL(this.files[0]);
+    picReader.readAsDataURL(file);
   }
-}
-
-document.getElementById("imageUpload").addEventListener("change", readFile);
+});
