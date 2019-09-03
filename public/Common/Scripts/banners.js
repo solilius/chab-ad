@@ -19,6 +19,7 @@ axios({
 function prepareBanner(id){
     mediaArr[id].views = 0;
     mediaArr[id].clicks = 0;
+    $('#media-'+id).css('opacity', '0.2');
     insertBanner(mediaArr[id], index++);
 }
 
