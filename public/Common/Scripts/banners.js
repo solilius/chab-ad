@@ -19,9 +19,15 @@ axios({
 function prepareBanner(id){
     mediaArr[id].views = 0;
     mediaArr[id].clicks = 0;
-    $('#media-'+id).css('opacity', '0.2');
+    $('#media-'+id).css('background', 'red');
     insertBanner(mediaArr[id], index++);
 }
+
+$('#myModal').on('hidden.bs.modal', function () {
+    for (let i = 0; i < mediaArr.length; i++) {
+    $('#media-'+i).css('background', 'white');
+    }
+})
 
 function insertBanner(data, bannerId) {
   positions[bannerId] = 1;
