@@ -1,5 +1,9 @@
 if (localStorage.getItem("token") != null) {
-  goToPage("/BannersViewer/banners_viewer.html");
+  if (localStorage.getItem("current_page") != null) {
+    goToPage(localStorage.getItem("current_page"));
+  } else {
+    goToPage("/BannersViewer/banners_viewer.html");
+  }
 }
 
 function login() {
@@ -11,7 +15,7 @@ function login() {
       method: "POST",
       data: { username: $("#username").val(), password: $("#password").val() }
     })
-      .then(function(res) {
+      .then(function (res) {
         if (res.data.includes("Bearer")) {
           localStorage.setItem("token", res.data);
           goToPage("/BannersViewer/banners_viewer.html");

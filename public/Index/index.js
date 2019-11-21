@@ -13,6 +13,9 @@ $(document).ready(function() {
 
 function goToPage(ref) {
   var url = ref;
+  if(ref != "/Login/login.html"){
+    localStorage.setItem("current_page", ref);
+  }
   if (localStorage.getItem("token") == null) {
     url = "/Login/login.html";
   }
@@ -28,8 +31,6 @@ function goToPage(ref) {
     }
   });
 }
-
-localStorage.setItem("campaign", "none");
 
 function logout() {
   localStorage.removeItem("token");
