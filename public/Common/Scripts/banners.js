@@ -63,10 +63,10 @@ function insertBanner(data, bannerId) {
             <div class="radio">
               <label class="checkbox-radio">
                 <input type="radio" name="platform-${bannerId}-0" value="mobile"/>נייד</label>
-              <label class="checkbox-radio"><input type="radio" name="platform-${bannerId}-0" value="desktop" />נייח
+              <label class="checkbox-radio"><input type="radio" name="platform-${bannerId}-0" checked value="desktop" />נייח
               </label>
               <label class="checkbox-radio">
-                  <input type="radio" name="platform-${bannerId}-0" checked value="both"/> שניהם
+                  <input type="radio" name="platform-${bannerId}-0"  value="both"/> שניהם
               </label>
             </div>
             <select class="form-control my-selector" id="pos-select-${bannerId}-0">
@@ -114,8 +114,8 @@ function addPosition(id) {
             <div class="btn btn-danger remove-pos-btn" onclick="removePosition(${id},${position})">הסר</div>
             <div class="radio">
                 <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-mobile" value="mobile">נייד</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-desktop"  value="desktop">נייח</label>
-                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-both" checked value="both">שניהם</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-desktop" checked value="desktop">נייח</label>
+                <label class="checkbox-radio"><input type="radio" name="platform-${id}-${position}" id="platform-${id}-${position}-both"  value="both">שניהם</label>
             </div>
             <select class="form-control my-selector" id="pos-select-${id}-${position}">
                 <option hidden>בחר מיקום</option>
