@@ -1,3 +1,15 @@
+var gridOptions = {
+    columnDefs: getColumnDefs(),
+    rowHeight: 100,
+    rowStyle: {'padding': '10px'},
+    enableRtl: true,
+    enableColResize: true,
+    onFirstDataRendered: onFirstDataRendered,
+    enableSorting: true,
+    enableFilter: true,
+    rowSelection: 'single',
+    onRowDoubleClicked: onRowDoubleClicked
+  };
 
 axios({
     url: '/banners',
@@ -9,20 +21,18 @@ axios({
 
   function onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
-}
+    var filterComponent = params.api.getFilterInstance("isActive");
+    filterComponent.setModel({
+      type: "contains",
+      filter: true
+    });
+    filterComponent.onFilterChanged();
+  }  
 
 function onRowDoubleClicked(e){
-    //console.log("Double Clicked!");
-    // console.log("data:", e.data);
+
     localStorage.setItem("campaign",  e.data.campaign_id);
     goToPage('/CampaignPage/campaign_page.html');
-}
-
-function onRightClick(e){
-    // console.log('Right Clicked!');
-    // console.log("sort by:", e.value);
-    // console.log("column:", e.colDef.field);
-    // filter
 }
 
 function getColumnDefs(){
@@ -32,34 +42,18 @@ function getColumnDefs(){
         {headerName: "באנר", field: "url", cellRenderer: function(params){ return '<img style="height:80px;" src="' + params.value + '">'}},
         {headerName: "גודל", field: "size"},
         {headerName: "מיקומים", field: "positions",  cellRenderer: function(params){ return printPositions(params.value)}},
-        {headerName: "תאריך התחלה", field: "starting_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
+        {headerName: "תאריך התחלה", field: "starting_date", sort: "asc",filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "ימים שנשארו", field: "expiration_date", filter: "agNumberColumnFilter", cellRenderer: function(params){ return getDays(params.value)}},
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},
         {headerName: "צפיות", field: "views", filter: "agNumberColumnFilter"},
-        { headerName: "סטטוס", field: "isActive", cellRenderer: function(params){ return getActivity(params.value)} }
+        {headerName: "סטטוס", field: "isActive", cellRenderer: function(params){ return getActivity(params.value)} }
       ];
 }
 
-function getGridOptions(rowData){
-    return {
-        columnDefs: getColumnDefs(),
-        rowData: rowData,
-        rowHeight: 100,
-        rowStyle: {'padding': '10px'},
-        enableRtl: true,
-        enableColResize: true,
-        onFirstDataRendered: onFirstDataRendered,
-        enableSorting: true,
-        enableFilter: true,
-        rowSelection: 'single',
-        onRowDoubleClicked: onRowDoubleClicked,
-        onCellContextMenu: onRightClick,
-      };
-}
-
 function createGrid(data){
-    new agGrid.Grid(document.querySelector('#myGrid'), getGridOptions(data));
+    gridOptions.rowData = data
+    new agGrid.Grid(document.querySelector('#myGrid'), gridOptions);
 }
 
 function getDays(expiration){

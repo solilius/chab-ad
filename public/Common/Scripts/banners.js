@@ -135,7 +135,9 @@ function removePosition(id, pos) {
   $(`#pos-${id}-${pos}`).remove();
 
   for (let index = pos + 1; index < positions[id]; index++) {
-    $(`#pos-${id}-${index}`).attr("id", index - 1);
+    $(`#pos-${id}-${index} .remove-pos-btn`).attr("onclick", `removePosition(${id},${index - 1})`);
+    $(`#pos-${id}-${index}`).attr("id", `pos-${id}-${index - 1}`);
+
   }
 
   positions[id]--;
