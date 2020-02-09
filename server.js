@@ -32,7 +32,7 @@ app.use('/media', media);
 app.use('/auth', auth);
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index/index.html');
+    res.sendFile(__dirname + '/public/Index/index.html');
 });
 
 // ############# Start Server ############### //
