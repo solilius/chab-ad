@@ -42,7 +42,7 @@ function getColumnDefs(){
         {headerName: "באנר", field: "url", cellRenderer: function(params){ return '<img style="height:80px;" src="' + params.value + '">'}},
         {headerName: "גודל", field: "size"},
         {headerName: "מיקומים", field: "positions",  cellRenderer: function(params){ return printPositions(params.value)}},
-        {headerName: "תאריך התחלה", field: "starting_date", sort: "asc",filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
+        {headerName: "תאריך התחלה", field: "starting_date",filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "תאריך סיום", field: "expiration_date" ,filter: "agDateColumnFilter", cellRenderer: function(params){ return params.value.split('T')[0]}},
         {headerName: "ימים שנשארו", field: "expiration_date", filter: "agNumberColumnFilter", cellRenderer: function(params){ return getDays(params.value)}},
         {headerName: "קליקים", field: "clicks", filter: "agNumberColumnFilter"},

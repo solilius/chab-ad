@@ -16,7 +16,7 @@ const DAL = {
 
     Get: (collection, query, callback) => {
         try {
-            db.db(DB_NAME).collection(collection).find(query).toArray((err, result) => {
+            db.db(DB_NAME).collection(collection).find(query).sort( { starting_date: -1 } ).toArray((err, result) => {
                 handleDbResult(err, result, callback);
             });
         } catch (error) {
