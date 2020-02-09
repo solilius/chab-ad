@@ -1,6 +1,18 @@
 // set todat as default date 
 $('#starting_date').val(new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + ('0' + new Date().getDate()).slice(-2));
 
+$('#expiration_date').on('change', function (){
+    var days = (parseInt(new Date($('#expiration_date').val()).getTime()) -
+                parseInt(new Date($('#starting_date').val()).getTime())) / 86400000
+    $('#days').val(days);
+});
+
+$('#days').on('change', function(){
+    var expiration = parseInt(new Date($("#starting_date").val()).getTime()) + ($('#days').val() * 86400000);
+    $('#expiration_date').val(new Date(expiration).toISOString().substr(0, 10));
+
+})
+
 function save() {
   swal({
     title: "שמירת קמפיין",
