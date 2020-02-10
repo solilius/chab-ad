@@ -63,7 +63,6 @@ function getAd(pos) {
   });
 }
 function changeCampaignState(query, active) {
-    console.log(query.expiration_date);
   DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, false, data => {
           console.log(`${active} > Campaigns modified: ${data.modifiedCount}`);
       DAL.Update( ADS_COL, query, { $set: { isActive: active } }, false, data => {
