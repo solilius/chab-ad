@@ -11,7 +11,7 @@ $('#days').on('change', function(){
     var expiration = parseInt(new Date($("#starting_date").val()).getTime()) + ($('#days').val() * 86400000);
     $('#expiration_date').val(new Date(expiration - tzoffset).toISOString().substr(0, 19));
 
-})
+});
 
 function save() {
   swal({
