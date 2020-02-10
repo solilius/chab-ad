@@ -10,6 +10,7 @@ send("/banners/" + campaign_id, "GET", {headers: { Authorization: localStorage.g
   loadAds(res.data);
 });
 
+var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
 $('#expiration_date').on('change', function (){
     var days = (parseInt(new Date($('#expiration_date').val()).getTime()) -
                 parseInt(new Date($('#starting_date').val()).getTime())) / 86400000
