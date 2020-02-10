@@ -43,34 +43,28 @@
 
     <div class="col-md-5">
         <div class="header">פרטי קמפיין</div>
-                <div class="form-group short-input">
-            <label>:מספר ימים</label>
-            <div class="col-10 ">
-                <input class="form-control" type="number" min="0" id="days" placeholder="0" />
-            </div>
-        </div>
-        <div class="form-group short-input">
-            <label>:תאריך התחלה</label>
-            <div class="col-10">
-                <input class="form-control" type="date" id="starting_date" />
-            </div>
-        </div>
-        <div class="form-group short-input">
+        <div class="form-group regular-input">
             <label>:תאריך סיום</label>
             <div class="col-10">
-                <input class="form-control" type="date" id="expiration_date" />
+                <input class="form-control" type="datetime-local" id="expiration_date" />
             </div>
         </div>
-                <div class="form-group short-input">
+        <div class="form-group regular-input">
+            <label>:תאריך התחלה</label>
+            <div class="col-10">
+                <input class="form-control" type="datetime-local" id="starting_date" />
+            </div>
+        </div>
+        <div class="form-group regular-input">
             <label>:שם קמפיין</label>
             <div class="col-10">
                 <input class="form-control" type="text" id="campaign_name" />
             </div>
-        </div>
-        <div class="form-group long-input">
-            <label>:תאור</label>
-            <div class="col-10">
-                <input class="form-control" type="text" id="description" />
+        </div><br/>
+        <div class="form-group short-input">
+            <label>:מספר ימים</label>
+            <div class="col-10 ">
+                <input class="form-control" type="number" min="0" id="days" placeholder="0" />
             </div>
         </div>
         <div class="form-group short-input">
@@ -83,6 +77,12 @@
             <label>:לחיצות</label>
             <div class="col-10">
                 <input class="form-control" type="number" id="clicks" min="0" placeholder="0" />
+            </div>
+        </div>
+                <div class="form-group regular-input">
+            <label>:תאור</label>
+            <div class="col-10">
+                <input class="form-control" type="text" id="description" />
             </div>
         </div>
     </div>
