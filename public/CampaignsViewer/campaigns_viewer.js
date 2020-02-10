@@ -6,9 +6,15 @@ axios({
     createGrid(data.data);
 });
 
-function onFirstDataRendered(params) {
+  function onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
-}
+    var filterComponent = params.api.getFilterInstance("isActive");
+    filterComponent.setModel({
+      type: "contains",
+      filter: true
+    });
+    filterComponent.onFilterChanged();
+  }  
 
 function onRowDoubleClicked(e) {
     localStorage.setItem("campaign", e.data.campaign_id);
