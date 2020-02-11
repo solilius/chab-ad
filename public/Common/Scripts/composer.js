@@ -27,8 +27,8 @@ function composeCampaign() {
 }
 
 function isActive(){
-    return (($('#starting_date').val() !== "") && 
-           (($('#days').val() !== "") && ($('#days').val() !== "0")) && checkDate($('#days').val()))
+     return (new Date($('#starting_date').val()).getTime() <= new Date().getTime()) &&
+      (new Date($('#expiration_date').val()).getTime() > new Date().getTime())
 }
 
 function checkDate(addDays){
