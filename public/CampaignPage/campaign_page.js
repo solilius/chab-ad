@@ -30,8 +30,9 @@ function insertValues() {
   $("#description").val(campaign.description);
   $("#views").val(campaign.views_left);
   $("#clicks").val(campaign.clicks_left);
-  $("#starting_date").val(campaign.starting_date);
-  $("#expiration_date").val(campaign.expiration_date);
+  $('#expiration_date').val(new Date(campaign.expiration_date).toISOString().substr(0, 19));
+  $('#starting_date').val(new Date(campaign.starting_date).toISOString().substr(0, 19));
+
   $("#days").val(campaign.days);
   $("#client_name").val(campaign.client_info.name);
   $("#client_phone").val(campaign.client_info.phone);
