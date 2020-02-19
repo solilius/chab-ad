@@ -163,9 +163,12 @@ function insertAds(ads){
             if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;
-                } else if(!elementHasClass(banner, 'dont-remove-parent')) {
+            } else {
+                banner.innerHTML = ads[i];
+                if(!elementHasClass(banner, 'dont-remove-parent')) {
                     banner.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
                 }
+            }
         }
     }
 }
