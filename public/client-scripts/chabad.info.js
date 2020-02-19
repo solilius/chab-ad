@@ -163,7 +163,7 @@ function insertAds(ads){
             if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;
-                } else{
+                } else if(!elementHasClass(banner, 'dont-remove-parent')) {
                     banner.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
                 }
         }
@@ -195,4 +195,8 @@ function onAdClicked(event, index){
     xhr.send(JSON.stringify(body));
 
     window.open(ads_array[index].onclick, '_blank');
+}
+
+function elementHasClass(element, className) {
+    return (' ' + element.className + ' ').indexOf(' ' + className+ ' ') > -1;
 }
