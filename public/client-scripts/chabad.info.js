@@ -165,7 +165,6 @@ function insertAds(ads){
                 banner.name = i;
                 banner.className += ' active';
             } else {
-                banner.innerHTML = ads[i];
                 if(!elementHasClass(banner, 'direct-ad')) {
                     banner.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
                 }
