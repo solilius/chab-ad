@@ -12,7 +12,7 @@ function composeCampaign() {
     clicks_left:
       $("#clicks").val() === "" ? 2000000000 : parseInt($("#clicks").val()),
     starting_date: $("#starting_date").val(),
-    expiration_date: getExpirationDate(),
+    expiration_date: $("#expiration_date").val(),
     days: $("#days").val(),
     isActive: isActive(),
     client_info: {
@@ -27,8 +27,8 @@ function composeCampaign() {
 }
 
 function isActive(){
-    return (($('#starting_date').val() !== "") && 
-           (($('#days').val() !== "") && ($('#days').val() !== "0")) && checkDate($('#days').val()))
+     return (new Date($('#starting_date').val()).getTime() <= new Date().getTime()) &&
+      (new Date($('#expiration_date').val()).getTime() > new Date().getTime())
 }
 
 function checkDate(addDays){
@@ -89,15 +89,6 @@ function getPositions(bannerId) {
   return curPositions;
 }
 
-function getExpirationDate() {
-
-  if ($("#starting_date").val() != "" && $("#days").val() != "") {
-    var start = new Date(document.getElementById("starting_date").value);
-    var days = parseInt(document.getElementById("days").value);
-    return new Date(start.setDate(start.getDate() + days));
-  }
-  return new Date();
-}
 
 function validateActivity(){
     $("input").bind("change keyup", function() {

@@ -46,7 +46,6 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  req.body.expiration_date = new Date(req.body.expiration_date);
   DAL.Insert(CAMPAIGN_COL, [req.body], data => {
     res.send(data);
   });

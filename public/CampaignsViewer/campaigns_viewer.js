@@ -6,9 +6,15 @@ axios({
     createGrid(data.data);
 });
 
-function onFirstDataRendered(params) {
+  function onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
-}
+    var filterComponent = params.api.getFilterInstance("isActive");
+    filterComponent.setModel({
+      type: "contains",
+      filter: true
+    });
+    filterComponent.onFilterChanged();
+  }  
 
 function onRowDoubleClicked(e) {
     localStorage.setItem("campaign", e.data.campaign_id);
@@ -21,8 +27,8 @@ function getColumnDefs() {
         { headerName: "קמפיין", field: "campaign_name" },
         { headerName: "תאור", field: "description" },
         { headerName: "לקוח", field: "client_info.name" },
-        { headerName: "תאריך התחלה", field: "starting_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
-        { headerName: "תאריך סיום", field: "expiration_date", cellRenderer: function (params) { return params.value.split('T')[0] } },
+        { headerName: "תאריך התחלה", field: "starting_date", cellRenderer: function (params) { return new Date(params.value).toLocaleString()} },
+        { headerName: "תאריך סיום", field: "expiration_date", cellRenderer: function (params) { return new Date(params.value).toLocaleString()} },
         { headerName: "ימים", field: "days", filter: "agNumberColumnFilter"},
         { headerName: " צפיות שנשארו", field: "views_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
         { headerName: " קליקים שנשארו", field: "clicks_left", cellRenderer: function (params) { return (params.value > 0 && params.value < 1000000000) ? params.value : "∞" } },
