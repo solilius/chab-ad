@@ -163,9 +163,10 @@ function insertAds(ads){
             if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;
-                banner.className += ' active';
             } else {
-                if(!elementHasClass(banner, 'direct-ad')) {
+                if(elementHasClass(banner, 'direct-ad')) {
+                    banner.className += ' inactive';
+                } else {
                     banner.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
                 }
             }
