@@ -62,7 +62,6 @@ var IDS = [
     "chabad.info-sidebar_under_deot_2",
     "chabad.info-sidebar_under_deot_3",
     "chabad.info-sidebar_test_1",
-    "chabad.info-sidebar_above_music_3",
     "chabad.info-under_mag_widget",
     "chabad.info-midcol_under_buisindex_1",
     "chabad.info-midcol_under_buisindex_2",
@@ -130,15 +129,13 @@ var MOBILE_IDS =[
     "chabad.info-sidebar_under_deot_1-m",
     "chabad.info-sidebar_under_deot_2-m",
     "chabad.info-sidebar_under_deot_3-m",
-    "chabad.info-sidebar_above_music_1-m",
-    "chabad.info-sidebar_above_music_2-m",
-    "chabad.info-sidebar_above_music_3-m",
+    "chabad.info-sidebar_test_1-m",
     "chabad.info-under_mag_widget-m",
     "chabad.info-midcol_under_buisindex_1-m",
     "chabad.info-midcol_under_buisindex_2-m"
 ];
 
-var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;console.log(currIds);
+var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
 var ads_array = [];
 
 requestAds();
