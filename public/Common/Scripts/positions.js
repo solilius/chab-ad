@@ -66,7 +66,6 @@ var chabadInfoPositions = [
     "sidebar_under_deot_2",
     "sidebar_under_deot_3",
     "sidebar_test_1",
-    "chabad.info-sidebar_test_2",
     "sidebar_above_music_3",
     "single_600X300",
     "under_mag_widget",

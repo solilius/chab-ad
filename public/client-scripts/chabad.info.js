@@ -61,8 +61,7 @@ var IDS = [
     "chabad.info-sidebar_under_deot_1",
     "chabad.info-sidebar_under_deot_2",
     "chabad.info-sidebar_under_deot_3",
-    "sidebar_test_1",
-    "chabad.info-sidebar_test_2",
+    "chabad.info-sidebar_test_1",
     "chabad.info-sidebar_above_music_3",
     "chabad.info-under_mag_widget",
     "chabad.info-midcol_under_buisindex_1",
@@ -159,11 +158,11 @@ function insertAds(ads){
     ads_array = ads;
     for(var i=0; i < ads.length; i++){
         var banner = document.getElementById(currIds[i]);
-        if(banner !== null){ console.log('banner:');console.log(banner); console.log('current ad:');console.log(ads[i]);
-            if(ads[i] !== "no_result"){ console.log('ok');
+        if(banner !== null){
+            if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;
-            } else {console.log('inactive');
+            } else {
                 if(elementHasClass(banner, 'direct-ad')) {
                     banner.className += ' inactive';
                 } else {
