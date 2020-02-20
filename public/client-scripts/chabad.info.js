@@ -159,11 +159,11 @@ function insertAds(ads){
     ads_array = ads;
     for(var i=0; i < ads.length; i++){
         var banner = document.getElementById(currIds[i]);
-        if(banner !== null){
-            if(ads[i] !== "no_result"){
+        if(banner !== null){ console.log('banner:');console.log(banner); console.log('current ad:');console.log(ads[i]);
+            if(ads[i] !== "no_result"){ console.log('ok');
                 banner.src = ads[i].url;
                 banner.name = i;
-            } else {
+            } else {console.log('inactive');
                 if(elementHasClass(banner, 'direct-ad')) {
                     banner.className += ' inactive';
                 } else {
