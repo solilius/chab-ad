@@ -139,7 +139,7 @@ var MOBILE_IDS =[
     "chabad.info-midcol_under_buisindex_2-m"
 ];
 
-var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
+var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;console.log(currIds);
 var ads_array = [];
 
 requestAds();
