@@ -11,7 +11,7 @@ axios({
     var filterComponent = params.api.getFilterInstance("isActive");
     filterComponent.setModel({
       type: "contains",
-      filter: true
+      filter: 'true'
     });
     filterComponent.onFilterChanged();
   }  
