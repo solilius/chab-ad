@@ -72,7 +72,9 @@ var IDS = [
   "chabad.info-sidebar_under_video3",
   "chabad.info-midcol_under_eventsboard",
   "chabad.info-midcol_under_recsites",
-  "chabad.info-midcol_under_tehilimwidg"
+  "chabad.info-midcol_under_tehilimwidg",
+  "chabad.info-sidebar_under_video_2",
+  "chabad.info-sidebar_under_video_3"
 ];
 
 var currIds = /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
