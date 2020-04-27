@@ -144,7 +144,7 @@ function requestAds(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-                insertAds(JSON.parse(xhr.response));
+            insertAds(JSON.parse(xhr.response));
         }
     };
     xhr.open('GET', SERVER + '/bannersHandler/?banners=' + idsToString(currIds));
@@ -159,15 +159,25 @@ function insertAds(ads){
             if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;
+                banner.className += ' rendered';
             } else {
-                if(elementHasClass(banner, 'direct-ad')) {
+                if(elementHasClass(banner, 'direct-ad') && !elementHasClass(banner.parentElement, 'adpro')) {
                     banner.className += ' inactive';
+                } else if(elementHasClass(banner, 'direct-ad') && elementHasClass(banner.parentElement, 'adpro')) {
+                    banner.parentElement.remove();
                 } else {
                     banner.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
                 }
             }
         }
     }
+
+    var old_adzones = document.getElementsByClassName("adpro");
+    Array.prototype.forEach.call(old_adzones, function (adzone) {
+        if( (adzone.childNodes[0] !== undefined && !elementHasClass(adzone.childNodes[0], 'rendered')) || adzone.childNodes[0] === undefined ) {
+            adzone.remove();
+        }
+    });
 }
 
 function idsToString(arr){
