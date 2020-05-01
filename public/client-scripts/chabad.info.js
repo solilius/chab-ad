@@ -65,7 +65,6 @@ var IDS = [
   "chabad.info-under_mag_widget",
   "chabad.info-midcol_under_buisindex_1",
   "chabad.info-midcol_under_buisindex_2",
-
   "chabad.info-home_under_main",
   "chabad.info-sidebar_under_video1",
   "chabad.info-sidebar_under_video2",
