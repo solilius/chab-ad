@@ -26,7 +26,7 @@ let sftp = new Client();
 sftp.connect(CONNECTION);
 
 router.get("/", (req, res) => {
-  DAL.Get(MEDIA_COL, {}, data => {
+  DAL.GetLimited(MEDIA_COL, {}, 30, data => {
     res.send(data);
   });
 });
