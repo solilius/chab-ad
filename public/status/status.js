@@ -7,6 +7,8 @@ var currPositions = {
 
 $(document).ready(function () {
   getBannars("chabad.info");
+$("#myModal").css('display', 'none');
+
 });
 
 $("select.site-selector").change(function () {

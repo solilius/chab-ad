@@ -8,6 +8,24 @@
   width: 150px;
 }
 
+.segments-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.segment{
+    height: 75vh;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list{
+    overflow-y: scroll;
+}
 .occupied {
   background: rgb(59, 190, 26);
 }
@@ -30,7 +48,7 @@
 
 .modal {
   position: fixed;
-  top: 20%;
+  top: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,20 +59,20 @@
   margin-right: 20vw;
 }
 
-.modal-item{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    border-bottom: solid 1px grey;
-    font-size: 20px;
-    margin: 10px;
-    background: white;
-    padding: 10px;
-    margin-right: -20vw;
+.modal-item {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: solid 1px grey;
+  font-size: 20px;
+  margin: 10px;
+  background: white;
+  padding: 10px;
+  margin-right: -20vw;
 }
 
-.modal-item:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 200ms ease-in;
+.modal-item:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 200ms ease-in;
 }
