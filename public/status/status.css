@@ -27,11 +27,11 @@
     overflow-y: scroll;
 }
 .occupied {
-  background: rgb(59, 190, 26);
+  background: rgb(218, 218, 218);
 }
 
 .free {
-  background: rgb(218, 218, 218);
+  background: rgb(59, 190, 26);
 }
 
 .position {
@@ -47,13 +47,10 @@
 }
 
 .modal {
-  position: fixed;
-  top: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 30vh;
   overflow-y: scroll;
   direction: rtl;
   margin-right: 20vw;
