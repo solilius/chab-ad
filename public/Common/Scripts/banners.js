@@ -11,7 +11,7 @@ function loadMedia(){
     }).then(function (data) {
         mediaArr = data.data;
         for (let i = 0; i < mediaArr.length; i++) {
-            $("#media").prepend(
+            $("#media").append(
                 `<img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>`
             );
         }
