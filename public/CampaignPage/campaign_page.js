@@ -35,16 +35,16 @@ $("#days").on("change", function () {
 });
 
 function insertValues() {
-    console.log(new Date(campaign.starting_date).toISOString().substring(11, 16));
+    console.log(campaign.starting_date);
     console.log(campaign.starting_date.substring(11, 16));
   $("#campaign_name").val(campaign.campaign_name);
   $("#description").val(campaign.description);
   $("#views").val(campaign.views_left);
   $("#clicks").val(campaign.clicks_left);
   $('#starting_date').val(campaign.starting_date.substring(0, 10));
-  $('#starting_date_time').val(campaign.starting_date.substring(11, 19));
+  $('#starting_date_time').val(campaign.starting_date.substring(11, 16));
   $('#expiration_date').val(campaign.expiration_date.substring(0, 10));
-  $('#expiration_date_time').val(campaign.expiration_date.substring(11, 19));
+  $('#expiration_date_time').val(campaign.expiration_date.substring(11, 16));
   $("#days").val(campaign.days);
   $("#client_name").val(campaign.client_info.name);
   $("#client_phone").val(campaign.client_info.phone);
