@@ -2,7 +2,7 @@ $("document").ready(function () {
   $("#starting_date").val(new Date().toISOString().substr(0, 10));
   $("#expiration_date").val(new Date().toISOString().substr(0, 10));
   $("#starting_date_time").val("00:01");
-  $("#expiration_date_time").val("00:01");
+  $("#expiration_date_time").val("23:59");
 });
 
 $("#expiration_date").on("change", function () {
