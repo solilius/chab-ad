@@ -1,179 +1,193 @@
-.form-group{
-    display: inline-block;
+.form-group {
+  display: inline-block;
 }
-.campaign-input{
-    text-align: center !important;
-    margin-bottom: 0 !important;
-}
-
-.well{
-    text-align: right;
+.campaign-input {
+  text-align: center !important;
+  margin-bottom: 0 !important;
 }
 
-label{
-    margin-right: 5px;
+.well {
+  text-align: right;
 }
 
-input{
-    text-align: right;
-}
-.ad-info input{
-        text-align: left;
+label {
+  margin-right: 5px;
 }
 
-.header{
-    width: 100%;
-    text-align: center;
-    font-size: 25px;
-    font-style: bold;
-    margin-bottom: 30px;
+input {
+  text-align: right;
+}
+.ad-info input {
+  text-align: left;
 }
 
-.my-selector{
-    width: 25%;
-    text-align: center;
-    margin-right: 5px;
+.header {
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  font-style: bold;
+  margin-bottom: 30px;
 }
 
-.form-control{
-    display: inline !important;
+.my-selector {
+  width: 25%;
+  text-align: center;
+  margin-right: 5px;
 }
 
-.radio{
-    display:inline;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 8px;
-    min-height: 34px;
-    max-height: 34px;
-    padding-top:8px;
-    padding-bottom:9px;
-    padding-left:9px;
+.form-control {
+  display: inline !important;
 }
 
-.click-input{
-    margin-bottom: 10px;
-    padding-left: 18%;
-    padding-right: 18%;
+.radio {
+  display: inline;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 8px;
+  min-height: 34px;
+  max-height: 34px;
+  padding-top: 8px;
+  padding-bottom: 9px;
+  padding-left: 9px;
 }
 
-.img-preview{
-    max-width: 80%;
-    max-height: 250px;
+.click-input {
+  margin-bottom: 10px;
+  padding-left: 18%;
+  padding-right: 18%;
 }
 
-
-.img-preview-container{
-    max-width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
+.img-preview {
+  max-width: 80%;
+  max-height: 250px;
 }
 
-.ad-info{
-    text-align: center;
-    
+.img-preview-container {
+  max-width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.position{
-    margin-top: 5px;
+.ad-info {
+  text-align: center;
 }
 
-#positions{
-    height: 150px;
-    margin-top: 10px;
-    overflow: hidden;
-    overflow-y:scroll;
-    max-height: 120px
+.position {
+  margin-top: 5px;
 }
 
-.save{
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
+#positions {
+  height: 150px;
+  margin-top: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 120px;
 }
 
-.duplicate{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+.save {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 
-.delete{
-    position: fixed;
-    bottom: 20px;
-    left: 150px;  
+.duplicate {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
 
-.add-banners-container{
-    width: 100%;
-    text-align: center;
+.delete {
+  position: fixed;
+  bottom: 20px;
+  left: 150px;
 }
 
-#banners{
-    margin-top: 10px;
-    max-height: 65vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
+.add-banners-container {
+  width: 100%;
+  text-align: center;
 }
 
-.btn-remove-banner{
-    position: relative;
-    top: 0px;
+#banners {
+  margin-top: 10px;
+  max-height: 65vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.modal-title{
-    text-align: center;
+.btn-remove-banner {
+  position: relative;
+  top: 0px;
 }
 
-.modal-dialog{
-    margin: 20vw;
-    width: 60vw;
+.modal-title {
+  text-align: center;
 }
 
-.modal-body{
-    padding: 0;
-    max-height: 60vh;
-    overflow-y: scroll;
+.modal-dialog {
+  margin: 20vw;
+  width: 60vw;
 }
 
-.media-item{
-    padding: 1vw;
-    width: 19.5vw;
-    cursor: pointer;
+.modal-body {
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: scroll;
 }
 
-.media-item:hover{
-    transform: scale(1.1);
-    transition: 0.2s;
+.media-item {
+  padding: 1vw;
+  width: 19.5vw;
+  cursor: pointer;
 }
 
-.media-item:active{
-    transform: scale(1);
-    transition: 0.1s;
+.media-item:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
 }
 
-.update-url:hover{
-    cursor: pointer ;
-    background: lightgray;
+.media-item:active {
+  transform: scale(1);
+  transition: 0.1s;
 }
 
-.update-url:active{
-    cursor: pointer;
-    background: grey;
+.update-url:hover {
+  cursor: pointer;
+  background: lightgray;
 }
 
-.short-input{
-    width: 17%;
-    margin-right: 1%
-
+.update-url:active {
+  cursor: pointer;
+  background: grey;
 }
 
-.regular-input{
-    width: 27%;
-    margin-right: 1%
+.short-input {
+  width: 17%;
+  margin-right: 1%;
 }
 
-.date-input{
-    width: 30%;
+.regular-input {
+  width: 27%;
+  margin-right: 1%;
+}
+
+.date-input {
+  width: 30%;
+}
+
+.time-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.time {
+  flex-basis: 33%;
+}
+
+.date {
+  flex-basis: 68%;
+}
+
+input[type="time"]::-webkit-clear-button {
+    display: none;
 }

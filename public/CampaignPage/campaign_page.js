@@ -10,29 +10,41 @@ send("/banners/" + campaign_id, "GET", {headers: { Authorization: localStorage.g
   loadAds(res.data);
 });
 
-var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-$('#expiration_date').on('change', function (){
-    var days = (parseInt(new Date($('#expiration_date').val()).getTime()) -
-                parseInt(new Date($('#starting_date').val()).getTime())) / 86400000
-    $('#days').val(Math.round(days));
+$("#expiration_date").on("change", function () {
+  var days =
+    (parseInt(new Date($("#expiration_date").val()).getTime()) -
+      parseInt(new Date($("#starting_date").val()).getTime())) /
+    86400000;
+  $("#days").val(Math.round(days));
 });
 
-$('#days').on('change', function(){
-    var expiration = parseInt(new Date($("#starting_date").val()).getTime()) + ($('#days').val() * 86400000);
-    $('#expiration_date').val(new Date(expiration - tzoffset).toISOString().substr(0, 19));
-
+$("#starting_date").on("change", function () {
+  var days =
+    (parseInt(new Date($("#expiration_date").val()).getTime()) -
+      parseInt(new Date($("#starting_date").val()).getTime())) /
+    86400000;
+  $("#days").val(Math.round(days));
 });
 
+$("#days").on("change", function () {
+  var expiration =
+    parseInt(new Date($("#starting_date").val()).getTime()) +
+    $("#days").val() * 86400000;
+    $("#expiration_date").val(new Date(expiration).toISOString().substr(0, 10));
 
+});
 
 function insertValues() {
+    console.log(new Date(campaign.starting_date).toISOString().substring(11, 16));
+    console.log(campaign.starting_date.substring(11, 16));
   $("#campaign_name").val(campaign.campaign_name);
   $("#description").val(campaign.description);
   $("#views").val(campaign.views_left);
   $("#clicks").val(campaign.clicks_left);
-  $('#expiration_date').val(new Date(campaign.expiration_date).toISOString().substr(0, 19));
-  $('#starting_date').val(new Date(campaign.starting_date).toISOString().substr(0, 19));
-
+  $('#starting_date').val(campaign.starting_date.substring(0, 10));
+  $('#starting_date_time').val(campaign.starting_date.substring(11, 19));
+  $('#expiration_date').val(campaign.expiration_date.substring(0, 10));
+  $('#expiration_date_time').val(campaign.expiration_date.substring(11, 19));
   $("#days").val(campaign.days);
   $("#client_name").val(campaign.client_info.name);
   $("#client_phone").val(campaign.client_info.phone);
