@@ -35,8 +35,6 @@ $("#days").on("change", function () {
 });
 
 function insertValues() {
-    console.log(campaign.starting_date);
-    console.log(campaign.starting_date.substring(11, 16));
   $("#campaign_name").val(campaign.campaign_name);
   $("#description").val(campaign.description);
   $("#views").val(campaign.views_left);
