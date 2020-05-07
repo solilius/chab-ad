@@ -135,9 +135,21 @@ input {
   overflow-y: scroll;
 }
 
+#media {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.media-item-container {
+  position: relative;
+  width: 19.5vw;
+}
+
 .media-item {
   padding: 1vw;
-  width: 19.5vw;
+  width: 19vw;
   cursor: pointer;
 }
 
@@ -151,6 +163,12 @@ input {
   transition: 0.1s;
 }
 
+.copy-link-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+}
 .update-url:hover {
   cursor: pointer;
   background: lightgray;
@@ -189,5 +207,5 @@ input {
 }
 
 input[type="time"]::-webkit-clear-button {
-    display: none;
+  display: none;
 }
