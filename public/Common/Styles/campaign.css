@@ -154,7 +154,7 @@ input {
 }
 
 .media-item:hover {
-  opacity: 0.8;
+  transform: scale(1.05);
   transition: 0.2s;
 }
 
@@ -173,8 +173,12 @@ input {
 }
 
 .copy-link-btn:hover {
-   transform: scale(1.2);
+  transform: scale(1.2);
   transition: 0.2s;   
+}
+
+.copy-link-btn:active {
+ background:grey;
 }
 
 .update-url:hover {
