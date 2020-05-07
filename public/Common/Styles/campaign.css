@@ -148,27 +148,35 @@ input {
 }
 
 .media-item {
-  padding: 1vw;
+  padding: 4px;
   width: 19vw;
   cursor: pointer;
 }
 
 .media-item:hover {
-  transform: scale(1.1);
+  opacity: 0.8;
   transition: 0.2s;
 }
 
 .media-item:active {
-  transform: scale(1);
   transition: 0.1s;
 }
 
 .copy-link-btn {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 8px;
+  right: 16px;
   z-index: 1;
+  opacity: 0.8;
+  padding: 2px 4px;
+  border-radius: 50px;
 }
+
+.copy-link-btn:hover {
+   transform: scale(1.2);
+  transition: 0.2s;   
+}
+
 .update-url:hover {
   cursor: pointer;
   background: lightgray;

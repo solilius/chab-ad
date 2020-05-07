@@ -16,7 +16,7 @@ function loadMedia() {
                     <img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>
                     <input type="text" value="${mediaArr[i].url}" id="url" style="display:none">
                     <button class="btn copy-link-btn" onclick="copylink('${mediaArr[i].url}', event)">
-                        <img src="/link.png" height="20px"/>
+                        <img src="/link.png" height="16px"/>
                     </button>
                 </div>`
       );
