@@ -8,7 +8,7 @@ var gridOptions = {
     enableSorting: true,
     enableFilter: true,
     rowSelection: 'single',
-    onRowDoubleClicked: onRowDoubleClicked
+    onSelectionChanged: onRowClicked
   };
 
 axios({
@@ -29,9 +29,8 @@ axios({
     filterComponent.onFilterChanged();
   }  
 
-function onRowDoubleClicked(e){
-
-    localStorage.setItem("campaign",  e.data.campaign_id);
+function onRowClicked(){
+    localStorage.setItem("campaign",  gridOptions.api.getSelectedRows()[0].campaign_id);
     goToPage('/CampaignPage/campaign_page.html');
 }
 

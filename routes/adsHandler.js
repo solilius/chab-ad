@@ -17,6 +17,12 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/status', (req, res) => {
+    BL.GetAdStatus(req.query.banners.split(','), (data) => {
+        res.send(data);
+    });
+});
+
 router.post('/click', (req, res) => {
     BL.AdClicked(req.body);
     res.send();

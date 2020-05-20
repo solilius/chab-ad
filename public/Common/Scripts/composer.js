@@ -11,8 +11,8 @@ function composeCampaign() {
       $("#views").val() === "" ? 2000000000 : parseInt($("#views").val()),
     clicks_left:
       $("#clicks").val() === "" ? 2000000000 : parseInt($("#clicks").val()),
-    starting_date: $("#starting_date").val(),
-    expiration_date: $("#expiration_date").val(),
+    starting_date: getDate("starting_date"),
+    expiration_date: getDate("expiration_date"),
     days: $("#days").val(),
     isActive: isActive(),
     client_info: {
@@ -21,42 +21,52 @@ function composeCampaign() {
       email: $("#client_email").val(),
       price: $("#client_price").val(),
       balance: $("#client_balance").val(),
-      details: $("#client_details").val()
-    }
+      details: $("#client_details").val(),
+    },
   };
 }
 
-function isActive(){
-     return (new Date($('#starting_date').val()).getTime() <= new Date().getTime()) &&
-      (new Date($('#expiration_date').val()).getTime() > new Date().getTime())
+function isActive() {
+  return (
+    new Date($("#starting_date").val()).getTime() <= new Date().getTime() &&
+    new Date($("#expiration_date").val()).getTime() > new Date().getTime()
+  );
 }
 
-function checkDate(addDays){
-    var date = new Date($('#starting_date').val() + "T00:00:00").getTime();
-    var now = new Date().getTime();
-    return (date <= now) && (date + (addDays * 86400000) >= now);
+function checkDate(addDays) {
+  var date = new Date($("#starting_date").val() + "T00:00:00").getTime();
+  var now = new Date().getTime();
+  return date <= now && date + addDays * 86400000 >= now;
+}
+
+function getDate(date) {
+  var dateTime = new Date($(`#${date}`).val()).getTime();
+  var time =
+    parseInt($(`#${date}_time`).val().split(":")[0]) * 3600000 +
+    parseInt($(`#${date}_time`).val().split(":")[1]) * 60000;
+  return new Date(dateTime + time).toISOString().substring(0, 19);
 }
 
 function composeBanners(campaign, isNew) {
   var banners = [];
   for (i in positions) {
-      var tempBanner = {
-        campaign_id: campaign.campaign_id,
-        campaign_name: campaign.campaign_name,
-        ad_id: campaign.campaign_id + "_" + $("#url-" + i).attr("src"),
-        url: $("#url-" + i).attr("src"),
-        onclick: $("#click-" + i).val(),
-        size: $("#img-size-" + i).text(),
-        starting_date: campaign.starting_date,
-        expiration_date: campaign.expiration_date,
-        positions: getPositions(i),
-        isActive: campaign.isActive
-      };
-      if(isNew){
-        tempBanner.clicks = 0; 
-        tempBanner.views = 0; 
-      }
-      banners.push(tempBanner);
+    var tempBanner = {
+      campaign_id: campaign.campaign_id,
+      campaign_name: campaign.campaign_name,
+      ad_id: campaign.campaign_id + "_" + $("#url-" + i).attr("src"),
+      url: $("#url-" + i).attr("src"),
+      onclick: $("#click-" + i).val(),
+      size: $("#img-size-" + i).text(),
+      starting_date: campaign.starting_date,
+      expiration_date: campaign.expiration_date,
+      positions: getPositions(i),
+      isActive: campaign.isActive,
+    };
+    if (isNew) {
+      tempBanner.clicks = 0;
+      tempBanner.views = 0;
+    }
+    banners.push(tempBanner);
   }
   return banners;
 }
@@ -89,13 +99,12 @@ function getPositions(bannerId) {
   return curPositions;
 }
 
-
-function validateActivity(){
-    $("input").bind("change keyup", function() {
-        if (isActive()) {
-            $("#save-btn").addClass("btn-success").removeClass("btn-warning");
-        } else {
-            $("#save-btn").addClass("btn-warning").removeClass("btn-success");
-        }
-    });
+function validateActivity() {
+  $("input").bind("change keyup", function () {
+    if (isActive()) {
+      $("#save-btn").addClass("btn-success").removeClass("btn-warning");
+    } else {
+      $("#save-btn").addClass("btn-warning").removeClass("btn-success");
+    }
+  });
 }

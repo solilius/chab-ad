@@ -44,15 +44,19 @@
     <div class="col-md-5">
         <div class="header">פרטי קמפיין</div>
         <div class="form-group date-input">
-            <label>:תאריך סיום</label>
-            <div class="col-10">
-                <input class="form-control" type="datetime-local" id="expiration_date" />
+            <label>:תאריך סיום </label>
+            <label style="margin: 0 10px">:שעת סיום </label>
+            <div class="col-10 time-container">
+                <input class="form-control date" type="date" id="expiration_date" />
+                <input class="form-control time" type="time" id="expiration_date_time" />
             </div>
         </div>
         <div class="form-group date-input">
             <label>:תאריך התחלה</label>
-            <div class="col-10">
-                <input class="form-control" type="datetime-local" id="starting_date" />
+            <label style="margin: 0 0 0 20px">:שעת התחלה </label>
+            <div class="col-10 time-container">
+                <input class="form-control date" type="date" id="starting_date" value="" />
+                <input class="form-control time" type="time" id="starting_date_time" />
             </div>
         </div>
         <div class="form-group regular-input">

@@ -3,33 +3,44 @@ var positions = {};
 var deleteBannersArray = [];
 var mediaArr;
 
-function loadMedia(){
-    axios({
-        url: '/media',
-        method: 'get',
-        headers: { "Authorization": localStorage.getItem('token') }
-    }).then(function (data) {
-        mediaArr = data.data;
-        for (let i = 0; i < mediaArr.length; i++) {
-            $("#media").prepend(
-                `<img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>`
-            );
-        }
-    });
-}
-
-function prepareBanner(id){
-    mediaArr[id].views = 0;
-    mediaArr[id].clicks = 0;
-    $('#media-'+id).css('background', 'red');
-    insertBanner(mediaArr[id], index++);
-}
-
-$('#myModal').on('hidden.bs.modal', function () {
+function loadMedia() {
+  axios({
+    url: "/media",
+    method: "get",
+    headers: { Authorization: localStorage.getItem("token") },
+  }).then(function (data) {
+    mediaArr = data.data;
     for (let i = 0; i < mediaArr.length; i++) {
-    $('#media-'+i).css('background', 'white');
+      $("#media").append(
+        `<div class="media-item-container">
+                    <img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="prepareBanner(${i})"/>
+                    <input type="text" value="${mediaArr[i].url}" id="url" style="display:none">
+                    <button class="btn copy-link-btn" onclick="copylink('${mediaArr[i].url}', event)">
+                        <img src="/link.png" height="16px"/>
+                    </button>
+                </div>`
+      );
     }
-})
+  });
+}
+
+function copylink(link, e) {
+  e.stopPropagation();
+  navigator.clipboard.writeText(link);
+}
+
+function prepareBanner(id) {
+  mediaArr[id].views = 0;
+  mediaArr[id].clicks = 0;
+  $("#media-" + id).css("background", "red");
+  insertBanner(mediaArr[id], index++);
+}
+
+$("#myModal").on("hidden.bs.modal", function () {
+  for (let i = 0; i < mediaArr.length; i++) {
+    $("#media-" + i).css("background", "white");
+  }
+});
 
 function insertBanner(data, bannerId) {
   positions[bannerId] = 1;
@@ -87,17 +98,17 @@ function insertBanner(data, bannerId) {
   );
 }
 
-function updateImage(id){
-  $('#url-' + id).attr('src', $('#editable-url-' + id).val());
+function updateImage(id) {
+  $("#url-" + id).attr("src", $("#editable-url-" + id).val());
   var img = new Image();
-    img.src = $('#editable-url-' + id).val();
-    img.onload = function() {
-      $('#img-size-' + id).text(this.width + "X" + this.height);
-  }
+  img.src = $("#editable-url-" + id).val();
+  img.onload = function () {
+    $("#img-size-" + id).text(this.width + "X" + this.height);
+  };
 }
 
-function openClickWeb(id){
-    window.open($('#click-' + id).val(), '_blank');  
+function openClickWeb(id) {
+  window.open($("#click-" + id).val(), "_blank");
 }
 
 function removeBanner(id) {
@@ -135,9 +146,11 @@ function removePosition(id, pos) {
   $(`#pos-${id}-${pos}`).remove();
 
   for (let index = pos + 1; index < positions[id]; index++) {
-    $(`#pos-${id}-${index} .remove-pos-btn`).attr("onclick", `removePosition(${id},${index - 1})`);
+    $(`#pos-${id}-${index} .remove-pos-btn`).attr(
+      "onclick",
+      `removePosition(${id},${index - 1})`
+    );
     $(`#pos-${id}-${index}`).attr("id", `pos-${id}-${index - 1}`);
-
   }
 
   positions[id]--;
@@ -158,9 +171,9 @@ function siteSelected(siteId) {
       insertActions(id, nesheiPositions);
 
       break;
-      case "shtraymel.co.il":
-         insertActions(id, shtraymel);
-         break; 
+    case "shtraymel.co.il":
+      insertActions(id, shtraymel);
+      break;
   }
 }
 

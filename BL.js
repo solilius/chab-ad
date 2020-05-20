@@ -39,7 +39,20 @@ module.exports = {
       handleErrors("GetAds", err, callback);
     }
   },
+  GetAdStatus: (adsReqArr, callback) => {
+    let ads = [];
 
+    try {
+      for (let i = 0; i < adsReqArr.length; i++) {
+        ads.push(getAdsInPosition(adsReqArr[i]));
+      }
+      Promise.all(ads).then(data => {
+        callback(data);
+      });
+    } catch (err) {
+      handleErrors("GetAds", err, callback);
+    }
+  },
   AdClicked: eventObject => {
     try {
       decremetValue(eventObject.campaign_id, eventObject.ad_id, "clicks_left");
@@ -62,6 +75,19 @@ function getAd(pos) {
     });
   });
 }
+
+function getAdsInPosition(pos) {
+  return new Promise((res, rej) => {
+    DAL.Get(ADS_COL, { isActive: true, positions: pos }, data => {
+      if (data.length === 0) {
+        res("no_result");
+      } else {
+        res(data);
+      }
+    });
+  });
+}
+
 function changeCampaignState(query, active) {
   DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, false, data => {
           console.log(`${active} > Campaigns modified: ${data.modifiedCount}`);
