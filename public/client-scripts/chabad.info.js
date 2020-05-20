@@ -68,6 +68,18 @@ var IDS = [
     "chabad.info-under_mag_widget",
     "chabad.info-midcol_under_buisindex_1",
     "chabad.info-midcol_under_buisindex_2",
+    "chabad.info-midcol_under_eventboard_1",
+    "chabad.info-midcol_under_eventboard_2",
+    "chabad.info-midcol_under_eventboard_3",
+    "chabad.info-midcol_under_mazal_1",
+    "chabad.info-midcol_under_mazal_2",
+    "chabad.info-midcol_under_mazal_3",
+    "chabad.info-midcol_under_recsites_1",
+    "chabad.info-midcol_under_recsites_2",
+    "chabad.info-midcol_under_recsites_3",
+    "chabad.info-midcol_under_linkbuttons_1",
+    "chabad.info-midcol_under_linkbuttons_2",
+    "chabad.info-midcol_under_linkbuttons_3",
 ];
 
 var MOBILE_IDS =[
@@ -138,7 +150,19 @@ var MOBILE_IDS =[
     "chabad.info-sidebar_test_1-m",
     "chabad.info-under_mag_widget-m",
     "chabad.info-midcol_under_buisindex_1-m",
-    "chabad.info-midcol_under_buisindex_2-m"
+    "chabad.info-midcol_under_buisindex_2-m",
+    "chabad.info-midcol_under_eventboard_1-m",
+    "chabad.info-midcol_under_eventboard_2-m",
+    "chabad.info-midcol_under_eventboard_3-m",
+    "chabad.info-midcol_under_mazal_1-m",
+    "chabad.info-midcol_under_mazal_2-m",
+    "chabad.info-midcol_under_mazal_3-m",
+    "chabad.info-midcol_under_recsites_1-m",
+    "chabad.info-midcol_under_recsites_2-m",
+    "chabad.info-midcol_under_recsites_3-m",
+    "chabad.info-midcol_under_linkbuttons_1-m",
+    "chabad.info-midcol_under_linkbuttons_2-m",
+    "chabad.info-midcol_under_linkbuttons_3-m",
 ];
 
 var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;

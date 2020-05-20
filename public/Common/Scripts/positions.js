@@ -71,10 +71,22 @@ var chabadInfoPositions = [
   "midcol_under_buisindex_1",
   "midcol_under_buisindex_2",
   "midcol_under_eventboard",
+  "midcol_under_eventboard_1",
+  "midcol_under_eventboard_2",
+  "midcol_under_eventboard_3",
   "midcol_under_mazal",
+  "midcol_under_mazal_1",
+  "midcol_under_mazal_2",
+  "midcol_under_mazal_3",
   "midcol_under_recsites",
+  "midcol_under_recsites_1",
+  "midcol_under_recsites_2",
+  "midcol_under_recsites_3",
   "midcol_under_tehilimwidget",
   "midcol_under_linkbuttons",
+  "midcol_under_linkbuttons_1",
+  "midcol_under_linkbuttons_2",
+  "midcol_under_linkbuttons_3",
 ];
 
 var chabadInfoComPositions = [
