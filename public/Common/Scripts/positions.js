@@ -90,6 +90,9 @@ var chabadInfoPositions = [
   "midcol_under_magazine_1",
   "midcol_under_magazine_2",
   "midcol_under_magazine_3",
+  "midcol_under_tehilim_1",
+  "midcol_under_tehilim_2",
+  "midcol_under_tehilim_3",
 ];
 
 var chabadInfoComPositions = [

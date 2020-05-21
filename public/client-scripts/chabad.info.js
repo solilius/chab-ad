@@ -83,6 +83,9 @@ var IDS = [
     "chabad.info-midcol_under_magazine_1",
     "chabad.info-midcol_under_magazine_2",
     "chabad.info-midcol_under_magazine_3",
+    "chabad.info-midcol_under_tehilim_1",
+    "chabad.info-midcol_under_tehilim_2",
+    "chabad.info-midcol_under_tehilim_3",
 ];
 
 var MOBILE_IDS =[
@@ -169,6 +172,9 @@ var MOBILE_IDS =[
     "chabad.info-midcol_under_magazine_1-m",
     "chabad.info-midcol_under_magazine_2-m",
     "chabad.info-midcol_under_magazine_3-m",
+    "chabad.info-midcol_under_tehilim_1-m",
+    "chabad.info-midcol_under_tehilim_2-m",
+    "chabad.info-midcol_under_tehilim_3-m",
 ];
 
 var currIds = ( /Android|webOS|iPhone|!tablet|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? MOBILE_IDS : IDS;
