@@ -87,6 +87,9 @@ var chabadInfoPositions = [
   "midcol_under_linkbuttons_1",
   "midcol_under_linkbuttons_2",
   "midcol_under_linkbuttons_3",
+  "midcol_under_magazine_1",
+  "midcol_under_magazine_2",
+  "midcol_under_magazine_3",
 ];
 
 var chabadInfoComPositions = [
