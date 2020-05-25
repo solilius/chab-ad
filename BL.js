@@ -9,7 +9,7 @@ module.exports = {
   ActiveCampaignScheuduler: scheduleTime => {
     try {
       schedule.scheduleJob(scheduleTime, function() {
-        let now = moment().format();
+        let now = moment().tz("Asia/Jerusalem").format();
         changeCampaignState({ starting_date: { $lte: now }, expiration_date: { $gte: now }, isActive: false }, true );
         changeCampaignState({ expiration_date: { $lte: now }, isActive: true}, false);
       });
