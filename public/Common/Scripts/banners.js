@@ -10,6 +10,7 @@ function loadMedia() {
     headers: { Authorization: localStorage.getItem("token") },
   }).then(function (data) {
     mediaArr = data.data;
+    $("#media").empty();
     for (let i = 0; i < mediaArr.length; i++) {
       $("#media").append(
         `<div class="media-item-container">
@@ -58,6 +59,7 @@ function insertBanner(data, bannerId) {
         <div class="input-group click-input">
           <input type="text" id="editable-url-${bannerId}" value="${data.url}" class="form-control" aria-describedby="basic-addon2"/>
           <span class="input-group-addon update-url" onclick="updateImage(${bannerId})" id="basic-addon2">עדכן</span>
+          <span class="input-group-addon update-url" onclick="selectImage(${bannerId})" id="basic-addon" data-toggle="modal" data-target="#myModal">החלף</span>
         </div>
         <div class="input-group click-input">
           <input type="text" id="click-${bannerId}" class="form-control" aria-describedby="basic-addon2"/>
@@ -96,6 +98,31 @@ function insertBanner(data, bannerId) {
     </div>
   </div>`
   );
+}
+
+function selectImage(id) {
+  console.log(id);
+  axios({
+    url: "/media",
+    method: "get",
+    headers: { Authorization: localStorage.getItem("token") },
+  }).then(function (data) {
+    mediaArr = data.data;
+    $("#media").empty();
+    for (let i = 0; i < mediaArr.length; i++) {
+      $("#media").append(
+        `<div class="media-item-container">
+                    <img class="media-item" id="media-${i}" src="${mediaArr[i].url}" onclick="imageSelected('${mediaArr[i].url}', ${id})"/>
+                    <input type="text" value="${mediaArr[i].url}" id="url" style="display:none">
+                </div>`
+      );
+    }
+  });
+}
+function imageSelected(link, id) {
+  $("#myModal").modal("toggle");
+  $("#editable-url-" + id).val(link);
+  updateImage(id);
 }
 
 function updateImage(id) {
