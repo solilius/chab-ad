@@ -62,13 +62,43 @@ function composeBanners(campaign, isNew) {
       positions: getPositions(i),
       isActive: campaign.isActive,
     };
+
     if (isNew) {
       tempBanner.clicks = 0;
       tempBanner.views = 0;
     }
     banners.push(tempBanner);
   }
+
   return banners;
+}
+
+function checkLinks(banners) {
+  return new Promise(function (res, rej) {
+    var missingLink = false;
+    for (let i = 0; i < banners.length; i++) {
+      if (banners[i].onclick == "") {
+        missingLink = true;
+        break;
+      }
+    }
+    if (missingLink) {
+      swal({
+        title: "אזהרה",
+        text: "חסרים לינקים בקמפיין זה",
+        icon: "warning",
+        buttons: true,
+      }).then(function (isOk) {
+        if (isOk) {
+          res(true);
+        } else {
+          res(false);
+        }
+      });
+    } else {
+      res(true);
+    }
+  });
 }
 
 function getPositions(bannerId) {
