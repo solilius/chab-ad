@@ -4,6 +4,7 @@
   "description": "ad manager",
   "main": "server.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.1.1",
     "base64-to-image": "^1.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",

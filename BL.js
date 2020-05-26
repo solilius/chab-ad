@@ -2,16 +2,27 @@ const moment = require("moment");
 const DAL = require("./DAL");
 const schedule = require("node-schedule");
 const logger = require("./Logger");
+const email = require("./email.service");
 const CAMPAIGN_COL = "campaigns";
 const ADS_COL = "ads";
 
 module.exports = {
-  ActiveCampaignScheuduler: scheduleTime => {
+  ActiveCampaignScheuduler: (scheduleTime) => {
     try {
-      schedule.scheduleJob(scheduleTime, function() {
+      schedule.scheduleJob(scheduleTime, () => {
         let now = moment().tz("Asia/Jerusalem").format();
-        changeCampaignState({ starting_date: { $lte: now }, expiration_date: { $gte: now }, isActive: false }, true );
-        changeCampaignState({ expiration_date: { $lte: now }, isActive: true}, false);
+        changeCampaignState(
+          {
+            starting_date: { $lte: now },
+            expiration_date: { $gte: now },
+            isActive: false,
+          },
+          true
+        );
+        changeCampaignState(
+          { expiration_date: { $lte: now }, isActive: true },
+          false
+        );
       });
     } catch (err) {
       handleErrors("CampaignSqudualer", err, () => {
@@ -19,6 +30,17 @@ module.exports = {
       });
     }
   },
+
+  ActiveEmailReminder: (scheduleTime) => {
+    try {
+      schedule.scheduleJob(scheduleTime, () => {
+        email.sendEmails();
+      });
+    } catch (err) {
+      handleErrors("ActiveEmailReminder", err, () => {});
+    }
+  },
+
   GetAds: (adsReqArr, callback) => {
     let ads = [];
 
@@ -27,7 +49,7 @@ module.exports = {
         ads.push(getAd(adsReqArr[i]));
       }
 
-      Promise.all(ads).then(data => {
+      Promise.all(ads).then((data) => {
         callback(data);
         for (let i = 0; i < data.length; i++) {
           if (data[i] !== "no_result") {
@@ -46,27 +68,27 @@ module.exports = {
       for (let i = 0; i < adsReqArr.length; i++) {
         ads.push(getAdsInPosition(adsReqArr[i]));
       }
-      Promise.all(ads).then(data => {
+      Promise.all(ads).then((data) => {
         callback(data);
       });
     } catch (err) {
       handleErrors("GetAds", err, callback);
     }
   },
-  AdClicked: eventObject => {
+  AdClicked: (eventObject) => {
     try {
       decremetValue(eventObject.campaign_id, eventObject.ad_id, "clicks_left");
     } catch (err) {
       handleErrors("AdClicked", err, callback);
     }
-  }
+  },
 };
 
 // ################### Private Methods ################### //
 
 function getAd(pos) {
   return new Promise((res, rej) => {
-    DAL.Get(ADS_COL, { isActive: true, positions: pos }, data => {
+    DAL.Get(ADS_COL, { isActive: true, positions: pos }, (data) => {
       if (data.length === 0) {
         res("no_result");
       } else {
@@ -78,7 +100,7 @@ function getAd(pos) {
 
 function getAdsInPosition(pos) {
   return new Promise((res, rej) => {
-    DAL.Get(ADS_COL, { isActive: true, positions: pos }, data => {
+    DAL.Get(ADS_COL, { isActive: true, positions: pos }, (data) => {
       if (data.length === 0) {
         res("no_result");
       } else {
@@ -88,11 +110,22 @@ function getAdsInPosition(pos) {
   });
 }
 
-function changeCampaignState(query, active) {
-  DAL.Update(CAMPAIGN_COL, query, { $set: { isActive: active } }, false, data => {
-          console.log(`${active} > Campaigns modified: ${data.modifiedCount}`);
-      DAL.Update( ADS_COL, query, { $set: { isActive: active } }, false, data => {
-          console.log(`${active} > Banners modified: ${data.modifiedCount}`);
+function changeCampaignState(query, isActive) {
+  DAL.Update(
+    CAMPAIGN_COL,
+    query,
+    { $set: { isActive: isActive } },
+    false,
+    (data) => {
+      console.log(`${isActive} > Campaigns modified: ${data.modifiedCount}`);
+
+      DAL.Update(
+        ADS_COL,
+        query,
+        { $set: { isActive: isActive } },
+        false,
+        (data) => {
+          console.log(`${isActive} > Banners modified: ${data.modifiedCount}`);
         }
       );
     }
@@ -121,8 +154,8 @@ function decremetValue(campaignId, adId, key) {
     { campaign_id: campaignId },
     campaignUpdateQuery,
     false,
-    data => {
-      DAL.Get(CAMPAIGN_COL, { campaign_id: campaignId }, data => {
+    (data) => {
+      DAL.Get(CAMPAIGN_COL, { campaign_id: campaignId }, (data) => {
         if (
           data[0] !== undefined &&
           (data[0].views_left <= 0 || data[0].clicks_left <= 0)
@@ -135,6 +168,8 @@ function decremetValue(campaignId, adId, key) {
 
   DAL.Update(ADS_COL, { ad_id: adId }, adUpdateQuery, false, () => {});
 }
+
+function manageEmails() {}
 
 function handleErrors(src, err, callback) {
   logger.LogError(err.id, src, err.message, err);

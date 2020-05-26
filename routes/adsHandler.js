@@ -8,6 +8,7 @@ router.use(bodyParser.json());
 router.post('*', vaild);
 
 BL.ActiveCampaignScheuduler( '0 * * * *');
+BL.ActiveEmailReminder( '0 8 * * *');
 
 // ################### API ################### //
 
