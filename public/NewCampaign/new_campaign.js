@@ -25,8 +25,7 @@ $("#days").on("change", function () {
   var expiration =
     parseInt(new Date($("#starting_date").val()).getTime()) +
     $("#days").val() * 86400000;
-    $("#expiration_date").val(new Date(expiration).toISOString().substr(0, 10));
-
+  $("#expiration_date").val(new Date(expiration).toISOString().substr(0, 10));
 });
 
 function save() {
@@ -39,7 +38,11 @@ function save() {
     if (isOk) {
       var campaign = composeCampaign();
       var banners = composeBanners(campaign, true);
-      upload(campaign, banners);
+      checkLinks(banners).then(function(res) {
+        if (res) {
+          upload(campaign, banners);
+        }
+      });
     }
   });
 }
