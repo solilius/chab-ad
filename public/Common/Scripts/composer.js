@@ -61,6 +61,8 @@ function composeBanners(campaign, isNew) {
       expiration_date: campaign.expiration_date,
       positions: getPositions(i),
       isActive: campaign.isActive,
+      clicks: $("#clicks-" + i).text(),
+      views: $("#views-" + i).text()
     };
 
     if (isNew) {

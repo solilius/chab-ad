@@ -52,7 +52,7 @@ function insertBanner(data, bannerId) {
       <div class="img-preview-container">
         <img id="url-${bannerId}" src="${data.url}" class="img-preview"/>
         <div id="img-size-${bannerId}">${data.width}X${data.height}</div><br>
-        <div><b>views:</b> ${data.views} &nbsp;&nbsp;&nbsp; <b>clicks:</b> ${data.clicks}</div><br>
+        <div><b>views:</b> <span id="views-${bannerId}">${data.views}</span> &nbsp;&nbsp;&nbsp; <b>clicks:</b> <span id="clicks-${bannerId}">${data.clicks}</span></div><br>
       </div>
 
       <div class="ad-info">
