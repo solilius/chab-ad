@@ -197,7 +197,7 @@ function insertAds(ads){
     ads_array = ads;
     for(var i=0; i < ads.length; i++){
         var banner = document.getElementById(currIds[i]);
-        if(banner !== null){
+        if(banner !== null && !elementHasClass(banner, 'rendered')){
             if(ads[i] !== "no_result"){
                 banner.src = ads[i].url;
                 banner.name = i;

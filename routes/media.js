@@ -7,14 +7,14 @@ const DAL = require("../DAL");
 const bodyParser = require("body-parser");
 const router = express.Router();
 const MEDIA_COL = "media";
-const FTP_BASE_URL = "http://devchabadinfoh.wpengine.com";
+const FTP_BASE_URL = "https://chabad.info";
 const FTP_PATH = "/chab-ad/";
 
 const CONNECTION = {
-  host: "devchabadinfoh.sftp.wpengine.com",
+  host: "chabadinfoheb.sftp.wpengine.com", //devchabadinfoh.sftp.wpengine.com
   port: 2222,
-  username: "devchabadinfoh-dev_user",
-  password: "LWzciMez2p4B"
+  username: "chabadinfoheb-chab-ad", //devchabadinfoh-dev_user
+  password: "98TY30NsoQze" //LWzciMez2p4B
 };
 
 router.use(bodyParser.json({ limit: "10mb", extended: true }));
