@@ -1,0 +1,12 @@
+.container {
+  direction: rtl;
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+    margin-bottom: 20px;
+
+}
+.mselector {
+  text-align: center;
+  width: 100px;
+}

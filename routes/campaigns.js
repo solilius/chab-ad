@@ -19,6 +19,12 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/end", (req, res) => {  
+  DAL.Get(CAMPAIGN_COL, {expiration_date: {$regex : `.*${req.query.year}-${req.query.month}.*`}}, data => {
+    res.send(data);
+  });
+});
+
 router.get("/duplicate/:id", (req, res) => {
 
   // Get the campaign details
