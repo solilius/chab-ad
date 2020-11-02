@@ -93,6 +93,7 @@ var chabadInfoPositions = [
   "midcol_under_tehilim_1",
   "midcol_under_tehilim_2",
   "midcol_under_tehilim_3",
+  "front",
 ];
 
 var chabadInfoComPositions = [
